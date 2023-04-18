@@ -1,0 +1,48 @@
+{% extends 'home.html' %}
+
+{% block title %} Hogares Deluxe {% endblock %}
+
+{% block content %}
+
+<!-- Carousel -->
+<div class="container-fluid carousel-container">
+    <div class="row">
+        <div class="col-12">
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://picsum.photos/id/1021/1920/1080" class="d-block w-100" alt="Departamento 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Departamento 1</h3>
+                            <p>Descripción del departamento 1.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://picsum.photos/id/1022/1920/1080" class="d-block w-100" alt="Departamento 2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Departamento 2</h3>
+                            <p>Descripción del departamento 2.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://picsum.photos/id/1023/1920/1080" class="d-block w-100" alt="Departamento 3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Departamento 3</h3>
+                            <p>Descripción del departamento 3.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
