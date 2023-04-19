@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="contacto">
+    <div class="titulo">
+    <h1 >Ubicacion</h1>
+    <hr class="rayita">
+    </div>
+    <div class="formulario">
+        
+        <form class="card card-body">
+            <h1>Contactanos</h1>
+            <label for="nombre">Ingrese su nombre</label>
+            <input type="text" name="nombre" id="nombre">
+            <label for="correo">Ingrese su correo electronico</label>
+            <input type="email" name="correo" id="correo">
+            <label for="mensaje">Mensaje</label>
+            <input type="text" name="mensaje" id="mensaje">
+            <button class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <div class="mapa">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106445.58375075209!2d-70.81505580273438!3d-33.51634739999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662dba8434f1c85%3A0x7a18183612f49a8c!2sInmobiliaria%20Aconcagua%20-%20Edificio%20Celtus!5e0!3m2!1ses!2scl!4v1681933683029!5m2!1ses!2scl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>   
+</div>
+{% endblock %}

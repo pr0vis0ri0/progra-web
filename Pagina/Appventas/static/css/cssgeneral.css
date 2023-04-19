@@ -1,0 +1,46 @@
+.titulo{
+    margin-left: 20px;
+}
+.contacto{
+    margin-top: 50px;
+    padding-left: 100px;
+}
+.contacto .rayita{
+    width: 180px;
+    height: 5px;
+    color: #FEC60D;
+}
+
+.formulario{
+    
+    border-radius: 15px;
+    width: 600px;
+    height: 450px;
+    margin-right: 50px;
+    float: left;
+    
+  
+}
+.formulario input{
+    border-color: #09044c;
+    border-radius: 9px;
+}
+.formulario label{
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.formulario form{
+    border-radius: 15px;
+    border-color: black;
+    margin-left: 20px;
+
+}
+
+button{
+    width: 50%;
+    margin-top: 20%;
+    margin-left: 25%;
+
+}
+
