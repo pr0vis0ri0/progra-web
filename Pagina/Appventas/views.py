@@ -4,3 +4,6 @@ from django.http import HttpResponse
 
 def ubicacion(request):
     return render(request,'ubicacion.html') 
+
+def contacto(request):
+    return render(request,'contacto.html')    
