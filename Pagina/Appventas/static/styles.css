@@ -1,0 +1,36 @@
+.container-full {
+    padding-left: 0 !important;
+    padding-right: 0 !important;    
+}
+
+.carousel-item {
+    height: 480px;
+}
+
+.carousel-item img {
+    position: absolute;
+    min-height: 480px;
+}
+
+.cover {
+    object-fit: cover;
+    height: 200px;
+    background-color: #D3D3D3 !important;
+}
+
+.heading-container {
+    display: flex;
+    align-items: center;
+}
+
+.heading-decoration {
+    display: inline-block;
+    margin-left: 24px;
+    width: 36px;
+    height: 4px;
+    background-color: #fec60d;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
