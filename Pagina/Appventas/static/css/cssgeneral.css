@@ -45,11 +45,11 @@ button{
 }
 
 .imgtop{   
-    background-image: url(https://cdn.pixabay.com/photo/2018/02/27/06/30/skyscrapers-3184798_1280.jpg);
+    background-image: url(https://cdn.pixabay.com/photo/2014/08/11/21/40/bedroom-416062_1280.jpg);
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;	
-    height: 500px;
+    height: 350px;
     width: 100%;  
     display: flex;
     flex-direction: column;
@@ -58,6 +58,12 @@ button{
 }
 
 .timg{
- color: white;
+    background-image: url(https://media.istockphoto.com/id/1268759368/es/foto/close-up-of-a-black-slate-texture-background-stone-grunge-texture.jpg?s=612x612&w=0&k=20&c=bKUzJ7VzYRp_Zxr4LN9sW4u_uRJZ8qUolpnpKX6PFCQ=);
+    background-size: cover;
+    background-position: center;
+    background-color: darkcyan;
+    color: rgba(0,0,0,0);
+    font-family: impact;
+    -webkit-background-clip: text;
 }
 
