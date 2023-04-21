@@ -4,7 +4,7 @@
 }
 
 .carousel-item {
-    height: 400px;
+    height: 480px;
 }
 
 .carousel-item img {
@@ -12,4 +12,27 @@
     top: 0;
     left: 0;
     min-height: 400px;
+}
+
+.cover {
+    object-fit: cover;
+    height: 200px;
+    background-color: #D3D3D3 !important;
+}
+
+.heading-container {
+    display: flex;
+    align-items: center;
+}
+
+.heading-decoration {
+    display: inline-block;
+    margin-left: 24px;
+    width: 36px;
+    height: 4px;
+    background-color: #fec60d;
+}
+
+.mt-auto {
+    margin-top: auto;
 }
