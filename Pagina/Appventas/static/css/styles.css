@@ -4,12 +4,12 @@
 }
 
 .carousel-item {
-    height: 480px;
+    height: 400px;
 }
 
 .carousel-item img {
     position: absolute;
-    min-height: 480px;
+    min-height: 400px;
 }
 
 .cover {

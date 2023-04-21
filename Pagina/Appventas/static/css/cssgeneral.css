@@ -37,7 +37,7 @@
 
 }
 
-button{
+.btn-esteban {
     width: 50%;
     margin-top: 20%;
     margin-left: 25%;
@@ -45,7 +45,7 @@ button{
 }
 
 .imgtop{   
-    background-image: url(https://cdn.pixabay.com/photo/2014/08/11/21/40/bedroom-416062_1280.jpg);
+    background-image: url('https://cdn.pixabay.com/photo/2014/08/11/21/40/bedroom-416062_1280.jpg');
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;	
@@ -58,7 +58,7 @@ button{
 }
 
 .timg{
-    background-image: url(https://media.istockphoto.com/id/1268759368/es/foto/close-up-of-a-black-slate-texture-background-stone-grunge-texture.jpg?s=612x612&w=0&k=20&c=bKUzJ7VzYRp_Zxr4LN9sW4u_uRJZ8qUolpnpKX6PFCQ=);
+    background-image: url('https://media.istockphoto.com/id/1268759368/es/foto/close-up-of-a-black-slate-texture-background-stone-grunge-texture.jpg?s=612x612&w=0&k=20&c=bKUzJ7VzYRp_Zxr4LN9sW4u_uRJZ8qUolpnpKX6PFCQ=');
     background-size: cover;
     background-position: center;
     background-color: darkcyan;
