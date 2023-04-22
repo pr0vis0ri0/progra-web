@@ -13,3 +13,6 @@ def contacto(request):
 
 def futuros_proyectos(request):
     return render(request,'futuros_proyectos.html')
+
+def departamentos(request):
+    return render(request, 'departamentos.html')

@@ -10,11 +10,12 @@
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    {% block extra_css %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/cssgeneral.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/mi.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'css/style_axel.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'css/style_axel2.css' %}" rel="stylesheet" type="text/css">
+    <!-- <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css"> -->
+    {% endblock %}
     <title>{% block title %} Home {% endblock %}</title>
 </head>
 <body>
@@ -43,7 +44,7 @@
             <a class="nav-link" href="futuros_proyectos">Futuros Proyectos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Departamentos</a>
+            <a class="nav-link" href="departamentos">Departamentos</a>
           </li>
         </ul>
       </div>
