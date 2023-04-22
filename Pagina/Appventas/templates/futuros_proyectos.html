@@ -1,0 +1,128 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %} Futuros Proyectos {% endblock %}
+{% block content %}
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+
+    <div class="hero-container" data-aos="fade-up">
+      <h1>LA CALIDAD DE VIDA COMIENZA POR CASA </h1>
+    </div>
+  </section><!-- End Hero -->
+
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 video-box " >
+            
+          </div>
+
+          <div class="col-xl-6 col-lg-6 d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+            <div class="box-heading" data-aos="fade-up">
+              
+              <h3>Proyecto buena vida</h3>
+              <p>Comienza una nueva vida en el mejor.Toda la comodidad de un barrio consolidado con 2 modelos de casas para tu tranquilidad y la de toda tu familia.  Tres modelos de casas de 142, 181 m2 aproximados.</p>
+            </div>
+
+            <div class="icon-box" data-aos="fade-up">
+              <div class="icon"><i ></i></div>
+              <h4 class="title"><a href="">Casa Elenan</a></h4>
+              <p class="description">142,35 metros cuadrados con 3 dormitorios, 2 baños completos y un baño de visitas. La cocina está equipada y cuenta con una cubierta de granito, y el living-comedor tiene un calefactor de tiro balanceado. La casa tiene aislación reforzada y los pisos son de cerámica y alfombra.</p>
+            </div>
+
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i ></i></div>
+              <h4 class="title"><a href="">Casa maria</a></h4>
+              <p class="description">Esta es una casa de 181,73 metros cuadrados con 3 dormitorios, 2 baños completos y un baño de visitas, y un Family Office. La cocina es grande y está equipada con horno empotrado, encimera y campana, y una cubierta de granito y logia estructurada. La casa tiene ventanas con marcos de PVC y termopanel en dormitorio principal y baños. Hay pisos de cerámica en áreas comunes y de alfombra en dormitorios y Family Office. También cuenta con aislación reforzada y un calefactor de tiro balanceado.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+        <div class="section-title" data-aos="zoom-in">
+          <h3 >Nuestra familia <span>mas felices:)</span></h3>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="box section-title" data-aos="fade-up">
+              <h4>Proyecto vida chida </h4>
+              <h3>Familia Felices <span>200</span></h3>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="box section-title" data-aos="fade-up" data-aos-delay="100">
+              <h4>Proyecto alto oeste</h4>
+              <h3>Familia Felices<span>155</span></h3>
+            </div>
+          </div>
+
+      
+
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+        <div class="text-center">
+          <h3>Nuevos Proyectos</h3>
+          <p> Para Tener a mas Familia felices en nuestro condominios seguros </p>
+        </div>
+      </div>
+    </section><!-- End Cta Section -->
+
+   
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+      
+
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up">
+            <ul id="portfolio-flters">
+              <li data-filter=".filter-app">Buen bienestar  </li>
+              <li data-filter=".filter-app">Parque libre </li>
+              <li data-filter=".filter-card">Vida en Viña del Mar </li>
+             
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+
+          <div id="foto1" class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <img  src="{% static 'images/Proyecto1.jpg' %}"  class="img-fluid" alt="" width="">
+          
+          </div>
+
+          <div  id="foto2" class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <img  src="{% static 'images/proyecto2.jpg' %}" class="img-fluid" alt="" >
+         
+          </div>
+
+          <div  id="foto3" class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <img  src="{% static 'images/proyecto3.jpg' %}"   class="img-fluid" alt="">
+           
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+   
+
+{% endblock %}
