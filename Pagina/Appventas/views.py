@@ -9,4 +9,7 @@ def ubicacion(request):
     return render(request,'ubicacion.html') 
 
 def contacto(request):
-    return render(request,'contacto.html')   
+    return render(request,'contacto.html')
+
+def futuros_proyectos(request):
+    return render(request,'futuros_proyectos.html')
