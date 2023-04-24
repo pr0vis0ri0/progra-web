@@ -1,3 +1,3 @@
 # Ignorar todas las carpeta __pycache__
 
-*/__pycache__/*
+**/__pycache__/
