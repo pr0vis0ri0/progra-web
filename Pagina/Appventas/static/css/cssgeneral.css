@@ -1,0 +1,69 @@
+.titulo{
+    margin-left: 20px;
+}
+.ubi{
+    margin-top: 50px;
+    padding-left: 100px;
+}
+.ubi .rayita{
+    width: 180px;
+    height: 5px;
+    color: #FEC60D;
+}
+
+.formulario{
+    
+    border-radius: 15px;
+    width: 600px;
+    height: 450px;
+    margin-right: 50px;
+    float: left;
+    
+  
+}
+.formulario input{
+    border-color: #09044c;
+    border-radius: 9px;
+}
+.formulario label{
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.formulario form{
+    border-radius: 15px;
+    border-color: black;
+    margin-left: 20px;
+
+}
+
+.btn-esteban {
+    width: 50%;
+    margin-top: 20%;
+    margin-left: 25%;
+
+}
+
+.imgtop{   
+    background-image: url('https://cdn.pixabay.com/photo/2014/08/11/21/40/bedroom-416062_1280.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;	
+    height: 350px;
+    width: 100%;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;      
+}
+
+.timg{
+    background-image: url('https://media.istockphoto.com/id/1268759368/es/foto/close-up-of-a-black-slate-texture-background-stone-grunge-texture.jpg?s=612x612&w=0&k=20&c=bKUzJ7VzYRp_Zxr4LN9sW4u_uRJZ8qUolpnpKX6PFCQ=');
+    background-size: cover;
+    background-position: center;
+    background-color: darkcyan;
+    color: rgba(0,0,0,0);
+    font-family: impact;
+    -webkit-background-clip: text;
+}
+

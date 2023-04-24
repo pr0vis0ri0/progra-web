@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+
+{% block title %} Hogares Deluxe {% endblock %}
+
+{% block content %}
+
+{% load static %}
+<!-- Link para encontrar fotos de departamentos en HD
+https://www.google.com/search?q=departamentos+1920x1080&rlz=1C1CHBF_esCL916CL916&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjjt7bmi7r-AhVfqZUCHTogCXgQ_AUoAXoECAEQAw#imgrc=kTRMufRyT_5nAM&imgdii=qlxvrnP99tFB3M -->
+<!-- Carousel -->
+
+<div class="container-fluid container-full">
+    <div class="row">
+        <div class="col-12">
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'images/DEPARTAMENTO-1V2.jpg' %}" class="d-block w-100" alt="Departamento 1">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                        <div class="container position-absolute bottom-0 start-50 translate-middle-x mb-5">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h3 class="card-title">Duplex</h3>
+                                      <p class="card-text">Departamento de 2 pisos, distribución en 1º y 2º piso, ideal para compartir con un roommate o parejas con un hijo.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/DEPARTAMENTO-2V2.jpg' %}" class="d-block w-100" alt="Departamento 2">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                        <div class="container position-absolute bottom-0 start-50 translate-middle-x mb-5">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h3 class="card-title">Loft</h3>
+                                      <p class="card-text">Construcción de amplia superficie con escasas divisiones en su interior, de 1 o 2 pisos, pensado para personas solteras o parejas sin hijos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/DEPARTAMENTO-3V2.jpg' %}" class="d-block w-100" alt="Departamento 3">
+                        <div class="carousel-caption d-none d-md-block">
+                        </div>
+                        <div class="container position-absolute bottom-0 start-50 translate-middle-x mb-5">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <h3 class="card-title">Penthouse</h3>
+                                      <p class="card-text">Departamento en último piso con acceso a azotea que se transforma en patio privado, equipado en algunos casos con jacuzzi, tv, quincho y gran terraza. Ideal para familias por su gran metraje.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-6">
+            <div class="heading-container">
+                <h2>¡Conoce nuestras asociaciones!</h2>
+                <div class="heading-decoration"></div>
+            </div>
+        </div>
+    </div>
+    <hr class="hr">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-light text-white">
+                <a href="https://adi-ag.cl/" target="_blank">
+                    <img src="{% static 'images/adi.png' %}" class="card-img cover bg-dark" alt="departamento 1">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light text-white">
+                <a href="https://www.anfdgac.cl/" target="_blank">
+                    <img src="{% static 'images/logo-nautica.png' %}" class="card-img cover bg-dark" alt="departamento 1">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light text-white">
+                <a href="https://www.minvu.gob.cl/" target="_blank">
+                    <img src="{% static 'images/logo-ministerio.png' %}" class="card-img cover bg-dark" alt="departamento 2">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-full pt-5">
+    <div class="row">
+        <div class="lg-12" style="min-height: 250px;">
+            <section id="cta-seba" class="cta-seba">
+                  <div class="text-center">
+                    <h3><a href="futuros_proyectos">¡Conoce nuestros nuevos proyectos!</a></h3>
+                    <p> Accede al link anterior para conocer más acerca de nuestros nuevos proyectos </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
