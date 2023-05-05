@@ -1,0 +1,14 @@
+/*
+    Como mencioné en estilos.css, este archivo sólo se creó con la intención de que se apliquen la misma
+    fuente a todos los archivos de HTML, por favor, tratar de no hacer cambios acá o al menos consultarme.
+
+    PD: NO REALIZAR CAMBIOS A TRAVÉS DE "*" DEBIDO A QUE AL HACER ESO MODIFICAS TODOS LOS HTML EXISTENTES.
+*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}

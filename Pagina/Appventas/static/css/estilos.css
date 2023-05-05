@@ -1,0 +1,34 @@
+/*
+    A partir de esta página de estilos vamos a ir añadiendo todos nuestros propios estilos como también documentar
+    lo que hace cada una de las clases que agregamos con el fin de que todos lo podamos modificar en el caso de que 
+    sea necesario.
+
+    Se creó un archivo CSS llamado fuentes.css el cual sólo le aplica la fuente de app/departamentos a todas las
+    páginas, igualmente, cuando creen una nueva clase y no les cargue, es probablemente debido al caché que crean los
+    archivos CSS, para eso, hagan CTRL + F5.
+*/
+
+/*
+    Esta clase complementa la clase container-fluid y a través de esta se logra un efecto como el que se ve en el 
+    inicio tanto con el carrusel de bootstrap como con la parte inferior de ¡Conoce nuestros nuevos proyectos!
+*/
+.container-full {
+    padding-left: 0 !important;
+    padding-right: 0 !important;    
+}
+
+/*
+
+*/
+.carousel-item {
+    height: 400px;
+}
+.carousel-item img {
+    position: absolute;
+    min-height: 400px;
+}
+
+.test-iframe {
+    height: 100%;
+    width: 100%;
+}
