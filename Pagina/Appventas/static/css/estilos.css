@@ -85,6 +85,11 @@
     background-color: rgb(249, 249, 251);
     width: 100%;
 }
+
+.s-deptos {
+    height: 200px;
+}
+
 /*
     Clase añadida el 06-05 para poder justificar los textos, esta se puede aplicar a un container
     afectando a TODO el texto dentro de un container.
