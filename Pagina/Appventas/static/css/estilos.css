@@ -1,0 +1,146 @@
+/*
+    A partir de esta página de estilos vamos a ir añadiendo todos nuestros propios estilos como también documentar
+    lo que hace cada una de las clases que agregamos con el fin de que todos lo podamos modificar en el caso de que 
+    sea necesario.
+
+    Se creó un archivo CSS llamado fuentes.css el cual sólo le aplica la fuente de app/departamentos a todas las
+    páginas, igualmente, cuando creen una nueva clase y no les cargue, es probablemente debido al caché que crean los
+    archivos CSS, para eso, hagan CTRL + F5.
+*/
+
+/*
+    Esta clase complementa la clase container-fluid y a través de esta se logra un efecto como el que se ve en el 
+    inicio tanto con el carrusel de bootstrap como con la parte inferior de ¡Conoce nuestros nuevos proyectos!
+*/
+.container-full {
+    padding-left: 0 !important;
+    padding-right: 0 !important;    
+}
+
+/*
+    Estos estilos los creé para los carruseles y para darles un tamaño fijo a las imagenes que muestran los
+    mismos, en caso de que quieran carruseles con mayor tamaño, sólo deben crear otra clase cambiando
+    el height y añadir la etiqueta !important debido a que esto le da prioridad al cambio.
+*/
+.carousel-item {
+    height: 400px;
+}
+.carousel-item img {
+    position: absolute;
+    min-height: 400px;
+}
+/*
+    .cover : Utilicé la clase de cover para que las imagenes que van en las primeras 3 cards de index
+    se vean lo más "correctas" que se puedan, se le dió un bg-color por que las imágenes son png por
+    lo cual son transpartentes.
+
+    .heading-container y .heading-decoration : son clases únicas que cree como apartados netamente
+    estéticos, de partida el .heading-container lo que hace es que le da la propiedad de flex y en este caso row (fila)
+    también se le da el align-items center con el cual los contenidos se alinean al centro.
+
+    El .heading-container y .heading-decoration se puede ver en index, en contacto y local de venta,
+    lo que aporta .heading-decoration es una línea de color amarillo para el título principal de la página
+    o sección en que se coloca, el cual al tener la propiedad de inline-block se alínea en la misma fila
+    que el .heading.container.
+*/
+.cover {
+    object-fit: cover;
+    height: 200px;
+    background-color: #D3D3D3 !important;
+}
+
+.heading-container {
+    display: flex;
+    align-items: center;
+}
+
+.heading-decoration {
+    display: inline-block;
+    margin-left: 24px;
+    width: 36px;
+    height: 4px;
+    background-color: #fec60d;
+}
+/*
+    Estos se los robé al sergio el cual los robó del internet, pero en resumen son para colocar una especie de baner
+    con una imagen de fondo la cual a medida que tú subes o bajas el fondo de la imagen cambia.
+*/
+.cta-seba {
+    background: linear-gradient(rgba(2, 2, 2, 0.7), rgba(0, 0, 0, 0.9)), url("../images/IMG-INICIO-WIDTH-100.jpg") fixed center center;
+    background-size: cover;
+    padding: 60px 0;
+}
+
+.cta-seba h3 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+}
+  
+.cta-seba p {
+    color: #fff;
+}
+
+.full-dptos {
+    background-color: rgb(249, 249, 251);
+    width: 100%;
+}
+
+.s-deptos {
+    height: 200px;
+}
+
+/*
+    Clase añadida el 06-05 para poder justificar los textos, esta se puede aplicar a un container
+    afectando a TODO el texto dentro de un container.
+*/
+.j-text {
+    text-align: justify !important;
+}
+
+/*
+    De la línea 95 a la 126 son estilos del Esteban
+    mantuve .formulario para el border-radius, quité muchos estilos ya que usé la documentación
+    de bootstrap 5 forms para hacer el formulario, mantuve .btn-esteban para darle el ancho
+    del 50% al botón, también añadí una clase al iframe de googlemaps llamado
+    .test-iframe, el cual tiene la función de que dependiendo el cuadro en donde esté el
+    iframe a este se le da el 100 de ancho y alto, la razón por la cual esto es automático
+    es debido a las columnas de bootstrap, tanto al formulario como al iframe les di
+    col-md-6 lo que significa que ocupan la mitad de la página y el alto acorde a los contenidos
+    que se muestran en pantalla.
+
+    Mantuve .imgtop y .timg por que no vi necesario removerlos.
+*/
+
+.formulario{
+    border-radius: 15px;
+}
+
+.btn-esteban {
+    width: 50%;
+}
+
+.test-iframe {
+    height: 100%;
+    width: 100%;
+}
+
+.imgtop{   
+    background-image: url('../images/CONTACTO.jpg');
+    background-size:cover;
+    background-position:center;
+    height: 300px;
+    width: 100%;  
+    align-items: center;
+    justify-content: center;      
+}
+
+.timg{
+    background-image: url('../images/CONTACTO.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: darkcyan;
+    color: rgba(0,0,0,0);
+    font-family: impact;
+    -webkit-background-clip: text;
+}
