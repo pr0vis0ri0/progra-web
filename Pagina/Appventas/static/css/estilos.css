@@ -120,6 +120,7 @@
     width: 50%;
 }
 
+
 .test-iframe {
     height: 100%;
     width: 100%;
@@ -133,14 +134,4 @@
     width: 100%;  
     align-items: center;
     justify-content: center;      
-}
-
-.timg{
-    background-image: url('../images/CONTACTO.jpg');
-    background-size: cover;
-    background-position: center;
-    background-color: darkcyan;
-    color: rgba(0,0,0,0);
-    font-family: impact;
-    -webkit-background-clip: text;
 }
