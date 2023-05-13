@@ -1,0 +1,171 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block extra_css %}
+   <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+{% endblock %}
+{% block title %} Departamentos {% endblock %}
+{% block content %}
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+   <div class="carousel-inner">
+     <div class="carousel-item active">
+       <img src="{% static 'images/home-img-1.jpg'%}" class="d-block w-100 img-carousel" alt="...">
+     </div>
+     <div class="carousel-item">
+       <img src="{% static 'images/home-img-2.jpg'%}" class="d-block w-100 img-carousel" alt="...">
+     </div>
+     <div class="carousel-item">
+       <img src="{% static 'images/home-img-3.png'%}" class="d-block w-100 img-carousel" alt="...">
+     </div>
+   </div>
+   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <span class="visually-hidden">Previous</span>
+   </button>
+   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="visually-hidden">Next</span>
+   </button>
+</div>
+
+<div class="letra">
+<section class="availability" id="availability">
+   <form action="" method="post">
+      <div class="flex">
+         
+         <div class="box">
+            <p>Dormitorios <span>*</span></p>
+            <select name="adults" class="input" required>
+               <option value="1">1 Dormitorio</option>
+               <option value="2">2 Dormitorios</option>
+               <option value="3">3 Dormitorios</option>
+            </select>
+         </div>
+         <div class="box">
+            <p>Baños <span>*</span></p>
+            <select name="childs" class="input" required>
+               <option value="1">1 Baño</option>
+               <option value="2">2 Baños</option>
+               <option value="3">3 Baños</option>
+            </select>
+         </div>
+         <div class="box">
+            <p>Decoración <span>*</span></p>
+            <select name="rooms" class="input" required>
+               <option value="1">Equipado</option>
+               <option value="2">No equipado</option>
+            </select>
+         </div>
+      </div>
+      <input type="submit" value="Ver disponibilidad" name="check" class="btn">
+   </form>
+
+</section>
+
+<section class="about" id="about">
+
+   <div class="row">
+      <div class="image">
+         <img src="{% static 'images/about-img-1.jpg'%}" alt="">
+      </div>
+      <div class="content">
+         <h3>Areas Comunes</h3>
+         <p>En todos nuestros proyectos tenemos grandes salas comunes en las cuales pasar el tiempo libre.</p>
+         <a href="#reservation" class="btn">Ver Proyectos</a>
+      </div>
+   </div>
+
+   <div class="row revers">
+      <div class="image">
+         <img src="{% static 'images/about-img-2.jpg'%}" alt="">
+      </div>
+      <div class="content">
+         <h3> Bares</h3>
+         <p>En todos nuestros proyectos tenemos bares para que nuestros habitantes pasen el rato </p>
+         <a href="#contact" class="btn">ver proyectos</a>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="image">
+         <img src="{% static 'images/about-img-3.jpg'%}" alt="">
+      </div>
+      <div class="content">
+         <h3>Piscinas</h3>
+         <p>Todos nuestros proyectos estan implementados con piscinas temperadas</p>
+         <a href="#availability" class="btn">Ver proyectos</a>
+      </div>
+   </div>
+
+</section>
+
+<section class="services">
+   <div class="box-container">
+      <div class="box">
+         <img src="{% static 'images/icon-2.png'%}" alt="">
+         <h3>Lugares de ventas</h3>
+         <p>Dentro del condominio poseemos tiendas para nuestros habitantes</p>
+      </div>
+
+      <div class="box">
+         <img src="{% static 'images/icon-3.png'%}" alt="">
+         <h3>Hermosa vista</h3>
+         <p>Ademas de ser muy comodos, nuestros departamentos tienen vista al mar</p>
+      </div>
+
+      <div class="box">
+         <img src="{% static 'images/icon-4.png'%}" alt="">
+         <h3>Decoración</h3>
+         <p>Puedes elegir si deseas tu departamento amueblado</p>
+      </div>
+   </div>
+
+</section>
+
+<section class="reviews" id="reviews">
+
+   <div class="swiper reviews-slider">
+
+      <div class="swiper-wrapper">
+         <div class="swiper-slide box">
+            <img src="{% static 'images/pic-5.png'%}" alt="">
+            <h3>john deo</h3>
+            <p>Los departamentos son bastantes amplios y acogedores, perfectos para vivir con mi familia.</p>
+         </div>
+      </div>
+      <div class="swiper-pagination"></div>
+   </div>
+
+</section>
+<section class="footer">
+
+   <div class="box-container">
+
+      <div class="box">
+         <a href="tel:1234567890"><i class="fas fa-phone"></i> +56 9 4157 2930</a>
+         <a href="tel:1112223333"><i class="fas fa-phone"></i> +111-222-3333</a>
+         <a href="mailto:shakhanas@gmail.com"><i class="fas fa-envelope"></i> Alumnos@duocuc.cl</a>
+         <a href="#"><i class="fas fa-map-marker-alt"></i> Freire 200, San Bernardo</a>
+      </div>
+
+      <div class="box">
+         <a href="#home">Proyectos</a>
+         <a href="#about">Ventajas</a>
+         <a href="#reservation">Local de ventas</a>
+         <a href="#gallery">Departamentos</a>
+      </div>
+
+      <div class="box">
+         <a href="#">facebook <i class="fab fa-facebook-f"></i></a>
+         <a href="#">twitter <i class="fab fa-twitter"></i></a>
+         <a href="#">instagram <i class="fab fa-instagram"></i></a>
+         <a href="#">linkedin <i class="fab fa-linkedin"></i></a>
+      </div>
+
+   </div>
+
+   <div class="credit">&copy; Copyright @ 2022  Hogares Deluxe | Todos los derechos reservados!</div>
+
+</section>
+</div>
+{% endblock %}

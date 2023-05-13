@@ -22,5 +22,4 @@ from Appventas import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('Appventas.urls')),
-    path('algo',views.algo)
 ]
