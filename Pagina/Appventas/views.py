@@ -6,7 +6,7 @@ def index(request):
     return render(request,'index.html') 
 
 def local_de_venta(request):
-    return render(request,'local-de-venta.html') 
+    return render(request,'local_de_venta.html') 
 
 def contacto(request):
     return render(request,'contacto.html')
@@ -14,5 +14,5 @@ def contacto(request):
 def futuros_proyectos(request):
     return render(request,'futuros_proyectos.html')
 
-def departamentos(request):
-    return render(request, 'departamentos.html')
+def propiedades(request):
+    return render(request, 'propiedades.html')
