@@ -26,7 +26,7 @@ class CaracteristicasPropiedad (models.Model):
     mascotas_propiedad = models.IntegerField()
     bodega_propiedad = models.IntegerField()
     estacionamiento = models.IntegerField()
-    id_propiedad = models.ForeignKey(Propiedad, null=True, on_delete=models.SET_NULL)
+    id_propiedad = models.ForeignKey(Propiedad,unique=True, null=True, on_delete=models.SET_NULL)
 
 class Visita (models.Model):
     id_visita = models.AutoField(primary_key=True)
