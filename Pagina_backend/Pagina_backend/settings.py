@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'import_export',
     'backend.apps.BackendConfig'
+
 ]
 
 MIDDLEWARE = [
