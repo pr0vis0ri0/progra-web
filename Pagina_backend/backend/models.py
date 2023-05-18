@@ -4,26 +4,33 @@ class Region (models.Model):
     id_region = models.AutoField(primary_key=True)
     nombre_region = models.CharField(max_length=70)
     capital_region = models.CharField(max_length=30, default='')
-
     # Esta función es para que cuando se llame la PK como FK en otras tablas aparezca el
     # id_region y el nombre de la región.
     def __str__ (self):
         return (str(self.id_region) + ' ' + self.nombre_region)
     
+    class Meta :
+        ordering = ['id_region']
+    
 class Comuna (models.Model):
     id_comuna = models.AutoField(primary_key=True)
     nombre_comuna = models.CharField(max_length=30)
     id_region = models.ForeignKey(Region, null=True, on_delete=models.SET_NULL)
-
     def __str__ (self):
         return (str(self.id_comuna) + ' ' + self.nombre_comuna)
+    
+    class Meta :
+        ordering = ['id_comuna']
 
 class TipoPropiedad (models.Model):
     id_tipo_propiedad = models.AutoField(primary_key=True)
     nombre_tipo_propiedad = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.id_tipo_propiedad
+        return str(self.id_tipo_propiedad)
+
+    class Meta :
+        ordering = ['id_tipo_propiedad']
 
 class Propiedad (models.Model):
     id_propiedad = models.AutoField(primary_key=True)
@@ -36,6 +43,9 @@ class Propiedad (models.Model):
     def __str__(self):
         return self.id_propiedad
 
+    class Meta :
+        ordering = ['id_propiedad']
+
 class CaracteristicasPropiedad (models.Model):
     cant_dormitorios = models.IntegerField()
     cant_banos = models.IntegerField()
@@ -43,6 +53,9 @@ class CaracteristicasPropiedad (models.Model):
     tiene_bodega = models.IntegerField()
     tiene_estacionamiento = models.IntegerField()
     id_propiedad = models.ForeignKey(Propiedad,unique=True, null=True, on_delete=models.SET_NULL)
+
+    class Meta :
+        ordering = ['id_propiedad']
 
 class Visita (models.Model):
     id_visita = models.AutoField(primary_key=True)
@@ -56,3 +69,6 @@ class Visita (models.Model):
 
     def __str__(self):
         return self.id_visita
+
+    class Meta :
+        ordering = ['id_visita']
