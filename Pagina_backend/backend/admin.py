@@ -64,7 +64,7 @@ class ComunaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id_comuna',
                     'nombre_comuna',
                     'id_region')
-    search_display = ('id_comuna',
+    search_fields = ('id_comuna',
                       'nombre_comuna',
                       'id_region')
 
@@ -79,7 +79,7 @@ class TipoPropiedadAdmin (ImportExportModelAdmin, admin.ModelAdmin):
     resource_classes = [TipoPropiedadResource]
     list_display = ('id_tipo_propiedad',
                     'nombre_tipo_propiedad')
-    search_display = ('id_tipo_propiedad',
+    search_fields = ('id_tipo_propiedad',
                     'nombre_tipo_propiedad')
 
 class PropiedadResource (ModelResource):
@@ -109,7 +109,7 @@ class PropiedadAdmin (ImportExportModelAdmin, admin.ModelAdmin):
                     'es_venta',
                     'id_tipo_propiedad',
                     'id_comuna')
-    search_display = ('id_propiedad',
+    search_fields = ('id_propiedad',
                     'valor_propiedad',
                     'es_arriendo',
                     'es_venta',
@@ -139,7 +139,7 @@ class CaracteristicasPropiedadAdmin (ImportExportModelAdmin, admin.ModelAdmin):
                     'tiene_bodega',
                     'tiene_estacionamiento',
                     'id_propiedad')
-    search_display = ('cant_dormitorios',
+    search_fields = ('cant_dormitorios',
                     'cant_banos',
                     'permite_mascotas',
                     'tiene_bodega',
@@ -174,7 +174,7 @@ class VisitaAdmin (ImportExportModelAdmin, admin.ModelAdmin):
                     'correo',
                     'telefono',
                     'id_propiedad')
-    search_display = ('id_visita',
+    search_fields = ('id_visita',
                     'dia_visita',
                     'hora_visita',
                     'nombre_completo',
