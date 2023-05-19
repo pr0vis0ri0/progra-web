@@ -31,16 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'drf_spectacular',
+    'rest_framework',
+    'import_export',
+    'backend.apps.BackendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'import_export',
-    'backend.apps.BackendConfig'
-
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +127,16 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Implementación de Swagger UI
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS' : 'drf_spectacular.openapi.AutoSchema'
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE' : 'API',
+    'DESCRIPTION' : 'Proyecto de Programación Web',
+    'VERSION' : '1.0.0',
+}

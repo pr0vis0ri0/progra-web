@@ -4,8 +4,7 @@ class Region (models.Model):
     id_region = models.AutoField(primary_key=True)
     nombre_region = models.CharField(max_length=70)
     capital_region = models.CharField(max_length=30, default='')
-    # Esta función es para que cuando se llame la PK como FK en otras tablas aparezca el
-    # id_region y el nombre de la región.
+    
     def __str__ (self):
         return (str(self.id_region) + ' ' + self.nombre_region)
     

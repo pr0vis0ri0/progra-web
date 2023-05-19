@@ -37,6 +37,7 @@ class RegionResource(ModelResource):
                   'nombre_region', 
                   'capital_region')
 
+
 class RegionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_classes = [RegionResource]
     list_display = ('id_region',

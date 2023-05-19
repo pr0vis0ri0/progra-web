@@ -4,8 +4,8 @@ from .models import *
 from rest_framework import status
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+
 
 class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
@@ -26,7 +26,7 @@ class RegionList(APIView):
             registro.save()
             return JSONResponse(registro.data, status=status.HTTP_201_CREATED)
         return JSONResponse(registro.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
 class RegionDetail(APIView):
     def get(self,request,id_region = None):
         if id_region is not None :
