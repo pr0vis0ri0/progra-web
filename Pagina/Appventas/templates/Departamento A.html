@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/cssgeneral.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/mi.css' %}" rel="stylesheet" type="text/css">
+    <title>Proyecto 1</title>
+    <link rel="stylesheet" href="static/css/style.css">
+  </head>
+  <body>
+    <!--NavBar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" aria-label="Ninth navbar example">
+        <div class="container-xl">
+          <a class="navbar-brand" href="inicio"><i class="fa-solid fa-building fa-xl"></i> Hogares Deluxe</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarsExample07XL">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="inicio">Inicio</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Quiénes Somos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ubicacion">Local de Venta</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacto">Contactános</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="futuros_proyectos">Futuros Proyectos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="departamentos">Departamentos</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <!--Fin NavBar-->
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-12">
+            <div id="carouselExampleCaptions" class="carousel slide">
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-bs-interval="3000">
+                    <img src="{% static 'img/carousel/1.jpg' %}" class="d-block w-100" alt="..." height="500">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Proyecto 1</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <!--Carrusel-->
+    <section>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-12">
+            <ul class="list-unstyled">
+              <li class="media">
+                <img class="mr-3"  src="img/touch/1.jpg" height="180" width="180" alt="Generic placeholder image">
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Living Amplio</h5>
+                  <p class="mb-0">Todos nuestros Departamentos cuentan con amplios living para la comodidad de cada persona</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-4 col-16">
+            <ul class="list-unstyled">
+              <li class="media">
+                <img class="mr-3" src="img/touch/4.jpg" height="180" width="180"  alt="Generic placeholder image">
+                <div class="media-body ">
+                  <h5 class="mt-0 mb-1">Piscina</h5>
+                  <p class="mb-0">Todos nuestros condominios cuentan con grandes pisicnas temperadas</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 d-md-4 d-lg-16">
+            <ul class="list-unstyled">
+              <li class="media">
+                <img class="mr-3" src="img/touch/3.jpg" height="180" width="180" alt="Generic placeholder image">
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Terrazas</h5>
+                  <p class="mb-0">Contamos con amplias areas verdes recreativas para toda familia</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--Fin Carrusel-->
+    <hr>
+    <!--Caracteristicas-->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-12">
+          <div class="row">
+            <div class="col-sm-5 col-12">
+              <div class="card">
+                <img class="card-img-top" src="img/iconos/bank.svg" alt="Piscina">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Bancos</h5>
+                  <p class="card-text"> a solo unas cuadras contamos con Banco de Chile para realizar sus tramites</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5 col-12">
+              <div class="card">
+                <img class="card-img-top" src="img/iconos/car-front-fill.svg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Estacionamientos</h5>
+                  <p class="card-text">Cada departamentos de nuestro condominio cuenta con estacionamiento propio</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5 col-12">
+              <div class="card">
+                <img class="card-img-top" src="img/iconos/fuel-pump.svg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Gasolineras</h5>
+                  <p class="card-text"> Contamos con mas de 3 gasolineras a pocas cuadras de nuestro condominio.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5 col-12">
+              <div class="card">
+                <img class="card-img-top" src="img/iconos/cart4.svg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">MiniMarket</h5>
+                  <p class="card-text"> A solo unas cuadras tenemos un MiniMarket en el cual puede realizar todas sus compras</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12 col-md-4 ms-auto">
+            <div class="row mx-0">
+              <div class="col-12 card bg-light mx-auto">
+                <h3 class="text-center card-header">Busca tu Hogar</h3>
+                <form class="card-body">
+                  <div class="form-group row">
+                    <label for="location1" class="col-form-label">Comuna</label>
+                    <select class="form-control" name="location" id="location1">
+                      <option value="">Any</option>
+                      <option value="">1</option>
+                      <option value="">2</option>
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <label for="location2" class="col-form-label">Dormitorios</label>
+                    <select class="form-control" name="location2" id="location2">
+                      <option value="">Any</option>
+                      <option value="">1</option>
+                      <option value="">2</option>
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <label for="location3" class="col-form-label">Baños</label>
+                    <select class="form-control" name="location3" id="location3">
+                      <option value="">Any</option>
+                      <option value="">1</option>
+                      <option value="">2</option>
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <label for="pricefrom" class="col-form-label">Precio desde</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text" id="basic-addon1">$</div>
+                      </div>
+                      <input type="text" class="form-control" id="pricefrom" aria-describedby="basic-addon1">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="priceto" class="col-form-label">Precio Hasta</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text" id="basic-addon2">$</div>
+                      </div>
+                      <input type="text" class="form-control" id="priceto" aria-describedby="basic-addon2">
+                    </div>
+                  </div>
+                  <p class="text-center"><a href="#" class="btn btn-danger" role="button">Buscar </a></p>
+                </form>
+              </div>
+              <div class="col-12">
+                <h3 class="text-center">Vendedores</h3>
+                <hr>
+                <div class="media">
+                  <img class="mr-3" src="img/ejecutivos/2.jpg" alt="Generic placeholder image">
+                  <div class="media-body">
+                    <h5 class="mt-0">John Doe</h5>
+                    <abbr title="Phone">P:</abbr> (123) 456-7890 <a href="mailto:#">first.last@example.com</a>
+                  </div>
+                </div>
+                <div class="media mt-2">
+                  <img class="mr-3" src="img/ejecutivos/1.png" alt="Generic placeholder image">
+                  <div class="media-body">
+                    <h5 class="mt-0">Linda Smith</h5>
+                    <abbr title="Phone">P:</abbr> (123) 456-7890 <a href="mailto:#">first.last@example.com</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <br>
+        <br>
+        <br>  
+        <hr>
+      </div>
+    </div>
+    <hr>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <h3>Tipos de departamentos</h3>
+            <hr>
+            <div class="row">
+              <div class="col-4">
+                <div class="text-center" > <img src="img/planos/1.png" alt="Thumbnail Image 1" width="350" height="350"></div>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="col-md-6 col-12">
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Tipo A</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Tipos A2</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Tipo B</a>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <p class="text-center mt-2"><img src="" alt=""></p>
+                <p>2 Dormitorios
+                </p>
+                <p>2 Baños</p>
+                <p>Superficie Total	68.77 m2</p>
+                <p>Superficie Interior	56.24 m2</p>
+                <p>Superficie Terraza	12.53 m2</p>
+                <p>Orientación	S</p>
+              </div>
+              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <p class="text-center mt-2"><img src="" alt=""></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus maxime aut ea impedit voluptates aperiam dolor laborum officiis autem aspernatur! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, alias, repudiandae sunt illo consequatur aperiam doloribus nesciunt ut deserunt ipsa est tempora nihil. Totam eveniet aperiam debitis fugit ipsa doloremque. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio sequi dolorem suscipit assumenda molestiae voluptatem qui consequuntur magni? Deleniti, corporis.</p>
+              </div>
+              <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <p class="text-center mt-2"><img src="" alt=""></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus maxime aut ea impedit voluptates aperiam dolor laborum officiis autem aspernatur! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, alias, repudiandae sunt illo consequatur aperiam doloribus nesciunt ut deserunt ipsa est tempora nihil. Totam eveniet aperiam debitis fugit ipsa doloremque. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio sequi dolorem suscipit assumenda molestiae voluptatem qui consequuntur magni? Deleniti, corporis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr>
+    <br>
+    <section>
+        <div class="container text-center">
+          <div class="row">
+            <hr>
+            <div class="col-lg-4 col-md-4 col-12">
+              <ul class="list-unstyled">
+                <li class="media"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.599267187798!2d-70.70385205424495!3d-33.58975248993809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662d95a2b39b953%3A0x5900bf9744ce36b3!2sFreire%20200%2C%208070932%20San%20Bernardo%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1683940170343!5m2!1ses-419!2scl" 
+                    width="400" 
+                    height="300"></iframe>
+                  <div class="media-body">
+                    <h5 class="mt-0 mb-1">Living Amplio</h5>
+                    <p class="mb-0"></p>
+                  </div>
+                </li>
+              </ul>
+            </div>            
+          </div>
+        </div>
+    </section>
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-12">
+          <div class="row">
+            <div class="col-lg-8 col-12">
+              <h3>Promociones</h3>
+              <hr>
+              <p>(1) Descuento máximo del 26% aplica solo para algunos departamentos de Edificio My Way. Consultar unidades en sala de ventas.
+              <p>(2) Cuota corresponde a Edificio Sueña Marín, valor UF 2.280, corresponde al depto. 209. No incluye estacionamiento ni bodega.</p>
+              <p>(3) Promoción 24 dividendos: consultar bases legales en sala de ventas.</p>  
+              <p>(4) 6 meses de arriendo garantizado: consultar bases legales en sala de ventas.</p>
+              <p>(5) Pago del pie con tarjeta de crédito válido para Edificios My Way, Circulo 650 y Status.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-12 mt-md-0 mt-2">
+          <h3>Contact Us</h3>
+          <hr>
+          <address>
+            <strong>MyStoreFront, Inc.</strong><br>
+            Indian Treasure Link<br>
+            Quitman, WA, 99110-0219<br>
+            <abbr title="Phone">P:</abbr> (123) 456-7890
+          </address>
+          <address>
+            <strong>Full Name</strong><br>
+            <a href="mailto:#">first.last@example.com</a>
+          </address>
+        </div>
+      </div>
+    </div>
+    <!--Footer Seba-->
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-5 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+              <i class="fa-solid fa-building fa-xl"></i>
+            </a>
+            <span class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">© 2023 Hogares Deluxe LTDA.</span>
+          </div>
+          <ul class="nav col-md-5 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#" target="_blank"><i class="fa-brands fa-twitter fa-xl"></i></a></li>
+            <li class="ms-3"><a class="text-muted" href="#" target="_blank"><i class="fa-brands fa-instagram fa-xl"></i></li>
+            <li class="ms-3"><a class="text-muted" href="#" target="_blank"><i class="fa-brands fa-facebook fa-xl"></i></li>
+          </ul>
+        </footer>
+      </div>
+    <!--Fin Footer Seba-->
+  </body>
+</html>
