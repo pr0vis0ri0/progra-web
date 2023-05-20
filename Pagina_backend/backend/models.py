@@ -26,7 +26,7 @@ class TipoPropiedad (models.Model):
     nombre_tipo_propiedad = models.CharField(max_length=20)
 
     def __str__(self):
-        return str(self.id_tipo_propiedad)
+        return (str(self.id_tipo_propiedad) + ' ' + self.nombre_tipo_propiedad)
 
     class Meta :
         ordering = ['id_tipo_propiedad']
@@ -46,6 +46,8 @@ class Propiedad (models.Model):
         ordering = ['id_propiedad']
 
 class CaracteristicasPropiedad (models.Model):
+    metros_totales = models.IntegerField(default=0)
+    metros_utiles = models.IntegerField(default=0)
     cant_dormitorios = models.IntegerField()
     cant_banos = models.IntegerField()
     permite_mascotas = models.IntegerField()

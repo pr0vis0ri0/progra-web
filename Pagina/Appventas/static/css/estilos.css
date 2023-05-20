@@ -12,16 +12,18 @@
     Esta clase complementa la clase container-fluid y a través de esta se logra un efecto como el que se ve en el 
     inicio tanto con el carrusel de bootstrap como con la parte inferior de ¡Conoce nuestros nuevos proyectos!
 */
-.container-full {
-    padding-left: 0 !important;
-    padding-right: 0 !important;    
-}
 
 /*
     Estos estilos los creé para los carruseles y para darles un tamaño fijo a las imagenes que muestran los
     mismos, en caso de que quieran carruseles con mayor tamaño, sólo deben crear otra clase cambiando
     el height y añadir la etiqueta !important debido a que esto le da prioridad al cambio.
 */
+
+.no-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
 .carousel-item {
     height: 400px;
 }
@@ -126,10 +128,12 @@ Hero pagina local de venta(Esteban)
 
 #heroe {
     width: 100%;
-    height: 30vh;
-    background: url("../images/arbolitos.jpg") top center;
-    background-size: cover;
+    height: 20vh;
+    /* background: url("../images/arbolitos.jpg") top center;
+    background-size: cover;*/
     position: relative;
+    background: url("../images/INMUEBLES.jpg") fixed center center;
+    background-size: cover;
   }
   
   #heroe:before {

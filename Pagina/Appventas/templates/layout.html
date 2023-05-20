@@ -10,11 +10,11 @@
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    {% block axel_css %}
+    {% endblock %}
     <link href="{% static 'css/fuente.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/estilos.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/mi.css' %}" rel="stylesheet" type="text/css">
-    {% block extra_css %}
-    {% endblock %}
     <title>{% block title %} Home {% endblock %}</title>
 </head>
 <body>
@@ -31,10 +31,7 @@
             <a class="nav-link active" aria-current="page" href="inicio">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="local_de_venta">Local de Venta</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contacto">Contactános</a>
+            <a class="nav-link" href="contacto">Contacto</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="futuros_proyectos">Futuros Proyectos</a>

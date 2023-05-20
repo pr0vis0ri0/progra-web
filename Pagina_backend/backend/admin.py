@@ -125,7 +125,9 @@ class CaracteristicasPropiedadResource (ModelResource):
     )
     class Meta:
         model = CaracteristicasPropiedad
-        fields = ('cant_dormitorios',
+        fields = ('metros_totales',
+                  'metros_utiles',
+                  'cant_dormitorios',
                   'cant_banos',
                   'permite_mascotas',
                   'tiene_bodega',
@@ -134,13 +136,17 @@ class CaracteristicasPropiedadResource (ModelResource):
 
 class CaracteristicasPropiedadAdmin (ImportExportModelAdmin, admin.ModelAdmin):
     resource_classes = [CaracteristicasPropiedadResource]
-    list_display = ('cant_dormitorios',
+    list_display = ('metros_totales',
+                    'metros_utiles',
+                    'cant_dormitorios',
                     'cant_banos',
                     'permite_mascotas',
                     'tiene_bodega',
                     'tiene_estacionamiento',
                     'id_propiedad')
-    search_fields = ('cant_dormitorios',
+    search_fields =('metros_totales',
+                    'metros_utiles',
+                    'cant_dormitorios',
                     'cant_banos',
                     'permite_mascotas',
                     'tiene_bodega',

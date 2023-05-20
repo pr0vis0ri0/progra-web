@@ -5,9 +5,6 @@ from django.http import HttpResponse
 def index(request):
     return render(request,'index.html') 
 
-def local_de_venta(request):
-    return render(request,'local_de_venta.html') 
-
 def contacto(request):
     return render(request,'contacto.html')
 
