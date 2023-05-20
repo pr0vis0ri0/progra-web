@@ -3,46 +3,45 @@
 {% block title %} Contacto {% endblock %}
 {% block content %}
 
-<div class="imgtop">
-    <div class="timg">
-    </div>
+<div class="imgtop">  
 </div>
 
 <div class="container mt-5">
     <div class="heading-container mb-5">
-        <h2>¡Canales oficiales de contacto!</h2>
+        <h1>¡Canales oficiales de contacto!</h1>
         <div class="heading-decoration"></div>
     </div>
-    <div class="row mb-5">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body j-text">
-                    <p>Bienvenidos a Hogares Deluxe. Si necesitas contactarnos, estaremos encantados de ayudarte. 
-                        A continuación, te presentamos nuestros canales oficiales de contacto.</p>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-3 ml-2">
+            <div class="card tarjeta">
+                <img src="{% static 'images/mail.png' %}" class="card-img-top" >
+                <div class="card-body ">
+                    <h1 class="card-title mb-5 ">Correo Electronico</h1>
+                    <p class="card-text j-text">Si usted lo prefiere puede enviarnos un correo electronico a contacto@hogaresdeluxe.cl
+                        Nuestro equipo de atención al cliente responderá su mensaje lo antes posible.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body j-text">
-                    <p>En Hogares Deluxe estamos comprometidos con brindarte la mejor experiencia de compra. 
-                        Por eso, te ofrecemos diversos canales de contacto para que puedas comunicarte con nosotros de manera fácil y rápida.</p>
+
+        <div class="col-md-3 mx-5">
+            <div class="card tarjeta">
+                <img src="{% static 'images/depaicono.png' %}" class="card-img-top mt-2" >      
+                <div class="card-body">
+                    <h1 class="card-title mb-4 mt-2 ">Local de Venta</h1>
+                    <p class="card-text j-text">También puedes visitar nuestro local de venta ubicado en Carvajal 358, San Miguel, La Cisterna, Región Metropolitana</p>
+                    <a class="btn btn-primary" href="local-de-venta" role="button">Ubicacion en mapa</a> 
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
+        
+        <div class="col-md-3 mr-2">
+            <div class="card tarjeta">
+                <img src="{% static 'images/telefono.png' %}" class="card-img-top" >
                 <div class="card-body j-text">
-                    <p>Si prefieres contactarnos por correo electrónico, por favor envíanos un mensaje a contacto@hogaresdeluxe.cl. 
-                        Nuestro equipo de atención al cliente te responderá lo antes posible.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body j-text">
+                    <h1 class="card-title ">Contacto Telefonico</h1>
                     <p>Si prefieres contactarnos por teléfono, por favor llámanos al +56 9 2910 1829. 
                         Nuestro equipo de atención al cliente estará encantado de ayudarte con cualquier pregunta o problema que tengas.</p>
                 </div>
@@ -50,6 +49,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 
 {% endblock %}

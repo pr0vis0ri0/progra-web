@@ -120,6 +120,50 @@
     width: 50%;
 }
 
+/*
+Hero pagina local de venta(Esteban)
+*/
+
+#heroe {
+    width: 100%;
+    height: 30vh;
+    background: url("../images/arbolitos.jpg") top center;
+    background-size: cover;
+    position: relative;
+  }
+  
+  #heroe:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  #heroe .heroe-container {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 15px;
+  }
+ 
+  #heroe h1 {
+    margin: 0 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #ffffff;
+  }
+
 .test-iframe {
     height: 100%;
     width: 100%;
@@ -135,12 +179,3 @@
     justify-content: center;      
 }
 
-.timg{
-    background-image: url('../images/CONTACTO.jpg');
-    background-size: cover;
-    background-position: center;
-    background-color: darkcyan;
-    color: rgba(0,0,0,0);
-    font-family: impact;
-    -webkit-background-clip: text;
-}
