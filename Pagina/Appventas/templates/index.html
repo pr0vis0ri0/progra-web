@@ -1,17 +1,11 @@
 {% extends 'layout.html' %}
-
-{% block title %} Hogares Deluxe {% endblock %}
-
-{% block content %}
-
 {% load static %}
-<!-- Link para encontrar fotos de departamentos en HD
-https://www.google.com/search?q=departamentos+1920x1080&rlz=1C1CHBF_esCL916CL916&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjjt7bmi7r-AhVfqZUCHTogCXgQ_AUoAXoECAEQAw#imgrc=kTRMufRyT_5nAM&imgdii=qlxvrnP99tFB3M -->
-<!-- Carousel -->
+{% block title %} Hogares Deluxe {% endblock %}
+{% block content %}
 
 <div class="container-fluid container-full">
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12 no-padding">
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -75,7 +69,7 @@ https://www.google.com/search?q=departamentos+1920x1080&rlz=1C1CHBF_esCL916CL916
 
 <div class="container mt-5">
     <div class="row align-items-center mb-4">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="heading-container">
                 <h2>¡Conoce nuestras asociaciones!</h2>
                 <div class="heading-decoration"></div>
@@ -108,9 +102,46 @@ https://www.google.com/search?q=departamentos+1920x1080&rlz=1C1CHBF_esCL916CL916
     </div>
 </div>
 
-<div class="container-fluid container-full pt-5">
+<section class="full-dptos mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-4">
+                <div class="card">
+                    <img src="{% static 'images/COMPRAR-DEPARTAMENTO.png' %}" class="card-img-top">
+                    <div class="card-body">
+                        <div class="card-title text-center">
+                            <div class="s-deptos">
+                                <h5 class="mb-3"><b>Comprar Departamento</b></h5>
+                                <p class="card-text">Encuentra tu lugar con una experiencia de fotos inmersiva y la mayoría de las listas, 
+                                    incluyendo cosas que no encontrarás en ningún otro lugar.</p>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary mt-3"><b>Buscar departamentos</b></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="card">
+                    <img src="{% static 'images/ARRENDAR-DEPARTAMENTO.png' %}" class="card-img-top">
+                    <div class="card-body">
+                        <div class="card-title text-center">
+                            <div class="s-deptos">
+                                <h5 class="mb-3"><b>Arrendar Departamento</b></h5>
+                                <p class="card-text">Estamos creando una experiencia en línea perfecta, desde comprar en la red de alquiler más grande,
+                                    hasta aplicar y pagar la renta, además de distintos tipos de financiamiento.</p>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary mt-3"><b>Encuentra departamentos</b></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid container-full mt-5 opciones">
     <div class="row">
-        <div class="lg-12" style="min-height: 250px;">
+        <div class="col-md-12 no-padding" style="min-height: 250px;">
             <section id="cta-seba" class="cta-seba">
                   <div class="text-center">
                     <h3><a href="futuros_proyectos">¡Conoce nuestros nuevos proyectos!</a></h3>
