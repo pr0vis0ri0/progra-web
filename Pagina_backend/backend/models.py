@@ -40,7 +40,7 @@ class Propiedad (models.Model):
     id_comuna = models.ForeignKey(Comuna, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.id_propiedad
+        return str(self.id_propiedad)
 
     class Meta :
         ordering = ['id_propiedad']
@@ -53,7 +53,7 @@ class CaracteristicasPropiedad (models.Model):
     permite_mascotas = models.IntegerField()
     tiene_bodega = models.IntegerField()
     tiene_estacionamiento = models.IntegerField()
-    id_propiedad = models.ForeignKey(Propiedad,unique=True, null=True, on_delete=models.SET_NULL)
+    id_propiedad = models.OneToOneField(Propiedad,null=True,on_delete=models.SET_NULL)
 
     class Meta :
         ordering = ['id_propiedad']

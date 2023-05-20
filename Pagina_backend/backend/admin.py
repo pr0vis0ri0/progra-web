@@ -28,7 +28,6 @@ from .models import *
 
 # search_fields considera todos los campos dentro de la lista y permite 
 # hacer búsquedas en la base de datos con estos campos.
-
 class RegionResource(ModelResource):
     class Meta :
         model = Region
@@ -36,7 +35,6 @@ class RegionResource(ModelResource):
         fields = ('id_region', 
                   'nombre_region', 
                   'capital_region')
-
 
 class RegionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_classes = [RegionResource]
@@ -190,6 +188,7 @@ class VisitaAdmin (ImportExportModelAdmin, admin.ModelAdmin):
                     'telefono',
                     'id_propiedad')
     
+
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Comuna, ComunaAdmin)
 admin.site.register(TipoPropiedad, TipoPropiedadAdmin)
