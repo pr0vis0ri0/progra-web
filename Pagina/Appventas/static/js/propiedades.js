@@ -40,7 +40,25 @@ $(document).ready(function () {
         url: "http://localhost:9000/api/v1/propiedad/",
         type: "GET",
         dataType: "json",
-        success: function (propiedades) {
+        success: function (response) {
+            // Número de propiedades que irán por página
+            const propiedadesPorPagina = 10;
+            console.log("1. " + propiedadesPorPagina);
+            // Número total de propiedades que se obtiene desde el response
+            const totalPropiedades = response.length; // 50
+            console.log("2. " + totalPropiedades);
+            // Obtener el número de la página actual (en caso de que se pase como parámetro en la URL)
+            const pagActual = getParameterByName("page") || 1; // Si entras sin parámetro por defecto será la primera
+            console.log("3. " + pagActual)
+            // Aquí se calcularán el indicio inicial y final de las propiedades a mostrar
+            const startIndex = (pagActual - 1) * propiedadesPorPagina;
+            console.log("4. " + startIndex);
+            const endIndex = startIndex + propiedadesPorPagina;
+            console.log("5. " + endIndex);
+            // Obtienes las propiedades de la página actual
+            const propiedades = response.slice(startIndex, endIndex);
+            console.log(propiedades.results);
+            console.log("6. " + propiedades);
             $.each(propiedades, function (i) {
                 let divCol = $('<div></div>').addClass('col-md-6 mb-5');
                 let card = $('<div></div>').addClass('card');
@@ -97,3 +115,23 @@ $(document).ready(function () {
         }
     });
 });
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+    const results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return "";
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+function createPaginationButton(label, pageNumber, currentPage) {
+  const listItem = $('<li></li>').addClass('page-item');
+  const link = $('<a></a>').addClass('page-link').attr('href', '?page=' + pageNumber).text(label);
+    if (currentPage === pageNumber) {
+        listItem.addClass('active');
+    } 
+  listItem.append(link);
+  return listItem;
+}
