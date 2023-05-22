@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block axel_css %}
-   <link rel="stylesheet" href="{% static 'css/estilos-axel.css' %}">
+<link rel="stylesheet" href="{% static 'css/estilos-axel.css' %}">
 {% endblock %}
 {% block title %} Departamentos {% endblock %}
 {% block content %}
@@ -38,21 +38,21 @@
 
 <div class="container mt-5">
    <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
          <div class="row">
             <div class="col-12 card">
                <h3 class="text-center card-header">Busca tu Hogar</h3>
                <form class="card-body">
                   <div class="form-group row">
                      <label for="region" class="col-form-label">Región:</label>
-                     <select class="form-control" name="region" id="region">
-                        <option value="#">Any</option>
+                     <select class="form-control" name="region" id="select-regiones">
+                        <option value="0">Escoge Región</option>
                      </select>
                   </div>
                   <div class="form-group row">
                      <label for="comuna" class="col-form-label">Comuna:</label>
-                     <select class="form-control" name="comuna" id="comuna">
-                        <option value="#">Any</option>
+                     <select class="form-control" name="comuna" id="select-comunas">
+                        <option value="0">Escoge Comuna</option>
                      </select>
                   </div>
                   <div class="form-group row">
@@ -81,11 +81,8 @@
 
       <!-- Comienzo de las CARD de los departamentos -->
 
-      <div class="col-md-9">
-         <div class="row">
-            <div class="col-md-6">
-               <p id="lista-dptos"></p>
-            </div>
+      <div class="col-md-8">
+         <div class="row" id="lista-departamentos">
          </div>
       </div>
    </div>
@@ -95,25 +92,8 @@
 {% endblock %}
 
 {% block js %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-   $(document).ready(function () {
-      $.ajax({
-         type: "GET",
-         dataType: "json",
-         url: "http://localhost:9000/api/v1/propiedad/",
-         success: function (data) {
-            $.each(data, function (index) {
-               $('#lista-dptos').append(
-                  "Departamento : " + data[index].id_propiedad + " "
-                     + data[index].valor_propiedad + " "
-                     + data[index].es_arriendo + " "
-                     + data[index].es_venta + " "
-                     + data[index].id_tipo_propiedad + " "
-                     + data[index].id_comuna + " ");
-            })
-         }
-      });
-   });
+   let staticUrl = "{% static 'images/' %}";
 </script>
+<script src="{% static 'js/propiedades.js'%}"></script>
 {% endblock %}
