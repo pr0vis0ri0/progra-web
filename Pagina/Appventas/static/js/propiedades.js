@@ -43,22 +43,26 @@ $(document).ready(function () {
         success: function (response) {
             // Número de propiedades que irán por página
             const propiedadesPorPagina = 10;
-            console.log("1. " + propiedadesPorPagina);
+            // console.log("1. " + propiedadesPorPagina);
             // Número total de propiedades que se obtiene desde el response
             const totalPropiedades = response.length; // 50
-            console.log("2. " + totalPropiedades);
+            // console.log("2. " + totalPropiedades);
+            const paginasTotales = Math.ceil(totalPropiedades / propiedadesPorPagina);
+            // console.log("3. " + paginasTotales)
             // Obtener el número de la página actual (en caso de que se pase como parámetro en la URL)
             const pagActual = getParameterByName("page") || 1; // Si entras sin parámetro por defecto será la primera
-            console.log("3. " + pagActual)
+            //console.log("4. " + pagActual)
             // Aquí se calcularán el indicio inicial y final de las propiedades a mostrar
             const startIndex = (pagActual - 1) * propiedadesPorPagina;
-            console.log("4. " + startIndex);
+            //console.log("6. " + startIndex);
             const endIndex = startIndex + propiedadesPorPagina;
-            console.log("5. " + endIndex);
+            //console.log("6. " + endIndex);
             // Obtienes las propiedades de la página actual
             const propiedades = response.slice(startIndex, endIndex);
-            console.log(propiedades.results);
-            console.log("6. " + propiedades);
+            //console.log("7. " + propiedades);
+
+
+
             $.each(propiedades, function (i) {
                 let divCol = $('<div></div>').addClass('col-md-6 mb-5');
                 let card = $('<div></div>').addClass('card');
@@ -98,10 +102,10 @@ $(document).ready(function () {
                 cardBody.append(cardText);
                 cardText.append(dFlex);
                 if(propiedades[i].es_arriendo != 0) {
-                    txtStart.html('Arriendo');
+                    txtStart.text('Arriendo');
                     dFlex.append(txtStart);
                 } else if (propiedades[i].es_venta != 0) {
-                    txtStart.html('Venta');
+                    txtStart.text('Venta');
                     dFlex.append(txtStart);
                 }
                 dFlex.append(txtEnd.html("$" + propiedades[i].valor_propiedad));
@@ -112,6 +116,27 @@ $(document).ready(function () {
                     'data-id' : propiedades[i].id_propiedad
                 }))
             });
+
+
+
+            // Se genera el nav destinado para la páginación en el HTML
+            // con las clases que están acá https://getbootstrap.com/docs/5.0/components/pagination/#alignment
+            const paginacionContainer = $('<nav></nav>').addClass('mt-5').attr({ 'aria-label' : 'Navegación de páginas' });
+            const paginacionLista = $('<ul></ul>').addClass('pagination justify-content-center');
+            paginacionContainer.append(paginacionLista);
+
+            // Creación de botones
+            if (pagActual > 1) {
+                paginacionLista.append(creacionBotonPaginacion('Anterior', parseInt(pagActual) - 1));
+            }
+            for (let i = 1; i <= paginasTotales; i++) {
+                paginacionLista.append(creacionBotonPaginacion(i, i, parseInt(pagActual)));
+            }
+            if (pagActual < paginasTotales) {
+                paginacionLista.append(creacionBotonPaginacion('Siguiente', parseInt(pagActual) + 1));
+            }
+
+            $('#container-nav').append(paginacionContainer);
         }
     });
 });
@@ -124,9 +149,9 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return "";
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
+}
 
-function createPaginationButton(label, pageNumber, currentPage) {
+function creacionBotonPaginacion(label, pageNumber, currentPage) {
   const listItem = $('<li></li>').addClass('page-item');
   const link = $('<a></a>').addClass('page-link').attr('href', '?page=' + pageNumber).text(label);
     if (currentPage === pageNumber) {
