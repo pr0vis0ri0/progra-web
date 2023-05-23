@@ -5,14 +5,11 @@ from django.http import HttpResponse
 def index(request):
     return render(request,'index.html') 
 
-def local_de_venta(request):
-    return render(request,'local-de-venta.html') 
-
 def contacto(request):
     return render(request,'contacto.html')
 
 def futuros_proyectos(request):
     return render(request,'futuros_proyectos.html')
 
-def departamentos(request):
-    return render(request, 'departamentos.html')
+def propiedades(request):
+    return render(request, 'propiedades.html')

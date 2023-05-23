@@ -1,0 +1,126 @@
+{% extends 'layout.html' %}
+{% block title %} Local de Venta Ubicación {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+    <div class="row align-items-center mb-4">
+        <div class="heading-container">
+            <h1>¡Conoce nuestro local de venta!</h1>
+            <div class="heading-decoration"></div>
+        </div>
+    </div>
+    <hr class="hr">
+    <div class="row">
+        <div class="heading-container mt-2 mb-3">Complete el formulario en caso de tener preguntas</div>
+        <div class="col-md-6">
+            <form>
+            <div class="card card-body formulario">
+                <div class="mb-3">
+                    <label for="nombreUsuario" class="form-label"> Nombre: </label>
+                    <input type="text" class="form-control" id="nombreUsuario">
+                </div>
+                <div class="mb-3">
+                    <label for="correoUsuario" class="form-label"> Correo: </label>
+                    <input type="text" class="form-control" id="correoUsuario" placeholder="nombre@ejemplo.com" aria-describedby="mensajeAyuda">
+                    <div id="mensajeAyuda" class="form-text">Nunca vamos a compartir tu correó electrónico.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="mensajeUsuario" class="form-label"> Mensaje: </label>
+                    <textarea type="text" class="form-control" id="mensajeUsuario" rows="3"></textarea>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <button type="submit" class="btn btn-primary btn-esteban" >Enviar</button>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106445.58375075209!2d-70.81505580273438!3d-33.51634739999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662dba8434f1c85%3A0x7a18183612f49a8c!2sInmobiliaria%20Aconcagua%20-%20Edificio%20Celtus!5e0!3m2!1ses!2scl!4v1681933683029!5m2!1ses!2scl"
+            class="test-iframe" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div> 
+
+
+
+
+<div class="container mt-5 ">
+    <div class="heading-container mb-5">
+        <h2>¡Canales oficiales de contacto!</h2>
+        <div class="heading-decoration"></div>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row  justify-content-center ">
+        <div class="col-md-3 ml-2">
+            <div class="card tarjeta">
+                <img src="{% static 'images/mail.png' %}" class="card-img-top"style="width: 250px !important;"  class = ""height="210px"  >
+                <div class="card-body ">
+                    <h1 class="card-title mb-5 ">Correo Electronico</h1>
+                    <p class="card-text j-text">Si usted lo prefiere puede enviarnos un correo electronico a contacto@hogaresdeluxe.cl
+                        Nuestro equipo de atención al cliente responderá su mensaje lo antes posible.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mx-5">
+            <div class="card tarjeta">
+                <img src="{% static 'images/depaicono.png' %}" class="card-img-top mt-2" style="width: 280px !important;"  class = ""height="250" >      
+                <div class="card-body">
+                    <h1 class="card-title mb-4 mt-2 ">Local de Venta</h1>
+                    <p class="card-text j-text">También puedes visitar nuestro local de venta ubicado en Carvajal 358, San Miguel, La Cisterna, Región Metropolitana. En donde estaremos encantados de presentale todos nuestros modelos de departamento y resolver todas sus dudas</p>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mr-2">
+            <div class="card tarjeta">
+                <img src="{% static 'images/telefono.png' %}" class="card-img-top " style="width: 250px !important;"  class = ""height="210px" >
+                <div class="card-body j-text">
+                    <h1 class="card-title ">Contacto Telefonico</h1>
+                    <p>Si prefieres contactarnos por teléfono, por favor llámanos al +56 9 2910 1829. 
+                        Nuestro equipo de atención al cliente estará encantado de ayudarte con cualquier pregunta o problema que tengas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="heroe">
+    <div class="heroe-container" data-aos="fade-up">
+      <h1>¡Te asesoramos!</h1>
+    </div>
+</section>
+
+<section id="why-us" class="why-us">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="box section-title" data-aos="fade-up">
+            <h3>¿Alguna Duda?</h3><br>
+            <h5>Tenemos un equipo totalmente dispuesto para ayudarte a resolverlas</h5>
+          </div>
+        </div>
+        
+
+        <div class="col-lg-6 ">
+          <div class="box section-title" data-aos="fade-up" data-aos-delay="100">
+            <h3>Priorizamos  tu comodidad</h3><br>
+            <h5>¡Cuidamos cada detalle!</span></h5>
+          </div>
+        </div>
+
+    
+
+      </div>
+
+    </div>
+  </section>
+
+{% endblock %}
