@@ -21,7 +21,7 @@ $(document).ready(function () {
         
         $.ajax({
             url: "http://localhost:9000/api/v1/comuna/filtroRegiones/" + regionId + "/",
-            type: "GET",
+            type: "POST",
             dataType: "json",
             success: function(comunas){
                 $('#select-comunas').empty();

@@ -21,7 +21,7 @@ class ComunaViewSet(viewsets.ModelViewSet):
 
     @action(
             detail=False, 
-            methods=['GET'],
+            methods=['POST'],
             url_path=r'filtroRegiones/(?P<id_region>\d+)')
     def filtroRegiones(self, request, id_region):
         queryset = Comuna.objects.filter(id_region = id_region)
