@@ -123,6 +123,7 @@ class CaracteristicasPropiedadResource (ModelResource):
     )
     class Meta:
         model = CaracteristicasPropiedad
+        import_id_fields = ['id_propiedad']
         fields = ('metros_totales',
                   'metros_utiles',
                   'cant_dormitorios',

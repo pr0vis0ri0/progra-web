@@ -11,11 +11,11 @@ class JSONResponse(HttpResponse):
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
-class RegionViewSet(viewsets.ModelViewSet):
+class RegionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
 
-class ComunaViewSet(viewsets.ModelViewSet):
+class ComunaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Comuna.objects.all()
     serializer_class = ComunaSerializer
 

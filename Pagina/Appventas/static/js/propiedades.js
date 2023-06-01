@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
     $.ajax({
-        url: "http://localhost:9000/api/v1/region/",
+        url: "http://localhost:9000/region/",
         type: "GET",
         dataType: "json",
         success: function (regiones) {
@@ -20,7 +20,7 @@ $(document).ready(function () {
         let regionId = $(this).val();
         
         $.ajax({
-            url: "http://localhost:9000/api/v1/comuna/filtroRegiones/" + regionId + "/",
+            url: "http://localhost:9000/comuna/filtroRegiones/" + regionId + "/",
             type: "POST",
             dataType: "json",
             success: function(comunas){
@@ -37,7 +37,7 @@ $(document).ready(function () {
     })
 
     $.ajax({
-        url: "http://localhost:9000/api/v1/propiedad/",
+        url: "http://localhost:9000/propiedad/",
         type: "GET",
         dataType: "json",
         success: function (response) {
