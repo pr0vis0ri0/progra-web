@@ -63,6 +63,13 @@
     height: 4px;
     background-color: #fec60d;
 }
+/* 
+.fotos-asoc img {
+    width: 15%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+    mix-blend-mode: color-burn;
+} */
 /*
     Estos se los robé al sergio el cual los robó del internet, pero en resumen son para colocar una especie de baner
     con una imagen de fondo la cual a medida que tú subes o bajas el fondo de la imagen cambia.
