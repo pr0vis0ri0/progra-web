@@ -1,0 +1,141 @@
+{% extends 'layout.html' %}
+{% block title %} Registrar Propiedad {% endblock %}
+{% load static %}
+{% block content %}
+
+<section>
+   <div class="container">
+      <div class="row align-items-center mt-3 mt-lg-4">
+         <div class="col-md-12">
+             <div class="heading-container">
+                 <h3>¡Aquí podrás registrar tu propiedad!</h3>
+                 <div class="heading-decoration"></div>
+             </div>
+         </div>
+     </div>
+   </div>
+</section>
+
+<section class="modal-registro mt-4">
+   <div class="container">
+      <div class="card">
+         <div class="card-body">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+               <li class="nav-item" role="presentation">
+                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#datos-base" type="button" role="tab" aria-controls="datos-base" aria-selected="true">Datos Base</button>
+               </li>
+               <li class="nav-item" role="presentation">
+                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#caracteristicas" type="button" role="tab" aria-controls="caracteristicas" aria-selected="false">Características</button>
+               </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+               <!-- Comienzo Tab Datos Base -->
+               <div class="tab-pane fade show active" id="datos-base" role="tabpanel" aria-labelledby="datos-base-tab">
+                  <div class="row mt-2 mt-lg-4">
+                     <div class="col-lg-6">
+                        <label for="valorPropiedad" class="form-label">Valor Propiedad :</label>
+                        <div class="input-group mb-3">
+                           <span class="input-group-text">$</span>
+                           <input type="text" class="form-control" id="valorPropiedad" aria-label="Valor Propiedad">
+                         </div>
+                     </div>
+                     <div class="col-lg-6">
+                        <label for="tipoPropiedad" class="form-label">Tipo Propiedad :</label>
+                        <select class="form-select" id="tipoPropiedad" aria-label="Select Tipo Propiedad">
+                           <option value="1">Departamento</option>
+                           <option value="2">Casa</option>
+                         </select>
+                     </div>
+                     <div class="col-lg-6">
+                        <label for="region" class="form-label">Región :</label>
+                        <select name="region" id="select-regiones" class="form-control">
+                           <option value="0">Escoge Región</option>
+                        </select>
+                     </div>
+                     <div class="col-lg-6">
+                        <label for="comuna" class="form-label">Comuna :</label>
+                        <select name="comuna" id="select-comunas" class="form-control">
+                           <option value="0">Escoge Comuna</option>
+                        </select>
+                     </div>
+                     <div class="col-lg-6 mt-3">
+                        <div class="form-check form-check-inline">
+                           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="arriendoCheck">
+                           <label class="form-check-label" for="arriendoCheck">Arriendo</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ventaCheck">
+                           <label class="form-check-label" for="ventaCheck">Venta</label>
+                         </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Fin Tab Datos Base -->
+               <!-- Comienzo Tab Características -->
+               <div class="tab-pane fade" id="caracteristicas" role="tabpanel" aria-labelledby="caracteristicas-tab">
+                  <div class="row mt-2 mt-lg-4">
+                     <div class="col-lg-6">
+                        <label for="metrosTotales" class="form-label">Metros Totales :</label>
+                        <div class="input-group mb-3">
+                           <input type="text" class="form-control" id="metrosTotales" aria-label="Metros Totales">
+                         </div>
+                     </div>
+                     <div class="col-lg-6">
+                        <label for="metrosUtiles" class="form-label">Metros Utiles :</label>
+                        <div class="input-group mb-3">
+                           <input type="text" class="form-control" id="metrosUtiles" aria-label="metrosUtiles">
+                         </div>
+                     </div>
+                     <div class="col-lg-6">
+                        <label for="cantidadDormitorios" class="form-label">Cantidad Dormitorios :</label>
+                        <div class="input-group mb-3">
+                           <input type="text" class="form-control" id="cantidadDormitorios" aria-label="Cantidad Dormitorios">
+                         </div>
+                     </div>
+                     <div class="col-lg-6">
+                        <label for="cantidadBanos" class="form-label">Cantidad Baños :</label>
+                        <div class="input-group mb-3">
+                           <input type="text" class="form-control" id="cantidadBanos" aria-label="Cantidad Banos">
+                         </div>
+                     </div>
+                     <div class="col-lg-12">
+                        <div class="form-check">
+                           <input class="form-check-input" type="checkbox" value="1" id="checkMascotas">
+                           <label class="form-check-label" for="checkMascotas">
+                             ¿Permite mascotas?
+                           </label>
+                         </div>
+                     </div>
+                     <div class="col-lg-12">
+                        <div class="form-check">
+                           <input class="form-check-input" type="checkbox" value="1" id="checkBodega">
+                           <label class="form-check-label" for="checkBodega">
+                             ¿Tiene bodega?
+                           </label>
+                         </div>
+                     </div>
+                     <div class="col-lg-12">
+                        <div class="form-check">
+                           <input class="form-check-input" type="checkbox" value="1" id="checkEstacionamiento">
+                           <label class="form-check-label" for="checkEstacionamiento">
+                             ¿Tiene estacionamiento?
+                           </label>
+                         </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Fin Tab Características -->
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+               <button class="btn btn-primary" type="button">Grabar</button>
+             </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/registrar_propiedad.js'%}"></script>
+{% endblock %}

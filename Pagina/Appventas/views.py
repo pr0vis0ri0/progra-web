@@ -13,3 +13,6 @@ def futuros_proyectos(request):
 
 def propiedades(request):
     return render(request, 'propiedades.html')
+
+def reg_propiedad(request):
+    return render(request, 'reg_propiedad.html')

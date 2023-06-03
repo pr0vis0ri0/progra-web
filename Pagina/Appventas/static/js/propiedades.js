@@ -2,6 +2,7 @@
 // sólo lo muestra dinámicamente el sitio con la request de JQuery
 
 $(document).ready(function () {
+    
     $.ajax({
         url: "http://localhost:9000/region/",
         type: "GET",
