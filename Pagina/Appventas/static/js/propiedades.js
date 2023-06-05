@@ -109,7 +109,11 @@ $(document).ready(function () {
                     txtStart.text('Venta');
                     dFlex.append(txtStart);
                 }
-                dFlex.append(txtEnd.html("$" + propiedades[i].valor_propiedad));
+                var formatoChile = {
+                    style : 'currency',
+                    currency : 'CLP'
+                }
+                dFlex.append(txtEnd.html("$" + propiedades[i].valor_propiedad.toLocaleString('es-CL'),formatoChile));
                 cardText.append('<hr>');
                 cardBody.append(divEnd);
                 divEnd.append(btnPropiedad.attr({
@@ -143,8 +147,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.btn-acceso', function() {
         var idPropiedad = $(this).data('id');
-        // var propiedadURL = "{% url 'prop_carac' id_propiedad = " + idPropiedad + " %}";
-        // var propiedadURL = redirectUrl + 'prop_carac id_propiedad = ' + idPropiedad;
+        var propiedadURL = "http://localhost:8000/app/caracteristicas/id_propiedad".replace('id_propiedad',idPropiedad)
         window.location.href = propiedadURL;
       });
 

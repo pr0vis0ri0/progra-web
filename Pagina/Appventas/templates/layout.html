@@ -20,7 +20,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary" aria-label="navbar-accesible">
     <div class="container-xl">
-      <a class="navbar-brand" href="inicio"><i class="fa-solid fa-building fa-xl"></i> Hogares Deluxe</a>
+      <a class="navbar-brand" href="{% url 'inicio' %}"><i class="fa-solid fa-building fa-xl"></i> Hogares Deluxe</a>
       <button class="navbar-toggler" 
               type="button" 
               data-bs-toggle="collapse" 
@@ -42,7 +42,7 @@
             <a class="nav-link" href="{% url 'futuros_proyectos' %}">Futuros Proyectos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Propiedades</a>
+            <a class="nav-link" href="{% url 'propiedades' %}">Propiedades</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'reg_propiedad' %}">¡Registra tu propiedad!</a>
