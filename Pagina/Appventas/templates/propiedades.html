@@ -3,7 +3,7 @@
 {% block axel_css %}
 <link rel="stylesheet" href="{% static 'css/estilos-axel.css' %}">
 {% endblock %}
-{% block title %} Departamentos {% endblock %}
+{% block title %} Propiedades {% endblock %}
 {% block content %}
 
 <div class="container-fluid">
@@ -97,7 +97,8 @@
 
 {% block js %}
 <script>
-   let staticUrl = "{% static 'images/' %}";
+   var staticUrl = "{% static 'images/' %}";
+   // var redirectUrl = "{% url '' %}"
 </script>
 <script src="{% static 'js/propiedades.js'%}"></script>
 {% endblock %}

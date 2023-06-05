@@ -12,7 +12,10 @@ def futuros_proyectos(request):
     return render(request,'futuros_proyectos.html')
 
 def propiedades(request):
-    return render(request, 'propiedades.html')
+    return render(request,'propiedades.html')
 
 def reg_propiedad(request):
-    return render(request, 'reg_propiedad.html')
+    return render(request,'reg_propiedad.html')
+
+def propiedad_caracteristicas(request, id_propiedad):
+    return render(request, 'carac_propiedad.html' , {'id_propiedad' : id_propiedad})

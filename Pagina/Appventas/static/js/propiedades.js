@@ -79,7 +79,7 @@ $(document).ready(function () {
                 let txtEnd = $('<h6></h6>').addClass('text-end');
                 let divEnd = $('<div></div>').addClass('text-end');
                 let btnPropiedad = $('<a></a>')
-                                    .addClass('btn btn-primary')
+                                    .addClass('btn btn-primary btn-acceso')
                                     .html('Ver propiedad');
                 $('#lista-departamentos').append(divCol);
                 divCol.append(card);
@@ -140,6 +140,14 @@ $(document).ready(function () {
             $('#container-nav').append(paginacionContainer);
         }
     });
+
+    $(document).on('click', '.btn-acceso', function() {
+        var idPropiedad = $(this).data('id');
+        // var propiedadURL = "{% url 'prop_carac' id_propiedad = " + idPropiedad + " %}";
+        // var propiedadURL = redirectUrl + 'prop_carac id_propiedad = ' + idPropiedad;
+        window.location.href = propiedadURL;
+      });
+
 });
 
 function getParameterByName(name, url) {
