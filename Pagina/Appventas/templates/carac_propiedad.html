@@ -6,7 +6,7 @@
 <section>
    <div class="container">
       <div class="row align-items-center mt-3 mt-lg-4">
-         <div class="col-md-12">
+         <div class="col-lg-12">
              <div class="heading-container">
                  <h3>Propiedad</h3>
                  <div class="heading-decoration"></div>
@@ -16,9 +16,19 @@
    </div>
 </section>
 
+<div class="container">
+    <div class="col-lg-12">
+        <div class="seccion-datos">
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block js %}
+<script>
+    var id_propiedad = "{{id_propiedad}}";
+</script>
 <script src="{% static 'js/caracteristicas_propiedad.js'%}"></script>
 {% endblock %}

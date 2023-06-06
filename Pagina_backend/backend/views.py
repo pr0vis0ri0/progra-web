@@ -32,10 +32,10 @@ class PropiedadList(APIView):
             srl_region = RegionSerializer(dtl_region)
 
             data_propiedad = {
-                "1" : PropiedadSerializer(propiedad).data,
-                "2" : srl_caract.data,
-                "3" : srl_comuna.data,
-                "4" : srl_region.data
+                "data_propiedades" : PropiedadSerializer(propiedad).data,
+                "data_caracteristicas" : srl_caract.data,
+                "data_comunas" : srl_comuna.data,
+                "data_regiones" : srl_region.data
             }
             data_propiedades.append(data_propiedad)
         
@@ -53,9 +53,9 @@ class PropiedadDetail(APIView):
             region_propiedad = Region.objects.get(pk = serializer_tres.data['id_region'])
             serializer_cuatro = RegionSerializer(region_propiedad)
             serializer = {
-                "1" : serializer_uno.data,
-                '2' : serializer_dos.data,
-                '3' : serializer_tres.data,
-                '4' : serializer_cuatro.data
+                "data_propiedad" : serializer_uno.data,
+                "data_caracteristica"  : serializer_dos.data,
+                "data_comuna"  : serializer_tres.data,
+                "data_region" : serializer_cuatro.data
             }
             return JSONResponse(serializer)

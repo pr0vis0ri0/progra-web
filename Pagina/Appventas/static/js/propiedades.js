@@ -38,7 +38,7 @@ $(document).ready(function () {
     })
 
     $.ajax({
-        url: "http://localhost:9000/propiedad/",
+        url: "http://localhost:9000/detalle_propiedad/",
         type: "GET",
         dataType: "json",
         success: function (response) {
@@ -59,12 +59,16 @@ $(document).ready(function () {
             const endIndex = startIndex + propiedadesPorPagina;
             //console.log("6. " + endIndex);
             // Obtienes las propiedades de la página actual
-            const propiedades = response.slice(startIndex, endIndex);
+            const datosPropiedad = response.slice(startIndex, endIndex);
             //console.log("7. " + propiedades);
 
 
 
-            $.each(propiedades, function (i) {
+            $.each(datosPropiedad, function (i, data) {
+                var datosProp = data['data_propiedades']
+                var datosRegion = data['data_regiones']
+                var datosComuna = data['data_comunas']
+
                 let divCol = $('<div></div>').addClass('col-md-6 mb-5');
                 let card = $('<div></div>').addClass('card');
                 let img = $('<img>').addClass('card-img-top');
@@ -72,7 +76,7 @@ $(document).ready(function () {
                 let cardTitle = $('<h5></h5>').addClass('card-title');
                 let cardSubtitle = $('<h6></h6>')
                                     .addClass('card-subtitle text-muted')
-                                    .html('Pendiente');
+                                    .html(datosComuna.nombre_comuna + ", " + datosRegion.nombre_region);
                 let cardText = $('<p></p>').addClass('card-text mt-3');
                 let dFlex = $('<div></div>').addClass('d-flex justify-content-between');
                 let txtStart = $('<h6></h6>').addClass('text-start');
@@ -83,7 +87,7 @@ $(document).ready(function () {
                                     .html('Ver propiedad');
                 $('#lista-departamentos').append(divCol);
                 divCol.append(card);
-                if(propiedades[i].id_tipo_propiedad == 1) {
+                if(datosProp.id_tipo_propiedad == 1) {
                     img.attr({
                         src : staticUrl + "departamentos/departamento-id-x.jpg",
                         alt : "Departamento"
@@ -102,10 +106,10 @@ $(document).ready(function () {
                 cardBody.append(cardSubtitle);
                 cardBody.append(cardText);
                 cardText.append(dFlex);
-                if(propiedades[i].es_arriendo != 0) {
+                if(datosProp.es_arriendo != 0) {
                     txtStart.text('Arriendo');
                     dFlex.append(txtStart);
-                } else if (propiedades[i].es_venta != 0) {
+                } else if (datosProp.es_venta != 0) {
                     txtStart.text('Venta');
                     dFlex.append(txtStart);
                 }
@@ -113,12 +117,12 @@ $(document).ready(function () {
                     style : 'currency',
                     currency : 'CLP'
                 }
-                dFlex.append(txtEnd.html("$" + propiedades[i].valor_propiedad.toLocaleString('es-CL'),formatoChile));
+                dFlex.append(txtEnd.html("$" + datosProp.valor_propiedad.toLocaleString('es-CL'),formatoChile));
                 cardText.append('<hr>');
                 cardBody.append(divEnd);
                 divEnd.append(btnPropiedad.attr({
                     href : "#",
-                    'data-id' : propiedades[i].id_propiedad
+                    'data-id' : datosProp.id_propiedad
                 }))
             });
 
