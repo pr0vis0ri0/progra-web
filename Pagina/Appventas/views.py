@@ -19,3 +19,6 @@ def reg_propiedad(request):
 
 def propiedad_caracteristicas(request, id_propiedad):
     return render(request, 'carac_propiedad.html' , {'id_propiedad' : id_propiedad})
+
+def transbank(request):
+    return render(request, 'transbank.html')

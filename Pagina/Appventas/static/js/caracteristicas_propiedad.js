@@ -5,7 +5,6 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (response) {
-            console.log(response)
             var propiedad = response['data_propiedad']
             var caracteristicas = response['data_caracteristica']
             var comuna = response['data_comuna']

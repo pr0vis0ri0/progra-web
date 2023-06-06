@@ -25,7 +25,7 @@ class PropiedadList(APIView):
             dtl_caract = CaracteristicasPropiedad.objects.get(id_propiedad = propiedad.id_propiedad)
             srl_caract = CaracteristicasPropiedadSerializer(dtl_caract)
 
-            dtl_comuna = Comuna.objects.get(pk = PropiedadSerializer(propiedad).data['id_propiedad'])
+            dtl_comuna = Comuna.objects.get(pk = PropiedadSerializer(propiedad).data['id_comuna'])
             srl_comuna = ComunaSerializer(dtl_comuna)
 
             dtl_region = Region.objects.get(pk = srl_comuna.data['id_region'])

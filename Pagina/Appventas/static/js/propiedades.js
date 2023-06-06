@@ -74,8 +74,8 @@ $(document).ready(function () {
                 let img = $('<img>').addClass('card-img-top');
                 let cardBody = $('<div></div>').addClass('card-body');
                 let cardTitle = $('<h5></h5>').addClass('card-title');
-                let cardSubtitle = $('<h6></h6>')
-                                    .addClass('card-subtitle text-muted')
+                let cardSubtitle = $('<span></span>')
+                                    .addClass('badge rounded-pill bg-success')
                                     .html(datosComuna.nombre_comuna + ", " + datosRegion.nombre_region);
                 let cardText = $('<p></p>').addClass('card-text mt-3');
                 let dFlex = $('<div></div>').addClass('d-flex justify-content-between');

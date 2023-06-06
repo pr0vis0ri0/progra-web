@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block title %} Propiedad {{ id_propiedad }} {% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="transbank-response">
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/transbank.js'%}"></script>
+{% endblock %}
