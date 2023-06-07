@@ -41,7 +41,7 @@ $(document).ready(function () {
             $('.propiedad-valor').html(propiedad.valor_propiedad.toLocaleString('es-CL', formatoChile))
 
             $('.car-1').append(' ' + caracteristicas.metros_totales + ' m² totales');
-            $('.car-2').append(' ' + caracteristicas.metros_utiles + ' m² totales');
+            $('.car-2').append(' ' + caracteristicas.metros_utiles + ' m² utiles');
             $('.car-3').append(' ' + caracteristicas.cant_dormitorios + ' dormitorio/s');
             $('.car-4').append(' ' + caracteristicas.cant_banos + ' baño/s');
 
