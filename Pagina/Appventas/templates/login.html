@@ -34,7 +34,7 @@
                         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                           <form>
                             <div class="text-center mb-3">
-                              <p>Sign in with:</p>
+                              <p>Ingresa sesión con</p>
                               <button type="button" class="btn btn-link btn-floating mx-1">
                                 <i class="fab fa-facebook-f"></i>
                               </button>
@@ -46,55 +46,51 @@
                               <button type="button" class="btn btn-link btn-floating mx-1">
                                 <i class="fab fa-twitter"></i>
                               </button>
-                          
-                              <button type="button" class="btn btn-link btn-floating mx-1">
-                                <i class="fab fa-github"></i>
-                              </button>
                             </div>
                         
-                            <p class="text-center">or:</p>
+                            <p class="text-center">o</p>
                         
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                              <input type="email" id="loginName" class="form-control" />
-                              <label class="form-label" for="loginName">Email or username</label>
+                              <label class="form-label" for="loginCorreo">Correo :</label>
+                              <input type="email" id="loginCorreo" class="form-control"/>
                             </div>
                         
                             <!-- Password input -->
                             <div class="form-outline mb-4">
+                              <label class="form-label" for="loginPassword">Contraseña :</label>
                               <input type="password" id="loginPassword" class="form-control" />
-                              <label class="form-label" for="loginPassword">Password</label>
                             </div>
                         
                             <!-- 2 column grid layout -->
                             <div class="row mb-4">
-                              <div class="col-md-6 d-flex justify-content-center">
+                              <div class="col-md-5 d-flex justify-content-center">
                                 <!-- Checkbox -->
                                 <div class="form-check mb-3 mb-md-0">
                                   <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-                                  <label class="form-check-label" for="loginCheck"> Remember me </label>
+                                  <label class="form-check-label" for="loginCheck"> Recuérdame </label>
                                 </div>
                               </div>
                           
-                              <div class="col-md-6 d-flex justify-content-center">
+                              <div class="col-md-7 d-flex justify-content-center">
                                 <!-- Simple link -->
-                                <a href="#!">Forgot password?</a>
+                                <a href="#!">¿Olvidaste tu contraseña?</a>
                               </div>
                             </div>
                         
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                            <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar</button>
                         
                             <!-- Register buttons -->
-                            <div class="text-center">
-                              <p>Not a member? <a href="#!">Register</a></p>
-                            </div>
+                            <!-- <div class="text-center">
+                              <p>¿No tienes cuenta? <a href="#pills-register" data-bs-toggle="tab" data-bs-target="#pills-register">Regístrate</a></p>
+                            </div> -->
                           </form>
                         </div>
                         <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                           <form>
                             <div class="text-center mb-3">
-                              <p>Sign up with:</p>
+                              <p>Ingresa sesión con</p>
                               <button type="button" class="btn btn-link btn-floating mx-1">
                                 <i class="fab fa-facebook-f"></i>
                               </button>
@@ -106,55 +102,51 @@
                               <button type="button" class="btn btn-link btn-floating mx-1">
                                 <i class="fab fa-twitter"></i>
                               </button>
-                          
-                              <button type="button" class="btn btn-link btn-floating mx-1">
-                                <i class="fab fa-github"></i>
-                              </button>
                             </div>
-                        
-                            <p class="text-center">or:</p>
+
+                            <p class="text-center">o</p>
                         
                             <!-- Name input -->
                             <div class="form-outline mb-4">
-                              <input type="text" id="registerName" class="form-control" />
-                              <label class="form-label" for="registerName">Name</label>
+                              <label class="form-label" for="registroNombreCompleto">Nombre :</label>
+                              <input type="text" id="registroNombreCompleto" class="form-control" />
                             </div>
                         
                             <!-- Username input -->
                             <div class="form-outline mb-4">
-                              <input type="text" id="registerUsername" class="form-control" />
-                              <label class="form-label" for="registerUsername">Username</label>
+                              <label class="form-label" for="registerUsername">Correo electrónico :</label>
+                              <input type="text" id="registerUsername" class="form-control" placeholder="Este será usado para iniciar sesión"/>
                             </div>
                         
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                              <input type="email" id="registerEmail" class="form-control" />
-                              <label class="form-label" for="registerEmail">Email</label>
+                              <label class="form-label" for="registroRut">RUT :</label>
+                              <input type="email" id="registroRut" class="form-control" />
                             </div>
                         
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                              <input type="password" id="registerPassword" class="form-control" />
-                              <label class="form-label" for="registerPassword">Password</label>
+                              <label class="form-label" for="registroPassword">Contraseña :</label>
+                              <input type="password" id="registroPassword" class="form-control" />
                             </div>
                         
                             <!-- Repeat Password input -->
                             <div class="form-outline mb-4">
-                              <input type="password" id="registerRepeatPassword" class="form-control" />
-                              <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+                              <label class="form-label" for="checkPassword">Repite tu contraseña :</label>
+                              <input type="password" id="checkPassword" class="form-control" />
                             </div>
                         
                             <!-- Checkbox -->
                             <div class="form-check d-flex justify-content-center mb-4">
-                              <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
-                                aria-describedby="registerCheckHelpText" />
-                              <label class="form-check-label" for="registerCheck">
-                                I have read and agree to the terms
+                              <input class="form-check-input me-2" type="checkbox" value="" id="registroCheck" checked
+                                aria-describedby="registroCheckAyuda" />
+                              <label class="form-check-label" for="registroCheck">
+                                He leído y estoy de acuerdo con los términos
                               </label>
                             </div>
                         
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+                            <button type="submit" class="btn btn-primary btn-block mb-3">Regístrate</button>
                           </form>
                         </div>
                     </div>
