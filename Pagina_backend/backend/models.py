@@ -73,3 +73,20 @@ class Visita (models.Model):
 
     class Meta :
         ordering = ['id_visita']
+
+# class ListaPropiedades(models.Model):
+#     id_propiedad = models.ForeignKey(Propiedad, null = True, on_delete = models.SET_NULL)
+#     valor_propiedad = models.IntegerField()
+#     es_arriendo = models.IntegerField()
+#     es_venta = models.IntegerField()
+#     nombre_tipo_propiedad = models.CharField(max_length=20)
+#     nombre_comuna = models.CharField(max_length=30)
+#     nombre_region = models.CharField(max_length=70)
+#     capital_region = models.CharField(max_length=30, default= '')
+
+#     class Meta:
+#         managed = False
+#         db_table = 'vista_detalle_propiedad'
+
+#     def __str__(self):
+#         return f"{self.valor_propiedad} - {self.nombre_tipo_propiedad}"

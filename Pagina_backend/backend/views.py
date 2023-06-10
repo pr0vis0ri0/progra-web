@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from .serializers import RegionSerializer, ComunaSerializer, TipoPropiedadSerializer, PropiedadSerializer, CaracteristicasPropiedadSerializer, VisitaSerializer
+from .serializers import *
 from .models import *
 from rest_framework import status
 from rest_framework.renderers import JSONRenderer
@@ -59,3 +59,13 @@ class PropiedadDetail(APIView):
                 "data_region" : serializer_cuatro.data
             }
             return JSONResponse(serializer)
+
+# class LoginUsuario(APIView):
+#     def login(self, request):
+
+# class PropiedadList(APIView):
+#     def get(self, request):
+#         lista_propiedades = ListaPropiedades.objects.all()
+#         srl_propiedades = ListaPropiedadesSerializer(lista_propiedades, many = True)
+#         data_propiedades = srl_propiedades.data
+#         return JSONResponse(data_propiedades)

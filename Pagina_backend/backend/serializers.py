@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Region, Comuna, TipoPropiedad, Propiedad, CaracteristicasPropiedad, Visita
+from .models import *
 
 class RegionSerializer (ModelSerializer):
     class Meta :
@@ -30,3 +30,8 @@ class VisitaSerializer (ModelSerializer):
     class Meta :
         model = Visita
         fields = '__all__'
+
+# class ListaPropiedadesSerializer (ModelSerializer):
+#     class Meta :
+#         model = ListaPropiedades
+#         fields = '__all__'
