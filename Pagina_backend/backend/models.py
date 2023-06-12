@@ -34,10 +34,11 @@ class TipoPropiedad (models.Model):
 class Propiedad (models.Model):
     id_propiedad = models.AutoField(primary_key=True)
     valor_propiedad = models.IntegerField()
-    es_arriendo = models.IntegerField()
-    es_venta = models.IntegerField()
+    es_arriendo = models.BooleanField(default=0, null=False, blank=True)
+    es_venta = models.BooleanField(default=0, null=False, blank=True)
     id_tipo_propiedad = models.ForeignKey(TipoPropiedad, null=True, on_delete=models.SET_NULL)
     id_comuna = models.ForeignKey(Comuna, null=True, on_delete=models.SET_NULL)
+    esta_habilitado = models.BooleanField(default=0, null=False)
 
     def __str__(self):
         return str(self.id_propiedad)
@@ -50,9 +51,9 @@ class CaracteristicasPropiedad (models.Model):
     metros_utiles = models.IntegerField(default=0)
     cant_dormitorios = models.IntegerField()
     cant_banos = models.IntegerField()
-    permite_mascotas = models.IntegerField()
-    tiene_bodega = models.IntegerField()
-    tiene_estacionamiento = models.IntegerField()
+    permite_mascotas = models.BooleanField(default=True, null=False)
+    tiene_bodega = models.BooleanField(default=True, null=False)
+    tiene_estacionamiento = models.BooleanField(default=True, null=False)
     id_propiedad = models.OneToOneField(Propiedad,null=True,on_delete=models.SET_NULL)
 
     class Meta :
@@ -85,8 +86,8 @@ class Usuario(models.Model):
     telefono = models.CharField(max_length=15)
     correo_electronico = models.EmailField(unique=True)
     fecha_registro = models.DateField(auto_now_add=True)
-    esta_habilitado = models.IntegerField()
-    es_superusuario = models.IntegerField()
+    esta_habilitado = models.BooleanField(default=True, null=False)
+    es_superusuario = models.BooleanField(default=True, null=False)
 
     def __str__(self):
         return self.nombre

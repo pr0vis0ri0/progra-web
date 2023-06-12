@@ -28,7 +28,7 @@ class ComunaViewSet(viewsets.ReadOnlyModelViewSet):
         serializer_class = ComunaSerializer(queryset, many = True)
         return JSONResponse(serializer_class.data)
 
-class TipoPropiedadViewSet(viewsets.ModelViewSet):
+class TipoPropiedadViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = TipoPropiedad.objects.all()
     serializer_class = TipoPropiedadSerializer
 

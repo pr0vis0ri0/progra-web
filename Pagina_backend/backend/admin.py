@@ -98,7 +98,8 @@ class PropiedadResource (ModelResource):
                   'es_arriendo',
                   'es_venta',
                   'id_tipo_propiedad',
-                  'id_comuna')
+                  'id_comuna',
+                  'esta_habilitado')
 
 class PropiedadAdmin (ImportExportModelAdmin, admin.ModelAdmin):
     resource_classes = [PropiedadResource]
@@ -107,13 +108,15 @@ class PropiedadAdmin (ImportExportModelAdmin, admin.ModelAdmin):
                     'es_arriendo',
                     'es_venta',
                     'id_tipo_propiedad',
-                    'id_comuna')
+                    'id_comuna',
+                    'esta_habilitado')
     search_fields = ('id_propiedad',
                     'valor_propiedad',
                     'es_arriendo',
                     'es_venta',
                     'id_tipo_propiedad',
-                    'id_comuna')
+                    'id_comuna',
+                    'esta_habilitado')
 
 class CaracteristicasPropiedadResource (ModelResource):
     id_propiedad = fields.Field(

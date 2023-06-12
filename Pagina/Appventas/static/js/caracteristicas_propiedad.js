@@ -1,7 +1,9 @@
 $(document).ready(function () {
+    var url_api = "http://localhost:9000/"
+    let endpoint_dp = "detalle_propiedad/";
 
     $.ajax({
-        url: "http://localhost:9000/detalle_propiedad/" + id_propiedad,
+        url: url_api + endpoint_dp + id_propiedad,
         type: "GET",
         dataType: "json",
         success: function (data) {

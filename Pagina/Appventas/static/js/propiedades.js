@@ -1,7 +1,11 @@
 $(document).ready(function () {
-    
+    var url_api = "http://localhost:9000/"
+    let ep_region = "region/";
+    let ep_filtro_comuna = "comuna/filtroRegiones/"
+    let ep_detalle_propiedad = "detalle_propiedad/"
+
     $.ajax({
-        url: "http://localhost:9000/region/",
+        url: url_api + ep_region,
         type: "GET",
         dataType: "json",
         success: function (regiones) {
@@ -18,7 +22,7 @@ $(document).ready(function () {
         let regionId = $(this).val();
         
         $.ajax({
-            url: "http://localhost:9000/comuna/filtroRegiones/" + regionId + "/",
+            url: url_api + ep_filtro_comuna + regionId + "/",
             type: "POST",
             dataType: "json",
             success: function(comunas){
@@ -35,7 +39,7 @@ $(document).ready(function () {
     })
 
     $.ajax({
-        url: "http://localhost:9000/detalle_propiedad/",
+        url: url_api + ep_detalle_propiedad,
         type: "GET",
         dataType: "json",
         success: function (response) {
