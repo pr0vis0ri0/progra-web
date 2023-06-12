@@ -74,19 +74,19 @@ class Visita (models.Model):
     class Meta :
         ordering = ['id_visita']
 
-# class ListaPropiedades(models.Model):
-#     id_propiedad = models.ForeignKey(Propiedad, null = True, on_delete = models.SET_NULL)
-#     valor_propiedad = models.IntegerField()
-#     es_arriendo = models.IntegerField()
-#     es_venta = models.IntegerField()
-#     nombre_tipo_propiedad = models.CharField(max_length=20)
-#     nombre_comuna = models.CharField(max_length=30)
-#     nombre_region = models.CharField(max_length=70)
-#     capital_region = models.CharField(max_length=30, default= '')
+class Usuario(models.Model):
+    id_usuario = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    edad = models.IntegerField()
+    rut = models.CharField(max_length=10, unique=True)
+    direccion = models.CharField(max_length=200)
+    comuna = models.CharField(max_length=100)
+    region = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=15)
+    correo_electronico = models.EmailField(unique=True)
+    fecha_registro = models.DateField(auto_now_add=True)
+    esta_habilitado = models.IntegerField()
+    es_superusuario = models.IntegerField()
 
-#     class Meta:
-#         managed = False
-#         db_table = 'vista_detalle_propiedad'
-
-#     def __str__(self):
-#         return f"{self.valor_propiedad} - {self.nombre_tipo_propiedad}"
+    def __str__(self):
+        return self.nombre

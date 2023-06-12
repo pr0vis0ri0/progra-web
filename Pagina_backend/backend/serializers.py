@@ -30,8 +30,3 @@ class VisitaSerializer (ModelSerializer):
     class Meta :
         model = Visita
         fields = '__all__'
-
-# class ListaPropiedadesSerializer (ModelSerializer):
-#     class Meta :
-#         model = ListaPropiedades
-#         fields = '__all__'

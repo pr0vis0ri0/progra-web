@@ -43,18 +43,3 @@ class CaracteristicasPropiedadViewSet(viewsets.ModelViewSet):
 class VisitaViewSet(viewsets.ModelViewSet):
     queryset = Visita.objects.all()
     serializer_class = VisitaSerializer
-
-# Para detallar cada uno de los métodos de la API con decoradores.
-# from drf_spectacular.utils import extend_schema_view
-# from drf_spectacular.utils import extend_schema
-# @extend_schema_view(
-#     list=extend_schema(
-#         description="The list action returns all available actions."
-#     ),
-#     create=extend_schema(
-#         description="The create action expects the fields `name`, creates a new object and returns it."
-#     ),
-#     retrieve=extend_schema(
-#         description="The retrieve action returns a single object selected by `id`."
-#     )
-# )
