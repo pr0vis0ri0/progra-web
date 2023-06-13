@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from django.db import connection
+from .DAOPropiedad import DAOPropiedad
 
 class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
@@ -17,30 +18,12 @@ class JSONResponse(HttpResponse):
 class PropiedadDetail(APIView):
     def get(self, request, id_propiedad = None):
         if id_propiedad is not None :
-            with connection.cursor() as cursor:
-                cursor.execute('SELECT * FROM vista_caracteristicas_propiedades WHERE id_propiedad = %s', [id_propiedad])
-                result = cursor.fetchone()
-
-            if result is not None:
-                nombres_columnas = [desc[0] for desc in cursor.description]
-                data = dict(zip(nombres_columnas, result))
-                return JSONResponse(data)
-            else :
-                return JSONResponse(status.HTTP_404_NOT_FOUND)
+            registro = DAOPropiedad.get_caracteristicas_propiedad(id_propiedad)
+            serializer = ViewCaracteristicasSerializer(registro)
+            return JSONResponse(serializer.data)
             
 class PropiedadList(APIView):
     def get(self, request):
-        with connection.cursor() as cursor:
-            cursor.execute('SELECT * FROM vista_detalle_propiedades')
-            resultados = cursor.fetchall()
-        data = []
-
-        if resultados is not None :
-            for fila in resultados:
-                nombres_columnas = [desc[0] for desc in cursor.description]
-                item = dict(zip(nombres_columnas, fila))
-                data.append(item)
-
-            return JSONResponse(data)
-        else :
-            return JSONResponse(status.HTTP_404_NOT_FOUND)
+        registros = DAOPropiedad.get_detalle_propiedades()
+        serializer = DetallePropiedadesSerializer(registros, many = True)
+        return JSONResponse(serializer.data)

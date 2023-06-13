@@ -42,7 +42,7 @@ $(document).ready(function () {
 });
 
 $(document).on("click blur change focusout select", 
-                "#valorPropiedad, #tipoPropiedad, #select-regiones, #select-comunas",
+                "#valorPropiedad, #tipoPropiedad, #select-regiones, #select-comunas, #arriendoCheck, #ventaCheck, #metrosTotales, #metrosUtiles, #cantidadDormitorios, #cantidadBanos",
     function () {
       checkFormulario();
     }
@@ -50,12 +50,16 @@ $(document).on("click blur change focusout select",
 
 function checkFormulario () {
     var error = 0
+
     if ($('#valorPropiedad').val() == "") {
+        $('#valorPropiedad').addClass('is-invalid')
+        error = 1
+    } else if (parseInt($('#valorPropiedad').val()) == 0) {
         $('#valorPropiedad').addClass('is-invalid')
         error = 1
     } else {
         $('#valorPropiedad').removeClass('is-invalid')
-        $('#valorPropiedad').addClass('is-valid')
+        $('#valorPropiedad').addClass('is-valid')        
     }
 
     if ($('#tipoPropiedad').val() == 0){
@@ -82,6 +86,62 @@ function checkFormulario () {
         $('#select-comunas').addClass('is-valid')
     }
 
+    if (!$('#arriendoCheck').is(':checked') && !$('#ventaCheck').is(':checked')) {
+        $('#arriendoCheck').addClass('is-invalid')
+        $('#ventaCheck').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#arriendoCheck').removeClass('is-invalid')
+        $('#ventaCheck').removeClass('is-invalid')
+        if($('#arriendoCheck').is(':checked')) {
+            $('#arriendoCheck').addClass('is-valid')
+        } else if ($('#ventaCheck').is(':checked')) {
+            $('#ventaCheck').addClass('is-valid')
+        }
+    }
+
+    if ($('#metrosTotales').val() == "") {
+        $('#metrosTotales').addClass('is-invalid')
+        error = 1
+    } else if (parseInt($('#metrosTotales').val()) == 0) {
+        $('#metrosTotales').addClass('is-invalid')
+        error = 1
+    } else if (parseInt($('#metrosTotales').val()) > parseInt($('#metrosUtiles').val())) {
+        $('#metrosTotales').addClass('is-invalid')        
+    } else {
+        $('#metrosTotales').removeClass('is-invalid')
+        $('#metrosTotales').addClass('is-valid')   
+    }
+
+    if ($('#metrosUtiles').val() == "") {
+        $('#metrosUtiles').addClass('is-invalid')
+        error = 1
+    } else if (parseInt($('#metrosUtiles').val()) == 0) {
+        $('#metrosUtiles').addClass('is-invalid')
+        error = 1
+    } else if (parseInt($('#metrosUtiles').val()) < parseInt($('#metrosTotales').val())) {
+        $('#metrosUtiles').addClass('is-invalid') 
+    } else {
+        $('#metrosUtiles').removeClass('is-invalid')
+        $('#metrosUtiles').addClass('is-valid')  
+    }
+
+    if ($('#cantidadDormitorios').val() == "") {
+        $('#cantidadDormitorios').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#cantidadDormitorios').removeClass('is-invalid')
+        $('#cantidadDormitorios').addClass('is-valid')        
+    }
+
+    if ($('#cantidadBanos').val() == "") {
+        $('#cantidadBanos').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#cantidadBanos').removeClass('is-invalid')
+        $('#cantidadBanos').addClass('is-valid')        
+    }
+
     if (error == 1) {
         $('#btnRegPropiedad').addClass('disabled')
                             .prop("disabled", true)
@@ -94,5 +154,22 @@ function checkFormulario () {
                             .each(function() {
                                 this.style.pointerEvents = "auto"
                             })
+    }
+}
+
+function Registro() {
+    this.regPropiedad = function (ep_registro_propiedad, data_propiedad) {
+        $.ajax({
+            type : "POST",
+            url : ep_registro_propiedad,
+            data : data_propiedad,
+            dataType : "json",
+            success : function (response) {
+                alert('Se logró grabar la propiedad.', response)
+            },
+            error : function (msg, status, errorThrown){
+                alert('msg')
+            }
+        })
     }
 }

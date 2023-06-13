@@ -79,12 +79,18 @@
                         <label for="metrosTotales" class="form-label">Metros Totales :</label>
                         <div class="input-group mb-3">
                            <input type="text" class="form-control" id="metrosTotales" aria-label="Metros Totales">
+                           <div id="metrosTotalesFeedback" class="invalid-feedback">
+                              El valor no puede ser 0 ni tampoco mayor al de los metros útiles.
+                           </div>
                          </div>
                      </div>
                      <div class="col-lg-6">
                         <label for="metrosUtiles" class="form-label">Metros Utiles :</label>
                         <div class="input-group mb-3">
                            <input type="text" class="form-control" id="metrosUtiles" aria-label="metrosUtiles">
+                           <div id="metrosUtilesFeedback" class="invalid-feedback">
+                              El valor no puede ser 0 ni tampoco menor al de los metros totales.
+                           </div>
                          </div>
                      </div>
                      <div class="col-lg-6">
