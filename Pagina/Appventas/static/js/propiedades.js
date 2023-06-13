@@ -2,7 +2,7 @@ $(document).ready(function () {
     var url_api = "http://localhost:9000/"
     let ep_region = "region/";
     let ep_filtro_comuna = "comuna/filtroRegiones/"
-    let ep_detalle_propiedad = "detalle_propiedad/"
+    let ep_lista_propiedades = "lista_propiedades/"
 
     $.ajax({
         url: url_api + ep_region,
@@ -39,7 +39,7 @@ $(document).ready(function () {
     })
 
     $.ajax({
-        url: url_api + ep_detalle_propiedad,
+        url: url_api + ep_lista_propiedades,
         type: "GET",
         dataType: "json",
         success: function (response) {

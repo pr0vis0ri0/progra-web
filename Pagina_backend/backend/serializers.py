@@ -70,4 +70,3 @@ class RegistroPropiedadSerializer (serializers.Serializer):
     permite_mascotas = serializers.BooleanField()
     tiene_bodega = serializers.BooleanField()
     tiene_estacionamiento = serializers.BooleanField()
-    id_propiedad = serializers.IntegerField()

@@ -2,6 +2,7 @@ $(document).ready(function () {
     var url_api = "http://localhost:9000/"
     let ep_region = "region/";
     let ep_filtro_comuna = "comuna/filtroRegiones/"
+    let ep_registro_propiedad = "registro_propiedad/"
 
     $.ajax({
         url: url_api + ep_region,
@@ -39,6 +40,12 @@ $(document).ready(function () {
             }
         })
     })
+
+    $('#btnRegPropiedad').click(function (){
+        let datosFormulario = devolverDatos()
+        let prop = new Registro()
+        prop.regPropiedad(url_api + ep_registro_propiedad, datosFormulario)
+    });
 });
 
 $(document).on("click blur change focusout select", 
@@ -47,6 +54,24 @@ $(document).on("click blur change focusout select",
       checkFormulario();
     }
 );
+
+function devolverDatos () {
+    datos = {
+        valor_propiedad : parseInt($('#valorPropiedad').val()),
+        es_arriendo : $('#arriendoCheck').is(':checked'),
+        es_venta : $('#ventaCheck').is(':checked'),
+        id_tipo_propiedad : parseInt($('#tipoPropiedad').val()),
+        id_comuna : parseInt($('#select-comunas').val()),
+        metros_totales : parseInt($('#metrosTotales').val()),
+        metros_utiles : parseInt($('#metrosUtiles').val()),
+        cant_dormitorios : parseInt($('#cantidadDormitorios').val()),
+        cant_banos : parseInt($('#cantidadBanos').val()),
+        permite_mascotas : $('#checkMascotas').is(':checked'),
+        tiene_bodega : $('#checkBodega').is(':checked'),
+        tiene_estacionamiento : $('#checkEstacionamiento').is(':checked')
+    }
+    return JSON.stringify(datos);
+}
 
 function checkFormulario () {
     var error = 0
@@ -163,12 +188,15 @@ function Registro() {
             type : "POST",
             url : ep_registro_propiedad,
             data : data_propiedad,
+            contentType: "application/json; charset=utf-8",
             dataType : "json",
             success : function (response) {
-                alert('Se logró grabar la propiedad.', response)
+                console.log(response)
+                alert('Se logró grabar la propiedad.')
             },
-            error : function (msg, status, errorThrown){
-                alert('msg')
+            error : function (jqXHR, status, errorThrown) {
+                var errorMessage = "Error: " + errorThrown;
+                alert(errorMessage);
             }
         })
     }

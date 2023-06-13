@@ -1,3 +1,40 @@
+Prueba de creación Propiedad
+
+{
+    "valor_propiedad": 900000,
+    "es_arriendo": true,
+    "es_venta": false,
+    "id_tipo_propiedad": 1,
+    "id_comuna" : 266,
+    "metros_totales": 50,
+    "metros_utiles": 5,
+    "cant_dormitorios": 3,
+    "cant_banos": 3,
+    "permite_mascotas": true,
+    "tiene_bodega": true,
+    "tiene_estacionamiento": true
+}
+
+para captar errores
+
+            try :
+                tipo_propiedad = TipoPropiedad.objects.get(id_tipo_propiedad=r_tpropiedad)
+                reg_propiedad = Propiedad(
+                id_propiedad = id_result,
+                valor_propiedad = r_vp, 
+                es_arriendo = r_arriendo, 
+                es_venta = r_venta, 
+                id_tipo_propiedad = tipo_propiedad, 
+                id_comuna = r_idcomuna, 
+                esta_habilitado = True)
+            except ValidationError as e:
+                print(f"Error de validación: {str(e)}")
+            except IntegrityError as e:
+                print(f"Error de integridad: {str(e)}")
+            except Exception as e:
+                print(f"Error desconocido: {str(e)}")
+
+
 Vista 1
 
 CREATE VIEW vista_detalle_propiedades AS
