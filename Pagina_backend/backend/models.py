@@ -74,20 +74,3 @@ class Visita (models.Model):
 
     class Meta :
         ordering = ['id_visita']
-
-class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    edad = models.IntegerField()
-    rut = models.CharField(max_length=10, unique=True)
-    direccion = models.CharField(max_length=200)
-    comuna = models.CharField(max_length=100)
-    region = models.CharField(max_length=100)
-    telefono = models.CharField(max_length=15)
-    correo_electronico = models.EmailField(unique=True)
-    fecha_registro = models.DateField(auto_now_add=True)
-    esta_habilitado = models.BooleanField(default=True, null=False)
-    es_superusuario = models.BooleanField(default=True, null=False)
-
-    def __str__(self):
-        return self.nombre

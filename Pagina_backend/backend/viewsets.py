@@ -1,15 +1,20 @@
 from .models import Region, Comuna, TipoPropiedad, Propiedad, CaracteristicasPropiedad, Visita
-from .serializers import RegionSerializer, ComunaSerializer, PropiedadSerializer, TipoPropiedadSerializer, CaracteristicasPropiedadSerializer, VisitaSerializer
+from .serializers import UserSerializer, RegionSerializer, ComunaSerializer, PropiedadSerializer, TipoPropiedadSerializer, CaracteristicasPropiedadSerializer, VisitaSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 class JSONResponse(HttpResponse):
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class RegionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Region.objects.all()
