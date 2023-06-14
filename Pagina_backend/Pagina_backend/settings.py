@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'drf_spectacular',
     'rest_framework',
+    'rest_framework_simplejwt',
     'import_export',
     'backend.apps.BackendConfig',
     'django.contrib.admin',
@@ -132,7 +133,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Implementación de Swagger UI
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS' : 'drf_spectacular.openapi.AutoSchema'
+    'DEFAULT_SCHEMA_CLASS' : 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
 SPECTACULAR_SETTINGS = {
