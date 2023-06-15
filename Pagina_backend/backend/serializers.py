@@ -3,11 +3,6 @@ from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
 
-class UserSerializer(ModelSerializer):
-    class Meta :
-        model = User
-        fields = ['username', 'password', 'email', 'first_name', 'last_name']
-
 class RegionSerializer (ModelSerializer):
     class Meta :
         model = Region
@@ -76,3 +71,15 @@ class RegistroPropiedadSerializer (serializers.Serializer):
     permite_mascotas = serializers.BooleanField()
     tiene_bodega = serializers.BooleanField()
     tiene_estacionamiento = serializers.BooleanField()
+
+class UserSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+
+# class UserSerializer(serializers.Serializer):
+#     class Meta :
+#         model = User
+#         fields = ['username', 'password', 'email', 'first_name', 'last_name']

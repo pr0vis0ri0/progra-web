@@ -3,26 +3,30 @@ from django.contrib.auth.hashers import make_password
 from backend.models import *
 from django.db import connection
 from http import HTTPStatus
+from backend.jsonresponse import JSONResponse
 
 class DAORegistro :
-    def get_user (id) :
+    def get_user (username) :
         try :
-            return User.objects.get(id = id)
+            return User.objects.get(username = username)
         except :
-            raise None
+            return None
     
-    def post_user (username, password, nombre, apellido) :
-        try :
-            reg_user = User(
-                username = username,
-                email = username,
-                password = make_password(password),
-                first_name = nombre,
-                last_name = apellido,
-                is_superuser = False
-            )
-            reg_user.save()
-        except Exception as e :
-            print(f"Error desconocido: {str(e)}")
+    def post_user (username, email, password, nombre, apellido) :
+        if DAORegistro.get_user(username) is None :
+            try :
+                reg_user = User(
+                    username = username,
+                    password = make_password(password)
+                )
+                reg_user.save()
+                reg_user.email = email
+                reg_user.first_name = nombre
+                reg_user.last_name = apellido
+                reg_user.save()
+            except Exception as e :
+                print(f"Error desconocido: {str(e)}")
+                return False
+            return True
+        else :
             return False
-        return True

@@ -1,20 +1,8 @@
-from .models import Region, Comuna, TipoPropiedad, Propiedad, CaracteristicasPropiedad, Visita
-from .serializers import UserSerializer, RegionSerializer, ComunaSerializer, PropiedadSerializer, TipoPropiedadSerializer, CaracteristicasPropiedadSerializer, VisitaSerializer
+from .models import Region, Comuna
+from .serializers import RegionSerializer, ComunaSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.renderers import JSONRenderer
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-
-class JSONResponse(HttpResponse):
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
-
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+from .jsonresponse import JSONResponse
 
 class RegionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Region.objects.all()
@@ -32,19 +20,3 @@ class ComunaViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = Comuna.objects.filter(id_region = id_region)
         serializer_class = ComunaSerializer(queryset, many = True)
         return JSONResponse(serializer_class.data)
-
-class TipoPropiedadViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = TipoPropiedad.objects.all()
-    serializer_class = TipoPropiedadSerializer
-
-class PropiedadViewSet(viewsets.ModelViewSet):
-    queryset = Propiedad.objects.all()
-    serializer_class = PropiedadSerializer
-
-class CaracteristicasPropiedadViewSet(viewsets.ModelViewSet):
-    queryset = CaracteristicasPropiedad.objects.all()
-    serializer_class = CaracteristicasPropiedadSerializer
-
-class VisitaViewSet(viewsets.ModelViewSet):
-    queryset = Visita.objects.all()
-    serializer_class = VisitaSerializer

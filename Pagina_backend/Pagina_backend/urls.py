@@ -10,7 +10,6 @@ from rest_framework_simplejwt.views import (
 # Creamos un router y registramos nuestro viewset
 
 router = DefaultRouter()
-router.register("user", viewsets.UserViewSet, basename='User')
 router.register("region", viewsets.RegionViewSet, basename='Region')
 router.register('comuna', viewsets.ComunaViewSet, basename='Comuna')
 

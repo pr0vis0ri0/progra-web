@@ -52,7 +52,7 @@
                         
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                              <label class="form-label" for="loginCorreo">Correo :</label>
+                              <label class="form-label" for="loginCorreo">Correo electrónico :</label>
                               <input type="email" id="loginCorreo" class="form-control"/>
                             </div>
                         
@@ -79,7 +79,7 @@
                             </div>
                         
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar</button>
+                            <button type="submit" class="btn btn-primary btn-block mb-4" id="btnIngresar">Ingresar</button>
                         
                             <!-- Register buttons -->
                             <!-- <div class="text-center">
@@ -155,4 +155,7 @@
     </div>
 </div>
 
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/login.js'%}"></script>
 {% endblock %}

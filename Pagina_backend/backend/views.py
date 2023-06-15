@@ -1,21 +1,12 @@
-from django.http import HttpResponse
 from .serializers import *
 from .models import *
 from rest_framework import status
-from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
-from rest_framework.parsers import JSONParser
-from rest_framework.decorators import action
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from backend.DAO.DAOPropiedad import DAOPropiedad
 from backend.DAO.DAORegistro import DAORegistro
-
-class JSONResponse(HttpResponse):
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
+from .jsonresponse import JSONResponse
 
 class PropiedadDetail(APIView):
     def get(self, request, id_propiedad = None):
@@ -50,9 +41,9 @@ class RegistroUsuarioDetail(APIView) :
             if (serializer.is_valid()):
                 data = serializer.data
                 if DAORegistro.post_user(*data.values()):
-                    return JSONResponse('Usuario creado')
+                    return JSONResponse('Usuario creado.')
                 else :
-                    return JSONResponse(status.HTTP_400_BAD_REQUEST)
+                    return JSONResponse('El usuario no fue creado.')
             else :
                 return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :
