@@ -5,15 +5,15 @@ from django.db import connection
 from http import HTTPStatus
 from backend.jsonresponse import JSONResponse
 
-class DAORegistro :
+class DAOUsuario :
     def get_user (username) :
         try :
             return User.objects.get(username = username)
         except :
             return None
     
-    def post_user (username, email, password, nombre, apellido) :
-        if DAORegistro.get_user(username) is None :
+    def registro_usuario (username, email, password, nombre, apellido) :
+        if DAOUsuario.get_user(username) is None :
             try :
                 reg_user = User(
                     username = username,
@@ -30,3 +30,6 @@ class DAORegistro :
             return True
         else :
             return False
+    
+    def login_usuario (username, password) :
+        print("Hola.")

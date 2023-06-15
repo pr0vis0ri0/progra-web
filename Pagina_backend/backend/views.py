@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from backend.DAO.DAOPropiedad import DAOPropiedad
-from backend.DAO.DAORegistro import DAORegistro
+from backend.DAO.DAOUsuario import DAOUsuario
 from .jsonresponse import JSONResponse
 
 class PropiedadDetail(APIView):
@@ -32,24 +32,6 @@ class RegistroPropiedadDetail(APIView):
             print(f"Error desconocido: {str(e)}")
             return False
 
-class RegistroUsuarioDetail(APIView) :
-    serializer_class = UserSerializer
-
-    def post(self, request):
-        try :
-            serializer = self.serializer_class(data=request.data)
-            if (serializer.is_valid()):
-                data = serializer.data
-                if DAORegistro.post_user(*data.values()):
-                    return JSONResponse('Usuario creado.')
-                else :
-                    return JSONResponse('El usuario no fue creado.')
-            else :
-                return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
-        except Exception as e :
-            print(f"Error desconocido : {str(e)}")
-            return False
-
 class PropiedadList(APIView):
     def get(self, request):
         registros = DAOPropiedad.get_detalle_propiedades()
@@ -66,6 +48,26 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['es_superusuario'] = self.user.is_superuser       
         return data
 
-
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+class RegistroUsuarioDetail(APIView) :
+    serializer_class = RegistroUserSerializer
+
+    def post(self, request):
+        try :
+            serializer = self.serializer_class(data=request.data)
+            if (serializer.is_valid()):
+                data = serializer.data
+                if DAOUsuario.post_user(*data.values()):
+                    return JSONResponse('Usuario creado.')
+                else :
+                    return JSONResponse('El usuario no fue creado.')
+            else :
+                return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except Exception as e :
+            print(f"Error desconocido : {str(e)}")
+            return False
+
+class LoginUsuarioDetail(APIView):
+    print("")

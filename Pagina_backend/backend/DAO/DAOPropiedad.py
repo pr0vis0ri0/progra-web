@@ -25,7 +25,23 @@ class DAOPropiedad :
     def get_detalle_propiedades():
         with connection.cursor() as cursor:
             try :
-                cursor.execute('SELECT * FROM vista_detalle_propiedades')
+                cursor.execute("""
+                SELECT
+    	            t1.id_propiedad id_propiedad,
+    	            t1.valor_propiedad valor_propiedad,
+    	            t1.es_arriendo es_arriendo,
+                    t1.es_venta es_venta,
+    	            t2.nombre_tipo_propiedad nombre_tipo_propiedad,
+    	            t3.nombre_comuna nombre_comuna,
+    	            t4.nombre_region nombre_region
+                FROM
+    	            backend_propiedad t1 inner join backend_tipopropiedad t2
+    	            on (t1.id_tipo_propiedad_id = t2.id_tipo_propiedad)
+    	            inner join backend_comuna t3
+    	            on (t1.id_comuna_id = t3.id_comuna)
+    	            inner join backend_region t4
+    	            on (t3.id_region_id = t4.id_region)
+                """)
                 resultados = cursor.fetchall()
             except :
                 return HTTPStatus.NOT_FOUND

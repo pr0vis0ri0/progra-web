@@ -72,14 +72,14 @@ class RegistroPropiedadSerializer (serializers.Serializer):
     tiene_bodega = serializers.BooleanField()
     tiene_estacionamiento = serializers.BooleanField()
 
-class UserSerializer(serializers.Serializer):
+class RegistroUserSerializer(serializers.Serializer):
     username = serializers.CharField()
     email = serializers.EmailField()
     password = serializers.CharField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
 
-# class UserSerializer(serializers.Serializer):
-#     class Meta :
-#         model = User
-#         fields = ['username', 'password', 'email', 'first_name', 'last_name']
+class LoginUserSerializer(serializers.Serializer):
+    class Meta :
+        model = User
+        fields = ['username', 'password']

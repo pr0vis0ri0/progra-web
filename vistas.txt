@@ -39,13 +39,13 @@ Vista 1
 
 CREATE VIEW vista_detalle_propiedades AS
     SELECT
-    	t1.id_propiedad,
-    	t1.valor_propiedad,
-    	t1.es_arriendo,
-        t1.es_venta,
-    	t2.nombre_tipo_propiedad,
-    	t3.nombre_comuna,
-    	t4.nombre_region
+    	t1.id_propiedad id_propiedad,
+    	t1.valor_propiedad valor_propiedad,
+    	t1.es_arriendo es_arriendo,
+        t1.es_venta es_venta,
+    	t2.nombre_tipo_propiedad nombre_tipo_propiedad,
+    	t3.nombre_comuna nombre_comuna,
+    	t4.nombre_region nombre_region
     FROM
     	backend_propiedad t1 inner join backend_tipopropiedad t2
     	on (t1.id_tipo_propiedad_id = t2.id_tipo_propiedad)
