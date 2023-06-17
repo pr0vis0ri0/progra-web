@@ -43,121 +43,172 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (response) {
-            // Número de propiedades que irán por página
-            const propiedadesPorPagina = 10;
-            // console.log("1. " + propiedadesPorPagina);
-            // Número total de propiedades que se obtiene desde el response
-            const totalPropiedades = response.length; // 50
-            // console.log("2. " + totalPropiedades);
-            const paginasTotales = Math.ceil(totalPropiedades / propiedadesPorPagina);
-            // console.log("3. " + paginasTotales)
-            // Obtener el número de la página actual (en caso de que se pase como parámetro en la URL)
-            const pagActual = getParameterByName("page") || 1; // Si entras sin parámetro por defecto será la primera
-            //console.log("4. " + pagActual)
-            // Aquí se calcularán el indicio inicial y final de las propiedades a mostrar
-            const startIndex = (pagActual - 1) * propiedadesPorPagina;
-            //console.log("6. " + startIndex);
-            const endIndex = startIndex + propiedadesPorPagina;
-            //console.log("6. " + endIndex);
-            // Obtienes las propiedades de la página actual
-            const datosPropiedad = response.slice(startIndex, endIndex);
-            //console.log("7. " + propiedades);
-
-            $.each(datosPropiedad, function (i) {
-
-                let divCol = $('<div></div>').addClass('col-md-6 mb-5');
-                let card = $('<div></div>').addClass('card');
-                let img = $('<img>').addClass('card-img-top');
-                let cardBody = $('<div></div>').addClass('card-body');
-                let cardTitle = $('<h5></h5>')
-                                    .addClass('card-title')
-                                    .html(datosPropiedad[i].nombre_tipo_propiedad);
-                let cardSubtitle = $('<span></span>')
-                                    .addClass('badge rounded-pill bg-success')
-                                    .html(datosPropiedad[i].nombre_comuna + ", " + datosPropiedad[i].nombre_region);
-                let cardText = $('<p></p>').addClass('card-text mt-3');
-                let dFlex = $('<div></div>').addClass('d-flex justify-content-between');
-                let txtStart = $('<h6></h6>').addClass('text-start');
-                let txtEnd = $('<h6></h6>').addClass('text-end');
-                let divEnd = $('<div></div>').addClass('text-end');
-                let btnPropiedad = $('<a></a>')
-                                    .addClass('btn btn-primary btn-acceso')
-                                    .html('Ver propiedad');
-                $('#lista-departamentos').append(divCol);
-                divCol.append(card);
-
-
-                if(datosPropiedad[i].nombre_tipo_propiedad == 'Departamento') {
-                    img.attr({
-                        src : staticUrl + "departamentos/departamento-id-x.jpg",
-                        alt : "Departamento"
-                    })
-                } else {
-                    img.attr({
-                        src : staticUrl + "casas/casa-id-x.jpg",
-                        alt : 'Casa'
-                    })
-                }
-
-                card.append(img);
-                card.append(cardBody);
-                cardBody.append(cardTitle);
-                cardBody.append(cardSubtitle);
-                cardBody.append(cardText);
-                cardText.append(dFlex);
-
-                if(datosPropiedad[i].es_arriendo != 0) {
-                    txtStart.text('Arriendo');
-                    dFlex.append(txtStart);
-                } else if (datosPropiedad[i].es_venta != 0) {
-                    txtStart.text('Venta');
-                    dFlex.append(txtStart);
-                }
-
-                var formatoChile = {
-                    style : 'currency',
-                    currency : 'CLP'
-                }
-
-                dFlex.append(txtEnd.html("$" + datosPropiedad[i].valor_propiedad.toLocaleString('es-CL'),formatoChile));
-                cardText.append('<hr>');
-                cardBody.append(divEnd);
-                divEnd.append(btnPropiedad.attr({
-                    href : "#",
-                    'data-id' : datosPropiedad[i].id_propiedad
-                }))
-            });
-
-
-
-            // Se genera el nav destinado para la páginación en el HTML
-            // con las clases que están acá https://getbootstrap.com/docs/5.0/components/pagination/#alignment
-            const paginacionContainer = $('<nav></nav>').addClass('mt-5').attr({ 'aria-label' : 'Navegación de páginas' });
-            const paginacionLista = $('<ul></ul>').addClass('pagination justify-content-center');
-            paginacionContainer.append(paginacionLista);
-
-            // Creación de botones
-            if (pagActual > 1) {
-                paginacionLista.append(creacionBotonPaginacion('Anterior', parseInt(pagActual) - 1));
-            }
-            for (let i = 1; i <= paginasTotales; i++) {
-                paginacionLista.append(creacionBotonPaginacion(i, i, parseInt(pagActual)));
-            }
-            if (pagActual < paginasTotales) {
-                paginacionLista.append(creacionBotonPaginacion('Siguiente', parseInt(pagActual) + 1));
-            }
-
-            $('#container-nav').append(paginacionContainer);
+            cargarHTML(response)
         }
     });
 
-    $(document).on('click', '.btn-acceso', function() {
-        var idPropiedad = $(this).data('id');
-        var propiedadURL = "http://localhost:8000/app/caracteristicas/id_propiedad".replace('id_propiedad',idPropiedad)
-        window.location.href = propiedadURL;
-      });
-
 });
+
+$(document).on('click', '.btn-acceso', function() {
+    var idPropiedad = $(this).data('id');
+    var propiedadURL = "http://localhost:8000/app/caracteristicas/id_propiedad".replace('id_propiedad',idPropiedad)
+    window.location.href = propiedadURL;
+});
+
+$(document).on("click blur change focusout select", 
+                "#valorDesde, #valorHasta, #arriendoCheck, #ventaCheck",
+    function () {
+        checkFiltros();
+    }
+);
+
+
+function cargarHTML (response) {
+    // Número de propiedades que irán por página
+    const propiedadesPorPagina = 10;
+    // console.log("1. " + propiedadesPorPagina);
+    // Número total de propiedades que se obtiene desde el response
+    const totalPropiedades = response.length; // 50
+    // console.log("2. " + totalPropiedades);
+    const paginasTotales = Math.ceil(totalPropiedades / propiedadesPorPagina);
+    // console.log("3. " + paginasTotales)
+    // Obtener el número de la página actual (en caso de que se pase como parámetro en la URL)
+    const pagActual = getParameterByName("page") || 1; // Si entras sin parámetro por defecto será la primera
+    //console.log("4. " + pagActual)
+    // Aquí se calcularán el indicio inicial y final de las propiedades a mostrar
+    const startIndex = (pagActual - 1) * propiedadesPorPagina;
+    //console.log("6. " + startIndex);
+    const endIndex = startIndex + propiedadesPorPagina;
+    //console.log("6. " + endIndex);
+    // Obtienes las propiedades de la página actual
+    const datosPropiedad = response.slice(startIndex, endIndex);
+    //console.log("7. " + propiedades);
+    $.each(datosPropiedad, function (i) {
+        let divCol = $('<div></div>').addClass('col-md-6 mb-5');
+        let card = $('<div></div>').addClass('card');
+        let cardHeader = $('<div></div>').addClass('card-header')
+        let textoRegion = $('<p></p>').addClass('card-text text-muted').text(datosPropiedad[i].nombre_region)
+        let img = $('<img>').addClass('card-img-bottom');
+        let cardBody = $('<div></div>').addClass('card-body');
+        let cardTitle = $('<h5></h5>')
+                            .addClass('card-title')
+                            .html(datosPropiedad[i].nombre_tipo_propiedad);
+        let cardSubtitle = $('<h6></h6>')
+                            .addClass('card-subtitle mb-2 text-muted')
+                            .html(datosPropiedad[i].nombre_comuna);
+        let cardText = $('<p></p>').addClass('card-text mt-3');
+        let dFlex = $('<div></div>').addClass('d-flex justify-content-between');
+        let txtStart = $('<h6></h6>').addClass('text-start');
+        let txtEnd = $('<h6></h6>').addClass('text-end');
+        let divEnd = $('<div></div>').addClass('text-end');
+        let btnPropiedad = $('<a></a>')
+                            .addClass('btn btn-primary btn-acceso')
+                            .html('Ver propiedad');
+        $('#lista-departamentos').append(divCol);
+        divCol.append(card);
+        card.append(cardHeader)
+        cardHeader.append(textoRegion)
+        if(datosPropiedad[i].nombre_tipo_propiedad == 'Departamento') {
+            img.attr({
+                src : staticUrl + "departamentos/departamento-id-x.jpg",
+                alt : "Departamento"
+            })
+        } else {
+            img.attr({
+                src : staticUrl + "casas/casa-id-x.jpg",
+                alt : 'Casa'
+            })
+        }
+        card.append(img);
+        card.append(cardBody);
+        cardBody.append(cardTitle);
+        cardBody.append(cardSubtitle);
+        cardBody.append(cardText);
+        cardText.append(dFlex);
+        if(datosPropiedad[i].es_arriendo != 0) {
+            txtStart.text('Arriendo');
+            dFlex.append(txtStart);
+        } else if (datosPropiedad[i].es_venta != 0) {
+            txtStart.text('Venta');
+            dFlex.append(txtStart);
+        }
+        var formatoChile = {
+            style : 'currency',
+            currency : 'CLP'
+        }
+        dFlex.append(txtEnd.html("$" + datosPropiedad[i].valor_propiedad.toLocaleString('es-CL'),formatoChile));
+        cardText.append('<hr>');
+        cardBody.append(divEnd);
+        divEnd.append(btnPropiedad.attr({
+            href : "#",
+            'data-id' : datosPropiedad[i].id_propiedad
+        }))
+    });
+    // Se genera el nav destinado para la páginación en el HTML
+    // con las clases que están acá https://getbootstrap.com/docs/5.0/components/pagination/#alignment
+    const paginacionContainer = $('<nav></nav>').addClass('mt-5').attr({ 'aria-label' : 'Navegación de páginas' });
+    const paginacionLista = $('<ul></ul>').addClass('pagination justify-content-center');
+    paginacionContainer.append(paginacionLista);
+    // Creación de botones
+    if (pagActual > 1) {
+        paginacionLista.append(creacionBotonPaginacion('Anterior', parseInt(pagActual) - 1));
+    }
+    for (let i = 1; i <= paginasTotales; i++) {
+        paginacionLista.append(creacionBotonPaginacion(i, i, parseInt(pagActual)));
+    }
+    if (pagActual < paginasTotales) {
+        paginacionLista.append(creacionBotonPaginacion('Siguiente', parseInt(pagActual) + 1));
+    }
+    $('#container-nav').append(paginacionContainer);
+}
+
+function checkFiltros() {
+    var error = 0
+    
+    if (parseInt($('#valorDesde').val()) > parseInt($('#valorHasta').val())) {
+        $('#valorDesde').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#valorDesde').removeClass('is-invalid')
+        $('#valorDesde').addClass('is-valid')
+    }
+    
+    if (parseInt($('#valorHasta').val()) < parseInt($('#valorDesde').val())) {
+        $('#valorHasta').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#valorHasta').removeClass('is-invalid')
+        $('#valorHasta').addClass('is-valid')
+    }
+
+    if (!$('#arriendoCheck').is(':checked') && !$('#ventaCheck').is(':checked')) {
+        $('#arriendoCheck').addClass('is-invalid')
+        $('#ventaCheck').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#arriendoCheck').removeClass('is-invalid')
+        $('#ventaCheck').removeClass('is-invalid')
+        if($('#arriendoCheck').is(':checked')) {
+            $('#arriendoCheck').addClass('is-valid')
+        } else if ($('#ventaCheck').is(':checked')) {
+            $('#ventaCheck').addClass('is-valid')
+        }
+    }
+
+    if (error == 1) {
+        $('#btnFiltrarPropiedades').addClass('disabled')
+                            .prop("disabled", true)
+                            .each(function() {
+                                this.style.pointerEvents = "none"
+                            })
+    } else {
+        $('#btnFiltrarPropiedades').removeClass('disabled')
+                            .prop("disabled", false)
+                            .each(function() {
+                                this.style.pointerEvents = "auto"
+                            })
+    }
+}
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;

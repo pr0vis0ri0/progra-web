@@ -32,6 +32,22 @@ class RegistroPropiedadDetail(APIView):
             print(f"Error desconocido: {str(e)}")
             return False
 
+class FiltroPropiedadDetail(APIView):
+    serializer_class = FiltroPropiedadSerializer
+    def post(self, request):
+        objetos = []
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            data = serializer.data
+            registros = DAOPropiedad.get_propiedades_filtradas(data['id_comuna'])
+            objetos.append(registros)
+            print(len(objetos))
+
+            serializer = DetallePropiedadesSerializer(registros, many = False)
+            return JSONResponse(serializer.data)
+        else :
+            return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+
 class PropiedadList(APIView):
     def get(self, request):
         registros = DAOPropiedad.get_detalle_propiedades()

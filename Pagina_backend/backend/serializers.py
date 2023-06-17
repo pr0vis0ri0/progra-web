@@ -83,3 +83,10 @@ class LoginUserSerializer(serializers.Serializer):
     class Meta :
         model = User
         fields = ['username', 'password']
+
+class FiltroPropiedadSerializer(serializers.Serializer):
+    id_comuna = serializers.IntegerField()
+    # valor_desde = serializers.IntegerField()
+    # valor_hasta = serializers.IntegerField()
+    # es_arriendo = serializers.IntegerField()
+    # es_venta = serializers.IntegerField()
