@@ -1,8 +1,11 @@
+var funciones = new Propiedades()
+var url_api = "http://localhost:9000/"
+var ep_region = "region/";
+var ep_filtro_comuna = "comuna/filtroRegiones/"
+var ep_lista_propiedades = "lista_propiedades/"
+var ep_filtro_propiedades = "propiedades_filtradas/"
+
 $(document).ready(function () {
-    var url_api = "http://localhost:9000/"
-    let ep_region = "region/";
-    let ep_filtro_comuna = "comuna/filtroRegiones/"
-    let ep_lista_propiedades = "lista_propiedades/"
 
     $.ajax({
         url: url_api + ep_region,
@@ -27,7 +30,10 @@ $(document).ready(function () {
             dataType: "json",
             success: function(comunas){
                 $('#select-comunas').empty();
-
+                let optionDefault = $('<option></option>')
+                                    .attr({value : 0})
+                                    .html('Escoge Comuna')
+                $('#select-comunas').append(optionDefault)
                 $.each(comunas, function (i){
                     let optionComuna = $('<option></option>')
                                         .attr({value : comunas[i].id_comuna})
@@ -38,14 +44,7 @@ $(document).ready(function () {
         })
     })
 
-    $.ajax({
-        url: url_api + ep_lista_propiedades,
-        type: "GET",
-        dataType: "json",
-        success: function (response) {
-            cargarHTML(response)
-        }
-    });
+    funciones.devolverPropiedades(url_api + ep_lista_propiedades)
 
 });
 
@@ -56,33 +55,52 @@ $(document).on('click', '.btn-acceso', function() {
 });
 
 $(document).on("click blur change focusout select", 
-                "#valorDesde, #valorHasta, #arriendoCheck, #ventaCheck",
+                "#select-regiones, #select-comunas, #valorDesde, #valorHasta, #arriendoCheck, #ventaCheck",
     function () {
         checkFiltros();
     }
 );
 
+$('#btnFiltrarPropiedades').click(function () {
+    let datosFiltros = devolverDatosFiltros()
+    funciones.filtrarPropiedades(url_api + ep_filtro_propiedades, datosFiltros)
+})
 
 function cargarHTML (response) {
+    $('#lista-departamentos').empty()
+    $('#container-nav').empty()
     // Número de propiedades que irán por página
     const propiedadesPorPagina = 10;
-    // console.log("1. " + propiedadesPorPagina);
+    console.log("1. " + propiedadesPorPagina);
     // Número total de propiedades que se obtiene desde el response
-    const totalPropiedades = response.length; // 50
-    // console.log("2. " + totalPropiedades);
+    var totalPropiedades
+    if (Array.isArray(response)) {
+        totalPropiedades = response.length
+    } else {
+        let data = new Array()
+        data.push(response)
+        totalPropiedades = data.length
+    }
+    // const totalPropiedades = response.length; // 50
+    console.log("2. " + totalPropiedades);
     const paginasTotales = Math.ceil(totalPropiedades / propiedadesPorPagina);
-    // console.log("3. " + paginasTotales)
+    console.log("3. " + paginasTotales)
     // Obtener el número de la página actual (en caso de que se pase como parámetro en la URL)
     const pagActual = getParameterByName("page") || 1; // Si entras sin parámetro por defecto será la primera
-    //console.log("4. " + pagActual)
+    console.log("4. " + pagActual)
     // Aquí se calcularán el indicio inicial y final de las propiedades a mostrar
     const startIndex = (pagActual - 1) * propiedadesPorPagina;
-    //console.log("6. " + startIndex);
+    console.log("5. " + startIndex);
     const endIndex = startIndex + propiedadesPorPagina;
-    //console.log("6. " + endIndex);
+    console.log("6. " + endIndex);
     // Obtienes las propiedades de la página actual
-    const datosPropiedad = response.slice(startIndex, endIndex);
-    //console.log("7. " + propiedades);
+    var datosPropiedad
+    if (Array.isArray(response)) {
+        datosPropiedad = response.slice(startIndex, endIndex);
+    } else {
+        datosPropiedad = [response]
+    }
+    console.log("7. " + datosPropiedad);
     $.each(datosPropiedad, function (i) {
         let divCol = $('<div></div>').addClass('col-md-6 mb-5');
         let card = $('<div></div>').addClass('card');
@@ -162,9 +180,36 @@ function cargarHTML (response) {
     $('#container-nav').append(paginacionContainer);
 }
 
+function devolverDatosFiltros () {
+    datos = {
+        id_comuna : parseInt($('#select-comunas').val()),
+        valor_desde : parseInt($('#valorDesde').val()),
+        valor_hasta : parseInt($('#valorHasta').val()),
+        es_arriendo : $('#arriendoCheck').is(':checked'),
+        es_venta : $('#ventaCheck').is(':checked'),
+    }
+    return JSON.stringify(datos);
+}
+
 function checkFiltros() {
     var error = 0
-    
+
+    if($('#select-regiones').val() == 0) {
+        $('#select-regiones').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#select-regiones').removeClass('is-invalid')
+        $('#select-regiones').addClass('is-valid')
+    }
+
+    if($('#select-comunas').val() == 0) {
+        $('#select-comunas').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#select-comunas').removeClass('is-invalid')
+        $('#select-comunas').addClass('is-valid')
+    }
+
     if (parseInt($('#valorDesde').val()) > parseInt($('#valorHasta').val())) {
         $('#valorDesde').addClass('is-invalid')
         error = 1
@@ -228,4 +273,40 @@ function creacionBotonPaginacion(label, pageNumber, currentPage) {
     } 
   listItem.append(link);
   return listItem;
+}
+
+function Propiedades () {
+    this.devolverPropiedades = function (url) {
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                cargarHTML(response)
+            },
+            error : function (jqXHR, status, errorThrown) {
+                var errorMessage = "Error: " + errorThrown;
+                alert(errorMessage);
+            }
+        });
+    }
+    this.filtrarPropiedades = function (url, data) {
+        $.ajax({
+            type : "POST",
+            url : url,
+            data : data,
+            contentType: "application/json; charset=utf-8",
+            dataType : "json",
+            success : function (response) {
+                console.log(response)
+                cargarHTML(response)
+            },
+            error : function (jqXHR, status, errorThrown) {
+                var errorMessage = "Error: " + errorThrown;
+                alert(errorMessage);
+            }
+        })
+    }
+
+    
 }

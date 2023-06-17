@@ -39,18 +39,20 @@ class FiltroPropiedadDetail(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             data = serializer.data
-            registros = DAOPropiedad.get_propiedades_filtradas(data['id_comuna'])
-            objetos.append(registros)
-            print(len(objetos))
-
-            serializer = DetallePropiedadesSerializer(registros, many = False)
-            return JSONResponse(serializer.data)
+            registros = DAOPropiedad.get_propiedades_filtradas(*data.values())
+            if isinstance(registros, dict) :
+                serializer = DetallePropiedadesSerializer(registros, many = False)
+                return JSONResponse(serializer.data)
+            elif isinstance(registros, list) :
+                serializer = DetallePropiedadesSerializer(registros, many = True)
+                return JSONResponse(serializer.data)
         else :
             return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
 
 class PropiedadList(APIView):
     def get(self, request):
         registros = DAOPropiedad.get_detalle_propiedades()
+        print(type(registros))
         serializer = DetallePropiedadesSerializer(registros, many = True)
         return JSONResponse(serializer.data)
 

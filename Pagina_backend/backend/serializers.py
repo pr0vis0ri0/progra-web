@@ -86,7 +86,7 @@ class LoginUserSerializer(serializers.Serializer):
 
 class FiltroPropiedadSerializer(serializers.Serializer):
     id_comuna = serializers.IntegerField()
-    # valor_desde = serializers.IntegerField()
-    # valor_hasta = serializers.IntegerField()
-    # es_arriendo = serializers.IntegerField()
-    # es_venta = serializers.IntegerField()
+    valor_desde = serializers.IntegerField()
+    valor_hasta = serializers.IntegerField()
+    es_arriendo = serializers.BooleanField()
+    es_venta = serializers.BooleanField()
