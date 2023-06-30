@@ -10,5 +10,8 @@ urlpatterns = [
     path('propiedades',views.propiedades, name='propiedades'),
     path('caracteristicas/<int:id_propiedad>', views.propiedad_caracteristicas, name= 'prop_carac'),
     path('reg_propiedad',views.reg_propiedad,name='reg_propiedad'),
-    path('transbank', views.transbank)
+    path('transbank', views.transbank),
+    path('usuario', views.usuario),
+    path('administrador', views.administrador),
+    path('redirigir', views.redirigir)
 ]

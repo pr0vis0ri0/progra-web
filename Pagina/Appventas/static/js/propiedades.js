@@ -298,7 +298,6 @@ function Propiedades () {
             contentType: "application/json; charset=utf-8",
             dataType : "json",
             success : function (response) {
-                console.log(response)
                 cargarHTML(response)
             },
             error : function (jqXHR, status, errorThrown) {

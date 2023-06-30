@@ -35,7 +35,6 @@ class RegistroPropiedadDetail(APIView):
 class FiltroPropiedadDetail(APIView):
     serializer_class = FiltroPropiedadSerializer
     def post(self, request):
-        objetos = []
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             data = serializer.data
@@ -52,19 +51,25 @@ class FiltroPropiedadDetail(APIView):
 class PropiedadList(APIView):
     def get(self, request):
         registros = DAOPropiedad.get_detalle_propiedades()
-        print(type(registros))
         serializer = DetallePropiedadesSerializer(registros, many = True)
         return JSONResponse(serializer.data)
 
+# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+#     def validate(self, attrs):
+#         data = super().validate(attrs)
+#         refresh = self.get_token(self.user)
+#         data['id_usuario'] = self.user.id
+#         data['correo'] = self.user.email
+#         data['es_superusuario'] = self.user.is_superuser
+#         return data
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        print(super().validate(attrs))
-        refresh = self.get_token(self.user)
-        data['id_usuario'] = self.user.id
-        data['correo'] = self.user.email
-        data['es_superusuario'] = self.user.is_superuser       
-        return data
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['es_superusuario'] = user.is_superuser
+        print(type(token))
+        return token
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer

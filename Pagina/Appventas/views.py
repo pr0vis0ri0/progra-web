@@ -25,3 +25,12 @@ def propiedad_caracteristicas(request, id_propiedad):
 
 def transbank(request):
     return render(request, 'transbank.html')
+
+def usuario(request):
+    return render(request, 'usuario.html')
+
+def administrador(request):
+    return render(request, 'administrador.html')
+
+def redirigir(request):
+    return render(request, 'intermediario.html')
