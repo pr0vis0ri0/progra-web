@@ -31,7 +31,7 @@ class Perfiles (models.Model):
         db_table = 'MAESTRO_PERFILES'
 
 class PerfilesUsuario (models.Model):
-    id_registro = models.AutoField(primary_key=True) # Sólo por que Django te obliga XD
+    id_registro = models.AutoField(primary_key=True)
     id_usuario = models.ForeignKey(Usuario, null= False, on_delete= models.DO_NOTHING, db_column = 'id_usuario')
     id_perfil = models.ForeignKey(Perfiles, null = False, on_delete= models.DO_NOTHING, db_column = 'id_perfil')
 
@@ -42,6 +42,9 @@ class PerfilesUsuario (models.Model):
 class Estados (models.Model):
     id_estado = models.AutoField(primary_key = True)
     descripcion_estado = models.CharField(max_length = 100)
+
+    def __str__ (self):
+        return str(self.descripcion_estado)
     
     class Meta:
         ordering = ['id_estado']
@@ -132,3 +135,14 @@ class Visita (models.Model):
     class Meta :
         ordering = ['id_visita']
         db_table = 'MAESTRO_VISITAS'
+
+# class SolicitudVisita (models.Model):
+#     """ Do me a model that requires the user to approve the visita to the propiedad """
+#     id_solicitud = models.AutoField(primary_key=True)
+#     id_visita = models.ForeignKey(Visita, null = False, on_delete = models.DO_NOTHING, db_column = 'id_visita')
+#     id_usuario = models.ForeignKey(Usuario, null = False, on_delete = models.DO_NOTHING, db_column = 'id_usuario')
+#     id_estado = models.ForeignKey(Estados, null = False, on_delete = models.DO_NOTHING, db_column = 'id_estado')
+
+#     class Meta :
+#         ordering = ['id_solicitud']
+#         db_table = 'MAESTRO_SOLICITUD_VISITAS'
