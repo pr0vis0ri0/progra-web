@@ -59,7 +59,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
         token['es_superusuario'] = user.is_superuser
-        print(type(token))
         return token
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -73,15 +72,12 @@ class RegistroUsuarioDetail(APIView) :
             serializer = self.serializer_class(data=request.data)
             if (serializer.is_valid()):
                 data = serializer.data
-                if DAOUsuario.post_user(*data.values()):
+                if DAOUsuario.registrar_usuario(*data.values()):
                     return JSONResponse('Usuario creado.')
                 else :
-                    return JSONResponse('El usuario no fue creado.')
+                    return JSONResponse('El usuario no fue creado, debido a que ese correo ya está siendo utilizado.')
             else :
                 return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :
             print(f"Error desconocido : {str(e)}")
             return False
-
-class LoginUsuarioDetail(APIView):
-    print("")

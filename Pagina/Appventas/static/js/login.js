@@ -9,12 +9,16 @@ $('#btnIngresar').click(function (){
         contentType: "application/json; charset=utf-8",
         dataType : "json",
         success : function (response) {
-            console.log(response)
-            localStorage.setItem('token', response['access'])
-            window.location.href = 'http://localhost:8000/app/redirigir'
+            $('#loginCorreo').removeClass('is-invalid')
+            $('#loginPassword').removaClass('is-invalid')
+            $('#loginCorreo').addClass('is-valid')
+            $('#loginPassword').addClass('is-valid')
+            localStorage.setItem('token', response)
+            //window.location.href = 'http://localhost:8000/app/redirigir' 
         },
         error : function () {
-            console.log('El login ha fallado')
+            $('#loginCorreo').addClass('is-invalid')
+            $('#loginPassword').addClass('is-invalid')
         }
     })
 });

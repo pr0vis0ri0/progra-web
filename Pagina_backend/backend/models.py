@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 class Usuario (models.Model):
     id_usuario = models.AutoField(primary_key = True)
     primer_nombre = models.CharField(max_length= 50, default= "")
-    segundo_nombre = models.CharField(max_length= 50, default= "")
+    segundo_nombre = models.CharField(max_length= 50, default= "", null = True)
     apellido_paterno = models.CharField(max_length= 50, default= "")
-    apellido_materno = models.CharField(max_length= 50, default= "")
-    email = models.EmailField(default= "")
-    rut = models.CharField(max_length=12)
-    fecha_nacimiento = models.DateField(default= None)
-    auth_user_id = models.ForeignKey(User, null = True, on_delete = models.DO_NOTHING, db_column = 'auth_user_id')
+    apellido_materno = models.CharField(max_length= 50, default= "", null = True)
+    email = models.EmailField(default= "", null = True)
+    rut = models.CharField(max_length=12, null = True)
+    fecha_nacimiento = models.DateField(default= None, null = True)
+    auth_user_id = models.ForeignKey(User, null = False, on_delete = models.DO_NOTHING, db_column = 'auth_user_id')
 
     def __str__ (self):
         return str(self.rut)

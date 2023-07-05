@@ -12,16 +12,28 @@ class DAOUsuario :
         except :
             return None
 
-    def get_usuario (id_usuario) :
+    def get_usuario (id) :
         try :
-            return Usuario.objects.get(id_usuario = id_usuario)
+            return Usuario.objects.get(id_usuario = id)
         except :
             return None
-
+    
+    def get_perfil (id) :
+        try :
+            return Perfiles.objects.get(id_perfil = id)
+        except :
+            return None
+        
+    def conseguir_perfil (id_usuario) :
+        try :
+            return PerfilesUsuario.objects.get(id_usuario = id_usuario)
+        except :
+            return None
+        
     def registrar_usuario (r_user, r_password, r_email, r_nombre, r_apellido) :
+        perfil = DAOUsuario.get_perfil(2)
         if DAOUsuario.get_auth_user(r_user) is None :
             try :
-            
                 registro_auth_user = User()
                 registro_auth_user.username = r_user
                 registro_auth_user.password = make_password(r_password)
@@ -31,9 +43,13 @@ class DAOUsuario :
                 registro_usuario.primer_nombre = r_nombre
                 registro_usuario.apellido_paterno = r_apellido
                 registro_usuario.email = r_email
-                registro_usuario.auth_user_id = DAOUsuario.get_auth_user(registro_auth_user.id)
+                registro_usuario.auth_user_id = registro_auth_user
                 registro_usuario.save()
 
+                perfil_usuario = PerfilesUsuario()
+                perfil_usuario.id_perfil = perfil
+                perfil_usuario.id_usuario = registro_usuario
+                perfil_usuario.save()
             except Exception as e :
                 print(f"Error desconocido: {str(e)}")
                 return False
