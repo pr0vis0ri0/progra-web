@@ -32,7 +32,6 @@ class VisitaSerializer (ModelSerializer):
     class Meta :
         model = Visita
         fields = '__all__'
-
 class DetallePropiedadesSerializer (serializers.Serializer):
     id_propiedad = serializers.IntegerField()
     valor_propiedad = serializers.IntegerField()
