@@ -66,7 +66,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-class RegistroUsuarioDetail(APIView) :
+class RegistroUsuario(APIView) :
     serializer_class = RegistroUserSerializer
 
     def post(self, request):
@@ -75,11 +75,7 @@ class RegistroUsuarioDetail(APIView) :
             if (serializer.is_valid()):
                 data = serializer.data
                 if DAOUsuario.registrar_usuario(*data.values()):
-                    username = data['username']
-                    user = User.objects.get(username = username)
-                    token_serializer = MyTokenObtainPairSerializer()
-                    token = token_serializer.get_token(user)
-                    return JSONResponse({'Mensaje' : 'Usuario creado.', 'Token' : token})
+                    return JSONResponse('Usuario creado.')
                 else :
                     return JSONResponse('El usuario no fue creado, debido a que ese correo ya está siendo utilizado.')
             else :
@@ -87,3 +83,14 @@ class RegistroUsuarioDetail(APIView) :
         except Exception as e :
             print(f"Error desconocido : {str(e)}")
             return False
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        user_search = User.objects.get(username = username)
+        token_serializer = MyTokenObtainPairSerializer()
+        token = token_serializer.get_token(user_search)
+        # Devolver el token como parte de la respuesta
+        return JSONResponse({'token': str(token)})
