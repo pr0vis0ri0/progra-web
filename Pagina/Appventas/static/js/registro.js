@@ -1,5 +1,5 @@
 var url_api = "http://localhost:9000/"
-var ep_token = "api/registro/";
+var ep_token = "registro/";
 $('#btnRegistrar').click(function (){
     let datos = datosRegistro()
     $.ajax({
@@ -33,6 +33,67 @@ function datosRegistro () {
     return JSON.stringify(dicc)
 }
 
-function checkPassword() {
+$(document).on("click blur change focusout select", 
+                "#regNombre, #regApellido, #regCorreo, #registroPassword, #checkPassword",
+    function () {
+      checkFormularioRegistro();
+    }
+);
 
+function checkFormularioRegistro () {
+    var error = 0
+
+    if ($('#regNombre').val() == "") {
+        $('#regNombre').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#regNombre').removeClass('is-invalid')
+        $('#regNombre').addClass('is-valid')        
+    }
+
+    if ($('#regApellido').val() == ""){
+        $('#regApellido').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#regApellido').removeClass('is-invalid')
+        $('#regApellido').addClass('is-valid')
+    }
+
+    if($('#regCorreo').val() == "") {
+        $('#regCorreo').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#regCorreo').removeClass('is-invalid')
+        $('#regCorreo').addClass('is-valid')
+    }
+
+    if($('#registroPassword').val() == "") {
+        $('#registroPassword').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#registroPassword').removeClass('is-invalid')
+        $('#registroPassword').addClass('is-valid')
+    }
+
+    if($('#checkPassword').val() == "") {
+        $('#checkPassword').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#checkPassword').removeClass('is-invalid')
+        $('#checkPassword').addClass('is-valid')
+    }
+
+    if (error == 1) {
+        $('#btnRegistrar').addClass('disabled')
+                            .prop("disabled", true)
+                            .each(function() {
+                                this.style.pointerEvents = "none"
+                            })
+    } else {
+        $('#btnRegistrar').removeClass('disabled')
+                            .prop("disabled", false)
+                            .each(function() {
+                                this.style.pointerEvents = "auto"
+                            })
+    }
 }

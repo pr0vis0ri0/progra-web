@@ -149,9 +149,9 @@ class DAOPropiedad :
                 SELECT
     	            COUNT(*)
                 FROM
-    	            MAESTRO_PROPIEDADES t1
+    	            MAESTRO_PROPIEDADES
                 WHERE
-                    id_comuna_id = %s
+                    id_comuna = %s
                     AND valor_propiedad between %s and %s
                     AND es_arriendo = %s
                     AND es_venta = %s
@@ -178,7 +178,7 @@ class DAOPropiedad :
     	            inner join MAESTRO_REGIONES t4
     	            on (t3.id_region = t4.id_region)
                 WHERE
-                    t1.id_comuna_id = %s
+                    t1.id_comuna = %s
                     AND t1.valor_propiedad between %s and %s
                     AND t1.es_arriendo = %s
                     AND t1.es_venta = %s

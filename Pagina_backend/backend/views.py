@@ -45,6 +45,8 @@ class FiltroPropiedadDetail(APIView):
             elif isinstance(registros, list) :
                 serializer = DetallePropiedadesSerializer(registros, many = True)
                 return JSONResponse(serializer.data)
+            else :
+                return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
         else :
             return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
 
@@ -73,7 +75,11 @@ class RegistroUsuarioDetail(APIView) :
             if (serializer.is_valid()):
                 data = serializer.data
                 if DAOUsuario.registrar_usuario(*data.values()):
-                    return JSONResponse('Usuario creado.')
+                    username = data['username']
+                    user = User.objects.get(username = username)
+                    token_serializer = MyTokenObtainPairSerializer()
+                    token = token_serializer.get_token(user)
+                    return JSONResponse({'Mensaje' : 'Usuario creado.', 'Token' : token})
                 else :
                     return JSONResponse('El usuario no fue creado, debido a que ese correo ya está siendo utilizado.')
             else :

@@ -71,7 +71,7 @@ function cargarHTML (response) {
     $('#container-nav').empty()
     // Número de propiedades que irán por página
     const propiedadesPorPagina = 10;
-    console.log("1. " + propiedadesPorPagina);
+    //console.log("1. " + propiedadesPorPagina);
     // Número total de propiedades que se obtiene desde el response
     var totalPropiedades
     if (Array.isArray(response)) {
@@ -82,17 +82,17 @@ function cargarHTML (response) {
         totalPropiedades = data.length
     }
     // const totalPropiedades = response.length; // 50
-    console.log("2. " + totalPropiedades);
+    //console.log("2. " + totalPropiedades);
     const paginasTotales = Math.ceil(totalPropiedades / propiedadesPorPagina);
-    console.log("3. " + paginasTotales)
+    //console.log("3. " + paginasTotales)
     // Obtener el número de la página actual (en caso de que se pase como parámetro en la URL)
     const pagActual = getParameterByName("page") || 1; // Si entras sin parámetro por defecto será la primera
-    console.log("4. " + pagActual)
+    //console.log("4. " + pagActual)
     // Aquí se calcularán el indicio inicial y final de las propiedades a mostrar
     const startIndex = (pagActual - 1) * propiedadesPorPagina;
-    console.log("5. " + startIndex);
+    //console.log("5. " + startIndex);
     const endIndex = startIndex + propiedadesPorPagina;
-    console.log("6. " + endIndex);
+    //console.log("6. " + endIndex);
     // Obtienes las propiedades de la página actual
     var datosPropiedad
     if (Array.isArray(response)) {
@@ -100,7 +100,7 @@ function cargarHTML (response) {
     } else {
         datosPropiedad = [response]
     }
-    console.log("7. " + datosPropiedad);
+    //console.log("7. " + datosPropiedad);
     $.each(datosPropiedad, function (i) {
         let divCol = $('<div></div>').addClass('col-md-6 mb-5');
         let card = $('<div></div>').addClass('card');
@@ -298,7 +298,12 @@ function Propiedades () {
             contentType: "application/json; charset=utf-8",
             dataType : "json",
             success : function (response) {
-                cargarHTML(response)
+                if ('mensaje-error' in response) {
+                    $('#lista-departamentos').empty();
+                    $('#container-nav').empty();
+                } else {
+                    cargarHTML(response);
+                }
             },
             error : function (jqXHR, status, errorThrown) {
                 var errorMessage = "Error: " + errorThrown;
