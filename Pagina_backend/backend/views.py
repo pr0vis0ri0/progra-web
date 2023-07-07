@@ -60,7 +60,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        token['es_superusuario'] = user.is_superuser
+        queryset = DAOUsuario.devolver_usuario_perfil(user.id)
+        token['id_perfil'] = queryset['id_perfil']
+        token['id_usuario'] = queryset['id_usuario']
         return token
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -85,12 +87,26 @@ class RegistroUsuario(APIView) :
             return False
 
 class LoginView(APIView):
+    serializer_class = LoginUserSerializer
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-
-        user_search = User.objects.get(username = username)
-        token_serializer = MyTokenObtainPairSerializer()
-        token = token_serializer.get_token(user_search)
-        # Devolver el token como parte de la respuesta
-        return JSONResponse({'token': str(token)})
+        try :
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid():
+                data = serializer.data
+                if DAOUsuario.validar_usuario(*data.values()):
+                    user_search = User.objects.get(username = data['username'])
+                    token_serializer = MyTokenObtainPairSerializer()
+                    token = token_serializer.get_token(user_search)
+                    access_token = str(token.access_token)
+                    refresh_token = str(token)
+                    return JSONResponse({
+                        'access': access_token,
+                        'refresh': refresh_token,
+                    })
+                else :
+                    return JSONResponse({'mensaje-error' : 'Credenciales incorrectas.', 'status-error' : status.HTTP_404_NOT_FOUND})
+            else :
+                return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except Exception as e :
+            print(f"Error desconocido : {str(e)}")
+            return False

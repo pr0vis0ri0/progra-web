@@ -1,14 +1,15 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate
 from backend.models import *
 from django.db import connection
 from http import HTTPStatus
 from backend.jsonresponse import JSONResponse
 
 class DAOUsuario :
-    def get_auth_user (username) :
+    def get_auth_user (id_user) :
         try :
-            return User.objects.get(username = username)
+            return User.objects.get(id = id_user)
         except :
             return None
 
@@ -56,3 +57,28 @@ class DAOUsuario :
             return True
         else :
             return False
+
+    def validar_usuario (p_user, p_password):
+        username = p_user
+        password = p_password
+        user = authenticate(username=username, password=password)
+        print(user)
+        if user is not None:
+            return True
+        else:
+            return False
+        
+    def devolver_usuario_perfil (p_user):
+        try :
+            auth_user = User.objects.get(id = p_user)
+            usuario = Usuario.objects.get(auth_user_id = auth_user.id)
+            perfil = PerfilesUsuario.objects.get(id_usuario = usuario.id_usuario)
+            return {
+                'id_usuario' : perfil.id_usuario.id_usuario,
+                'id_perfil' : perfil.id_perfil.id_perfil,
+            }
+        except :
+            return None
+    
+    #print(get_auth_user(1))
+    print(devolver_usuario_perfil(1))

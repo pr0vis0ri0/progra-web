@@ -32,6 +32,7 @@ class VisitaSerializer (ModelSerializer):
     class Meta :
         model = Visita
         fields = '__all__'
+        
 class DetallePropiedadesSerializer (serializers.Serializer):
     id_propiedad = serializers.IntegerField()
     valor_propiedad = serializers.IntegerField()
@@ -80,9 +81,8 @@ class RegistroUserSerializer(serializers.Serializer):
     last_name = serializers.CharField()
 
 class LoginUserSerializer(serializers.Serializer):
-    class Meta :
-        model = User
-        fields = ['username', 'password']
+    username = serializers.CharField()
+    password = serializers.CharField()
 
 class FiltroPropiedadSerializer(serializers.Serializer):
     id_comuna = serializers.IntegerField()

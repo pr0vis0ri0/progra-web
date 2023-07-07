@@ -82,7 +82,10 @@
                             </div>
                         
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4" id="btnIngresar">Ingresar</button>
+                            <!-- <button type="submit" class="btn btn-primary btn-block mb-4" id="btnIngresar">Ingresar</button> -->
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                              <button class="btn btn-primary btn-block mb-4" id="btnIngresar" type="button">Ingresar</button>
+                            </div>
                         
                             <!-- Register buttons -->
                             <!-- <div class="text-center">
@@ -136,6 +139,9 @@
                             <div class="form-outline mb-4">
                               <label class="form-label" for="checkPassword">Repite tu contraseña :</label>
                               <input type="password" id="checkPassword" class="form-control" />
+                              <label class="form-check-label" for="registroCheck">
+                                La contraseña debe contener a lo menos 8 caracteres.
+                              </label>
                             </div>
                         
                             <!-- Checkbox -->
@@ -143,7 +149,7 @@
                               <input class="form-check-input me-2" type="checkbox" value="" id="registroCheck" checked
                                 aria-describedby="registroCheckAyuda" />
                               <label class="form-check-label" for="registroCheck">
-                                He leído y estoy de acuerdo con los términos
+                                Esta contraseña debe ser idéntica a la ingresada anteriormente.
                               </label>
                             </div>
                         

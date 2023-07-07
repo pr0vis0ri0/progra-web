@@ -66,16 +66,27 @@ function checkFormularioRegistro () {
         $('#regCorreo').removeClass('is-invalid')
         $('#regCorreo').addClass('is-valid')
     }
-
+    
     if($('#registroPassword').val() == "") {
         $('#registroPassword').addClass('is-invalid')
         error = 1
+    } else if ($('#registroPassword').val().length < 8) {
+        $('#registroPassword').addClass('is-invalid')
+        error = 1 
     } else {
         $('#registroPassword').removeClass('is-invalid')
         $('#registroPassword').addClass('is-valid')
     }
 
     if($('#checkPassword').val() == "") {
+        $('#checkPassword').addClass('is-invalid')
+        error = 1
+    } else {
+        $('#checkPassword').removeClass('is-invalid')
+        $('#checkPassword').addClass('is-valid')
+    }
+
+    if ($('#checkPassword').val() != $('#registroPassword').val()) {
         $('#checkPassword').addClass('is-invalid')
         error = 1
     } else {

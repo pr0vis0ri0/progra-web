@@ -13,7 +13,7 @@ class Usuario (models.Model):
     auth_user_id = models.ForeignKey(User, null = False, on_delete = models.DO_NOTHING, db_column = 'auth_user_id')
 
     def __str__ (self):
-        return str(self.rut)
+        return str(self.id_usuario)
 
     class Meta:
         ordering = ['id_usuario']
@@ -24,7 +24,7 @@ class Perfiles (models.Model):
     nombre_perfil = models.CharField(max_length= 75)
 
     def __str__ (self):
-        return str(self.nombre_perfil)
+        return str(self.id_perfil)
 
     class Meta:
         ordering = ['id_perfil']
