@@ -79,6 +79,3 @@ class DAOUsuario :
             }
         except :
             return None
-    
-    #print(get_auth_user(1))
-    print(devolver_usuario_perfil(1))

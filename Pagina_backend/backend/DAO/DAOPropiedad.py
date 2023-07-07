@@ -212,7 +212,7 @@ class DAOPropiedad :
             else :
                 return HTTPStatus.NOT_FOUND
 
-    def post_registrar_propiedad(r_vp, r_arriendo, r_venta, r_tpropiedad, r_idcomuna, r_mtotales, r_mutiles, r_cantdorm, r_cantbanos, r_mascotas, r_bodega, r_estacionamiento, r_id_usuario):
+    def post_registrar_propiedad(r_id_usuario, r_vp, r_arriendo, r_venta, r_tpropiedad, r_idcomuna, r_mtotales, r_mutiles, r_cantdorm, r_cantbanos, r_mascotas, r_bodega, r_estacionamiento):
         try :
             tipo_propiedad = DAOPropiedad.get_tipo_propiedad(r_tpropiedad)
             comuna = DAOPropiedad.get_comuna(r_idcomuna)
@@ -244,3 +244,83 @@ class DAOPropiedad :
             print(f"Error desconocido: {str(e)}")
             return False
         return True
+    
+    def get_propiedades_pendientes(id_usuario):
+        resultados = []
+        with connection.cursor() as cursor:
+            try :
+                cursor.execute("""
+                SELECT
+	                COUNT(*)
+                FROM
+	                MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
+	                on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
+	                inner join MAESTRO_ASOC_CARACTERISTICAS_PROPIEDAD t3
+	                on (t1.id_propiedad = t3.id_propiedad)
+	                inner join MAESTRO_COMUNAS t4
+	                on (t1.id_comuna = t4.id_comuna)
+	                inner join MAESTRO_REGIONES t5
+	                on (t4.id_region = t5.id_region)
+                WHERE
+                    t1.id_usuario = %s
+                    AND t1.esta_habilitado = 1
+                    AND t1.ultimo_estado = 1
+                """, [id_usuario])
+                count = cursor.fetchone()
+                num_filas = count[0]
+                cursor.execute("""
+                SELECT
+	                t1.id_propiedad id_propiedad,
+	                t1.valor_propiedad valor_propiedad,
+	                t1.es_arriendo es_arriendo,
+	                t1.es_venta es_venta,
+	                t2.nombre_tipo_propiedad nombre_tipo_propiedad,
+	                t3.metros_totales metros_totales,
+	                t3.metros_utiles metros_utiles,
+	                t3.cant_dormitorios cant_dormitorios,
+	                t3.cant_banos cant_banos,
+	                t3.permite_mascotas permite_mascotas,
+	                t3.tiene_bodega tiene_bodega,
+	                t3.tiene_estacionamiento tiene_estacionamiento,
+	                t4.nombre_comuna nombre_comuna,
+	                t5.nombre_region nombre_region
+                FROM
+	                MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
+	                on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
+	                inner join MAESTRO_ASOC_CARACTERISTICAS_PROPIEDAD t3
+	                on (t1.id_propiedad = t3.id_propiedad)
+	                inner join MAESTRO_COMUNAS t4
+	                on (t1.id_comuna = t4.id_comuna)
+	                inner join MAESTRO_REGIONES t5
+	                on (t4.id_region = t5.id_region)
+                WHERE
+                    t1.id_usuario = %s
+                    AND t1.esta_habilitado = 1
+                    AND t1.ultimo_estado = 1
+                """, [id_usuario])
+                if num_filas > 0 :
+                    if num_filas > 1 :
+                        resultados = cursor.fetchall()
+                    else :
+                        resultados = cursor.fetchone()
+                else :
+                    return JSONResponse('No se han encontrado registros.')
+            except Exception as e :
+                print(f"Error desconocido: {str(e)}")
+        data = []
+        if num_filas == 1 :
+            if resultados is not None :
+                nombres_columnas = [desc[0] for desc in cursor.description]
+                data = dict(zip(nombres_columnas, resultados))
+                return (data)
+            else :
+                return HTTPStatus.NOT_FOUND
+        elif num_filas > 1 :
+            if resultados is not None :
+                for fila in resultados:
+                    nombres_columnas = [desc[0] for desc in cursor.description]
+                    item = dict(zip(nombres_columnas, fila))
+                    data.append(item)
+                return (data)
+            else :
+                return HTTPStatus.NOT_FOUND

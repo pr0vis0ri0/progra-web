@@ -59,12 +59,12 @@ class ViewCaracteristicasSerializer (serializers.Serializer):
     nombre_region = serializers.CharField()
 
 class RegistroPropiedadSerializer (serializers.Serializer):
+    id_usuario = serializers.IntegerField()
     valor_propiedad = serializers.IntegerField()
     es_arriendo = serializers.BooleanField()
     es_venta = serializers.BooleanField()
     id_tipo_propiedad = serializers.IntegerField()
     id_comuna = serializers.IntegerField()
-    id_usuario = serializers.IntegerField()
     metros_totales = serializers.IntegerField()
     metros_utiles = serializers.IntegerField()
     cant_dormitorios = serializers.IntegerField()
@@ -75,8 +75,8 @@ class RegistroPropiedadSerializer (serializers.Serializer):
 
 class RegistroUserSerializer(serializers.Serializer):
     username = serializers.CharField()
-    email = serializers.EmailField()
     password = serializers.CharField()
+    email = serializers.EmailField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
 
@@ -90,3 +90,6 @@ class FiltroPropiedadSerializer(serializers.Serializer):
     valor_hasta = serializers.IntegerField()
     es_arriendo = serializers.BooleanField()
     es_venta = serializers.BooleanField()
+
+class BasePropiedadesSerializer(serializers.Serializer):
+    id_usuario = serializers.IntegerField()

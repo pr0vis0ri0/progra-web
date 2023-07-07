@@ -25,8 +25,8 @@ $('#btnRegistrar').click(function (){
 function datosRegistro () {
     dicc = {
         username : $('#regCorreo').val(),
-        email : $('#regCorreo').val(),
         password : $('#registroPassword').val(),
+        email : $('#regCorreo').val(),
         first_name : $('#regNombre').val(),
         last_name : $('#regApellido').val()
     }
@@ -86,7 +86,7 @@ function checkFormularioRegistro () {
         $('#checkPassword').addClass('is-valid')
     }
 
-    if ($('#checkPassword').val() != $('#registroPassword').val()) {
+    if ($('#checkPassword').val() != $('#registroPassword').val() || $('#checkPassword').val() == "") {
         $('#checkPassword').addClass('is-invalid')
         error = 1
     } else {

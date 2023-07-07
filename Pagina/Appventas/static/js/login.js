@@ -19,11 +19,17 @@ $('#btnIngresar').click(function (){
         success : function (response) {
             localStorage.setItem('access_token', response.access);
             localStorage.setItem('refresh_token', response.refresh);
-            //window.location.href = 'http://localhost:8000/app/redirigir' 
+            var access = localStorage.getItem('access_token');
+            decodedToken = jwt_decode(access)
+            if (decodedToken['id_perfil'] === 1) {
+                window.location.href = "/app/administrador"
+            } else if (decodedToken['id_perfil'] === 2){
+                window.location.href = "/app/usuario"
+            }
         },
-        error : function (jqXHR, status, errorThrown) {
+        error : function (errorThrown) {
             var errorMessage = "Error: " + errorThrown;
-            alert(errorMessage);
+            console.log(errorMessage);
         }
     })
 });

@@ -11,8 +11,6 @@
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
-    {% block axel_css %}
-    {% endblock %}
     <link href="{% static 'css/fuente.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/estilos.css' %}" rel="stylesheet" type="text/css">
     <title>{% block title %} Home {% endblock %}</title>
@@ -34,21 +32,15 @@
       <div class="collapse navbar-collapse" id="navbarPrincipal">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-2 mt-lg-2">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-circle-user fa-xl"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-right-from-bracket fa-xl"></i>
+            </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'futuros_proyectos' %}">Futuros Proyectos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'propiedades' %}">Propiedades</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'reg_propiedad' %}">¡Registra tu propiedad!</a>
-          </li>
-        </ul>
     </div>
   </nav>
   
@@ -73,9 +65,8 @@
     </footer>
   </div>
 </body>
-<!-- Explicación del JQuery acá y no dentro del bloque js
-Al cargar el script de JQuery fuera del bloque puedo colocar  -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{% block js %}
+<script src="{% static 'js/jwt-decode.js' %}"></script>
+{% block extra_js %}
 {% endblock %}
 </html>

@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import IsAuthenticated
 from backend.DAO.DAOPropiedad import DAOPropiedad
 from backend.DAO.DAOUsuario import DAOUsuario
 from .jsonresponse import JSONResponse
@@ -14,9 +15,11 @@ class PropiedadDetail(APIView):
             registro = DAOPropiedad.get_caracteristicas_propiedad(id_propiedad)
             serializer = ViewCaracteristicasSerializer(registro)
             return JSONResponse(serializer.data)
-    
+
+
 class RegistroPropiedadDetail(APIView):
     serializer_class = RegistroPropiedadSerializer
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         try :
             serializer = self.serializer_class(data=request.data)
@@ -105,6 +108,29 @@ class LoginView(APIView):
                     })
                 else :
                     return JSONResponse({'mensaje-error' : 'Credenciales incorrectas.', 'status-error' : status.HTTP_404_NOT_FOUND})
+            else :
+                return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except Exception as e :
+            print(f"Error desconocido : {str(e)}")
+            return False
+        
+class PropiedadesPendientes(APIView):
+    serializer_class = BasePropiedadesSerializer
+    def post(self, request):
+        try :
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid():
+                data = serializer.data
+                print(data)
+                registros = DAOPropiedad.get_propiedades_pendientes(data['id_usuario'])
+                if isinstance(registros, dict) :
+                    serializer = ViewCaracteristicasSerializer(registros, many = False)
+                    return JSONResponse(serializer.data)
+                elif isinstance(registros, list) :
+                    serializer = ViewCaracteristicasSerializer(registros, many = True)
+                    return JSONResponse(serializer.data)
+                else :
+                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
             else :
                 return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :
