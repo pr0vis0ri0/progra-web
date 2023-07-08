@@ -62,7 +62,6 @@ class DAOUsuario :
         username = p_user
         password = p_password
         user = authenticate(username=username, password=password)
-        print(user)
         if user is not None:
             return True
         else:

@@ -7,7 +7,9 @@ var ep_region = "region/";
 var ep_filtro_comuna = "comuna/filtroRegiones/"
 var ep_registro_propiedad = "registro_propiedad/"
 var ep_propiedades_pendientes = "propiedades_pendientes/"
+var ep_propiedades_validadas = "propiedades_validadas/"
 var ep_detalle_propiedad_pendiente = "detalle_propiedad_pendiente/"
+var ep_detalle_propiedad_validada = "detalle_propiedad_validada/"
 var access = localStorage.getItem('access_token');
 var decodedToken = jwt_decode(access)
 var panel = new PanelUsuario()
@@ -15,6 +17,7 @@ var panel = new PanelUsuario()
 // Aquí debe ir la carga de las propiedades pendientes del usuario.
 $(document).ready(function (){
     panel.devolverPropiedadesPendientes(url_api + ep_propiedades_pendientes, devolverIdUsuario())
+    panel.devolverPropiedadesBase(url_api + ep_propiedades_validadas, devolverIdUsuario())
 })
 // Aquí debe ir la carga de todas las propiedades del usuario.
 
@@ -53,6 +56,22 @@ function cargarModal(id_propiedad) {
         id_propiedad : id_propiedad
     }
     panel.devolverDetallePropiedadPendiente(url_api + ep_detalle_propiedad_pendiente, JSON.stringify(datos))
+}
+
+function cargarModal(id_propiedad) {
+    datos = {
+        id_usuario : decodedToken['id_usuario'],
+        id_propiedad : id_propiedad
+    }
+    panel.devolverDetallePropiedadPendiente(url_api + ep_detalle_propiedad_pendiente, JSON.stringify(datos))
+}
+
+function cargarModalBase(id_propiedad) {
+    datos = {
+        id_usuario : decodedToken['id_usuario'],
+        id_propiedad : id_propiedad
+    }
+    panel.devolverDetallePropiedadValidada(url_api + ep_detalle_propiedad_validada, JSON.stringify(datos))
 }
 
 function cargarInformacionModal(i){
@@ -250,42 +269,90 @@ function limpiarFormulario () {
     $('#btnRegPropiedad').addClass('disabled')
 }
 
+// function cargarTablaPendientes(p) {
+//     $.each(p, function (i){
+//         $("#propiedadesPendientes")
+//         .append($('<tr>')
+//             .append($('<td>')
+//                 .text(p[i].id_propiedad)
+//             )
+//             .append($('<td>')
+//                 .text(p[i].nombre_tipo_propiedad)
+//             )
+//             .append($('<td>')
+//                 .text(function (){
+//                     if (p[i].es_arriendo) {
+//                         return "Arriendo"
+//                     } else if (p[i].es_venta) {
+//                         return "Venta"
+//                     }
+//                 })
+//             )
+//             .append($('<td>')
+//                 .text(function (){
+//                     var formatoChile = {
+//                         style : 'currency',
+//                         currency : 'CLP'
+//                     }
+//                     return p[i].valor_propiedad.toLocaleString('es-CL', formatoChile)
+//                 })
+//             )
+//             .append($('<td>')
+//                 .text(p[i].nombre_comuna)
+//             )
+//             .append($('<td>')
+//                 .append($('<a>')
+//                     .attr('href', '#')
+//                     .attr('onclick', 'cargarModal(' + p[i].id_propiedad + ')')
+//                     .attr('data-id', p[i].id_propiedad)
+//                     .attr('data-bs-toggle', 'modal')
+//                     .attr('data-bs-target', '#PropiedadModalView')
+//                     .addClass('ModalPendienteView')
+//                     .append($('<i>')
+//                         .addClass('fa fa-eye')
+//                         .attr('aria-hidden', 'true')
+//                     )
+//                 )
+//             )
+//         );
+//     })
+// }
+
 function cargarTablaPendientes(p) {
-    $.each(p, function (i){
-        $("#propiedadesPendientes")
-        .append($('<tr>')
-            .append($('<td>')
-                .text(p[i].id_propiedad)
-            )
-            .append($('<td>')
-                .text(p[i].nombre_tipo_propiedad)
-            )
-            .append($('<td>')
-                .text(function (){
-                    if (p[i].es_arriendo) {
-                        return "Arriendo"
-                    } else if (p[i].es_venta) {
-                        return "Venta"
-                    }
-                })
-            )
-            .append($('<td>')
-                .text(function (){
-                    var formatoChile = {
-                        style : 'currency',
-                        currency : 'CLP'
-                    }
-                    return p[i].valor_propiedad.toLocaleString('es-CL', formatoChile)
-                })
-            )
-            .append($('<td>')
-                .text(p[i].nombre_comuna)
-            )
-            .append($('<td>')
-                .append($('<a>')
+    if (Array.isArray(p)) {
+        $.each(p, function(i) {
+            appendTableRowPendientes(p[i]);
+        });
+    } else {
+        appendTableRowPendientes(p);
+    }
+}
+
+function appendTableRowPendientes(data) {
+    $("#propiedadesPendientes").append(
+        $('<tr>')
+            .append($('<td>').text(data.id_propiedad))
+            .append($('<td>').text(data.nombre_tipo_propiedad))
+            .append($('<td>').text(function() {
+                if (data.es_arriendo) {
+                    return "Arriendo";
+                } else if (data.es_venta) {
+                    return "Venta";
+                }
+            }))
+            .append($('<td>').text(function() {
+                var formatoChile = {
+                    style: 'currency',
+                    currency: 'CLP'
+                };
+                return data.valor_propiedad.toLocaleString('es-CL', formatoChile);
+            }))
+            .append($('<td>').text(data.nombre_comuna))
+            .append($('<td>').append(
+                $('<a>')
                     .attr('href', '#')
-                    .attr('onclick', 'cargarModal(' + p[i].id_propiedad + ')')
-                    .attr('data-id', p[i].id_propiedad)
+                    .attr('onclick', 'cargarModal(' + data.id_propiedad + ')')
+                    .attr('data-id', data.id_propiedad)
                     .attr('data-bs-toggle', 'modal')
                     .attr('data-bs-target', '#PropiedadModalView')
                     .addClass('ModalPendienteView')
@@ -293,10 +360,54 @@ function cargarTablaPendientes(p) {
                         .addClass('fa fa-eye')
                         .attr('aria-hidden', 'true')
                     )
-                )
-            )
-        );
-    })
+            ))
+    );
+}
+
+function cargarTablaBase(p) {
+    if (Array.isArray(p)) {
+        $.each(p, function(i) {
+            appendTableRowBase(p[i]);
+        });
+    } else {
+        appendTableRowBase(p);
+    }
+}
+
+function appendTableRowBase(data) {
+    $("#basePropiedades").append(
+        $('<tr>')
+            .append($('<td>').text(data.id_propiedad))
+            .append($('<td>').text(data.nombre_tipo_propiedad))
+            .append($('<td>').text(function() {
+                if (data.es_arriendo) {
+                    return "Arriendo";
+                } else if (data.es_venta) {
+                    return "Venta";
+                }
+            }))
+            .append($('<td>').text(function() {
+                var formatoChile = {
+                    style: 'currency',
+                    currency: 'CLP'
+                };
+                return data.valor_propiedad.toLocaleString('es-CL', formatoChile);
+            }))
+            .append($('<td>').text(data.nombre_comuna))
+            .append($('<td>').append(
+                $('<a>')
+                    .attr('href', '#')
+                    .attr('onclick', 'cargarModalBase(' + data.id_propiedad + ')')
+                    .attr('data-id', data.id_propiedad)
+                    .attr('data-bs-toggle', 'modal')
+                    .attr('data-bs-target', '#PropiedadModalView')
+                    .addClass('ModalPendienteView')
+                    .append($('<i>')
+                        .addClass('fa fa-eye')
+                        .attr('aria-hidden', 'true')
+                    )
+            ))
+    );
 }
 
 function PanelUsuario () {
@@ -337,6 +448,24 @@ function PanelUsuario () {
         })
     }
 
+    this.devolverDetallePropiedadValidada = function (endpoint, datos) {
+        $.ajax({
+            type : "POST",
+            url : endpoint,
+            data : datos,
+            headers: { "Authorization": 'Bearer ' + access },
+            contentType: "application/json; charset=utf-8",
+            dataType : "json",
+            success : function (response) {
+                cargarInformacionModal(response)
+            },
+            error : function (jqXHR, status, errorThrown) {
+                var errorMessage = "Error: " + errorThrown;
+                alert(errorMessage);
+            }
+        })
+    }
+
     this.devolverPropiedadesPendientes = function (endpoint, id_usuario) {
         $.ajax({
             type : "POST",
@@ -346,7 +475,29 @@ function PanelUsuario () {
             contentType: "application/json; charset=utf-8",
             dataType : "json",
             success : function (response) {
-                cargarTablaPendientes(response)
+                if (!response.hasOwnProperty('mensaje-error')) {
+                    cargarTablaPendientes(response);
+                }
+            },
+            error : function (jqXHR, status, errorThrown) {
+                var errorMessage = "Error: " + errorThrown;
+                alert(errorMessage);
+            }
+        })
+    }
+
+    this.devolverPropiedadesBase = function (endpoint, id_usuario) {
+        $.ajax({
+            type : "POST",
+            url : endpoint,
+            data : id_usuario,
+            headers: { "Authorization": 'Bearer ' + access },
+            contentType: "application/json; charset=utf-8",
+            dataType : "json",
+            success : function (response) {
+                if (!response.hasOwnProperty('mensaje-error')) {
+                    cargarTablaBase(response);
+                }
             },
             error : function (jqXHR, status, errorThrown) {
                 var errorMessage = "Error: " + errorThrown;
