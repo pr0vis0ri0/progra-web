@@ -218,7 +218,6 @@ class DAOPropiedad :
             comuna = DAOPropiedad.get_comuna(r_idcomuna)
             usuario = DAOPropiedad.get_usuario(r_id_usuario)
             estado = DAOPropiedad.get_estado(1)
-
             reg_propiedad = Propiedad(
                 valor_propiedad = r_vp, 
                 es_arriendo = r_arriendo, 
@@ -229,7 +228,6 @@ class DAOPropiedad :
                 ultimo_estado = estado,
                 esta_habilitado = True)
             reg_propiedad.save()
-
             reg_caracteristicas = CaracteristicasPropiedad(
                 id_propiedad_id = reg_propiedad.id_propiedad,
                 metros_totales = r_mtotales, 
@@ -243,6 +241,7 @@ class DAOPropiedad :
         except Exception as e :
             print(f"Error desconocido: {str(e)}")
             return False
+        
         return True
     
     def get_propiedades_pendientes(id_usuario):
@@ -275,15 +274,7 @@ class DAOPropiedad :
 	                t1.es_arriendo es_arriendo,
 	                t1.es_venta es_venta,
 	                t2.nombre_tipo_propiedad nombre_tipo_propiedad,
-	                t3.metros_totales metros_totales,
-	                t3.metros_utiles metros_utiles,
-	                t3.cant_dormitorios cant_dormitorios,
-	                t3.cant_banos cant_banos,
-	                t3.permite_mascotas permite_mascotas,
-	                t3.tiene_bodega tiene_bodega,
-	                t3.tiene_estacionamiento tiene_estacionamiento,
-	                t4.nombre_comuna nombre_comuna,
-	                t5.nombre_region nombre_region
+	                t4.nombre_comuna nombre_comuna
                 FROM
 	                MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
 	                on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
@@ -321,6 +312,51 @@ class DAOPropiedad :
                     nombres_columnas = [desc[0] for desc in cursor.description]
                     item = dict(zip(nombres_columnas, fila))
                     data.append(item)
+                return (data)
+            else :
+                return HTTPStatus.NOT_FOUND
+
+    def get_caracteristicas_propiedad_pendiente(id_usuario, id_propiedad):
+        if id_propiedad is not None :
+            with connection.cursor() as cursor:
+                try :
+                    cursor.execute("""
+                    SELECT
+	                    t1.id_propiedad id_propiedad,
+	                    t1.valor_propiedad valor_propiedad,
+	                    t1.es_arriendo es_arriendo,
+	                    t1.es_venta es_venta,
+	                    t2.nombre_tipo_propiedad nombre_tipo_propiedad,
+	                    t3.metros_totales metros_totales,
+	                    t3.metros_utiles metros_utiles,
+	                    t3.cant_dormitorios cant_dormitorios,
+	                    t3.cant_banos cant_banos,
+	                    t3.permite_mascotas permite_mascotas,
+	                    t3.tiene_bodega tiene_bodega,
+	                    t3.tiene_estacionamiento tiene_estacionamiento,
+	                    t4.nombre_comuna nombre_comuna,
+	                    t5.nombre_region nombre_region
+                    FROM
+	                    MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
+	                    on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
+	                    inner join MAESTRO_ASOC_CARACTERISTICAS_PROPIEDAD t3
+	                    on (t1.id_propiedad = t3.id_propiedad)
+	                    inner join MAESTRO_COMUNAS t4
+	                    on (t1.id_comuna = t4.id_comuna)
+	                    inner join MAESTRO_REGIONES t5
+	                    on (t4.id_region = t5.id_region)
+                    WHERE
+                        t1.id_usuario = %s
+                        AND t1.id_propiedad = %s
+                        AND t1.ultimo_estado = 1
+                    """, [id_usuario, id_propiedad])
+                    result = cursor.fetchone()
+                except :
+                    return HTTPStatus.NOT_FOUND
+
+            if result is not None:
+                nombres_columnas = [desc[0] for desc in cursor.description]
+                data = dict(zip(nombres_columnas, result))
                 return (data)
             else :
                 return HTTPStatus.NOT_FOUND

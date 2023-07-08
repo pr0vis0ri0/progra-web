@@ -8,5 +8,6 @@ urlpatterns = [
     path('propiedades_filtradas/', views.FiltroPropiedadDetail.as_view()),
     path('propiedades_pendientes/', views.PropiedadesPendientes.as_view()),
     path('registro_propiedad/', views.RegistroPropiedadDetail.as_view()),
+    path('detalle_propiedad_pendiente/', views.PropiedadPendienteDetail.as_view()),
     path('detalle_propiedad/<int:id_propiedad>', views.PropiedadDetail.as_view())
 ]

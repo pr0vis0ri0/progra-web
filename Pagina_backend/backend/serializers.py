@@ -93,3 +93,15 @@ class FiltroPropiedadSerializer(serializers.Serializer):
 
 class BasePropiedadesSerializer(serializers.Serializer):
     id_usuario = serializers.IntegerField()
+
+class DetallePendienteUsuarioSerializer(serializers.Serializer):
+    id_usuario = serializers.IntegerField()
+    id_propiedad = serializers.IntegerField()
+
+class TablasPropiedadesSerializer (serializers.Serializer):
+    id_propiedad = serializers.IntegerField()
+    valor_propiedad = serializers.IntegerField()
+    es_arriendo = serializers.BooleanField()
+    es_venta = serializers.BooleanField()
+    nombre_tipo_propiedad = serializers.CharField()
+    nombre_comuna = serializers.CharField()

@@ -2,29 +2,30 @@ if (!localStorage.getItem("access_token")) {
     window.location.href = "/app/login";
 }
 
-
-// Aquí debe ir la carga de las propiedades pendientes del usuario.
-
-// Aquí debe ir la carga de todas las propiedades del usuario.
-
-
 var url_api = "http://localhost:9000/"
 var ep_region = "region/";
 var ep_filtro_comuna = "comuna/filtroRegiones/"
 var ep_registro_propiedad = "registro_propiedad/"
+var ep_propiedades_pendientes = "propiedades_pendientes/"
+var ep_detalle_propiedad_pendiente = "detalle_propiedad_pendiente/"
 var access = localStorage.getItem('access_token');
 var decodedToken = jwt_decode(access)
+var panel = new PanelUsuario()
+
+// Aquí debe ir la carga de las propiedades pendientes del usuario.
+$(document).ready(function (){
+    panel.devolverPropiedadesPendientes(url_api + ep_propiedades_pendientes, devolverIdUsuario())
+})
+// Aquí debe ir la carga de todas las propiedades del usuario.
 
 // Validación para cuando se abra el modal.
 
 $('#btnRegPropiedad').click(function (){
     let datosFormulario = devolverDatos()
-    let panel = new PanelUsuario()
     panel.registrarPropiedad(url_api + ep_registro_propiedad, datosFormulario)
 });
 
 $('#btnRedirigirModal').click(function (){
-    let panel = new PanelUsuario()
     panel.devolverRegiones(url_api + ep_region)
 
     $('#select-regiones').change(function (){
@@ -46,9 +47,57 @@ $(document).on("click blur change focusout select",
     }
 );
 
+function cargarModal(id_propiedad) {
+    datos = {
+        id_usuario : decodedToken['id_usuario'],
+        id_propiedad : id_propiedad
+    }
+    panel.devolverDetallePropiedadPendiente(url_api + ep_detalle_propiedad_pendiente, JSON.stringify(datos))
+}
+
+function cargarInformacionModal(i){
+    $('#viewValorPropiedad').val(i.valor_propiedad)
+    $('#viewTipoPropiedad').val(i.nombre_tipo_propiedad)
+    $('#viewRegion').val(i.nombre_region)
+    $('#viewComuna').val(i.nombre_comuna)
+    if (i.es_arriendo) { 
+        $('#viewArriendoCheck').prop('checked', true);
+        $('#viewVentaCheck').prop('checked', false);
+    } else if (i.es_venta) {
+        $('#viewVentaCheck').prop('checked', true);
+        $('#viewArriendoCheck').prop('checked', false);
+    }
+    $('#viewMetrosTotales').val(i.metros_totales)
+    $('#viewMetrosUtiles').val(i.metros_utiles)
+    $('#viewCantidadDormitorios').val(i.cant_dormitorios)
+    $('#viewCantidadBanos').val(i.cant_banos)
+    if (i.permite_mascotas) {
+        $('#viewCheckMascotas').prop('checked', true);
+    } else {
+        $('#viewCheckMascotas').prop('checked', false);
+    }
+    if (i.tiene_bodega) {
+        $('#viewCheckBodega').prop('checked', true);
+    } else {
+        $('#viewCheckBodega').prop('checked', false);
+    }
+    if (i.tiene_estacionamiento) {
+        $('#viewCheckEstacionamiento').prop('checked', true);
+    } else {
+        $('#viewCheckEstacionamiento').prop('checked', false);
+    }
+}
+
+function devolverIdUsuario () {
+    data = {
+        id_usuario : decodedToken['id_usuario']
+    }
+    return JSON.stringify(data)
+}
+
 function devolverDatos () {
     datos = {
-        id_usuario : decodedToken['user_id'],
+        id_usuario : decodedToken['id_usuario'],
         valor_propiedad : parseInt($('#valorPropiedad').val()),
         es_arriendo : $('#arriendoCheck').is(':checked'),
         es_venta : $('#ventaCheck').is(':checked'),
@@ -201,19 +250,67 @@ function limpiarFormulario () {
     $('#btnRegPropiedad').addClass('disabled')
 }
 
+function cargarTablaPendientes(p) {
+    $.each(p, function (i){
+        $("#propiedadesPendientes")
+        .append($('<tr>')
+            .append($('<td>')
+                .text(p[i].id_propiedad)
+            )
+            .append($('<td>')
+                .text(p[i].nombre_tipo_propiedad)
+            )
+            .append($('<td>')
+                .text(function (){
+                    if (p[i].es_arriendo) {
+                        return "Arriendo"
+                    } else if (p[i].es_venta) {
+                        return "Venta"
+                    }
+                })
+            )
+            .append($('<td>')
+                .text(function (){
+                    var formatoChile = {
+                        style : 'currency',
+                        currency : 'CLP'
+                    }
+                    return p[i].valor_propiedad.toLocaleString('es-CL', formatoChile)
+                })
+            )
+            .append($('<td>')
+                .text(p[i].nombre_comuna)
+            )
+            .append($('<td>')
+                .append($('<a>')
+                    .attr('href', '#')
+                    .attr('onclick', 'cargarModal(' + p[i].id_propiedad + ')')
+                    .attr('data-id', p[i].id_propiedad)
+                    .attr('data-bs-toggle', 'modal')
+                    .attr('data-bs-target', '#PropiedadModalView')
+                    .addClass('ModalPendienteView')
+                    .append($('<i>')
+                        .addClass('fa fa-eye')
+                        .attr('aria-hidden', 'true')
+                    )
+                )
+            )
+        );
+    })
+}
+
 function PanelUsuario () {
-    this.registrarPropiedad = function (ep_registro_propiedad, data_propiedad) {
+    this.registrarPropiedad = function (endpoint, data_propiedad) {
         $.ajax({
             type : "POST",
-            url : ep_registro_propiedad,
+            url : endpoint,
             data : data_propiedad,
             headers: { "Authorization": 'Bearer ' + access },
             contentType: "application/json; charset=utf-8",
             dataType : "json",
             success : function (response) {
-                alert('Se logró grabar la propiedad.')
                 $('#modalRegistro').modal('toggle')
-                limpiarFormulario()
+                location.reload()
             },
             error : function (jqXHR, status, errorThrown) {
                 var errorMessage = "Error: " + errorThrown;
@@ -222,18 +319,34 @@ function PanelUsuario () {
         })
     }
 
-    this.devolverPropiedadesPendientes = function (endpoint) {
+    this.devolverDetallePropiedadPendiente = function (endpoint, datos) {
         $.ajax({
             type : "POST",
-            url : ep_registro_propiedad,
-            data : data_propiedad,
+            url : endpoint,
+            data : datos,
             headers: { "Authorization": 'Bearer ' + access },
             contentType: "application/json; charset=utf-8",
             dataType : "json",
             success : function (response) {
-                alert('Se logró grabar la propiedad.')
-                $('#modalRegistro').modal('toggle')
-                limpiarFormulario()
+                cargarInformacionModal(response)
+            },
+            error : function (jqXHR, status, errorThrown) {
+                var errorMessage = "Error: " + errorThrown;
+                alert(errorMessage);
+            }
+        })
+    }
+
+    this.devolverPropiedadesPendientes = function (endpoint, id_usuario) {
+        $.ajax({
+            type : "POST",
+            url : endpoint,
+            data : id_usuario,
+            headers: { "Authorization": 'Bearer ' + access },
+            contentType: "application/json; charset=utf-8",
+            dataType : "json",
+            success : function (response) {
+                cargarTablaPendientes(response)
             },
             error : function (jqXHR, status, errorThrown) {
                 var errorMessage = "Error: " + errorThrown;

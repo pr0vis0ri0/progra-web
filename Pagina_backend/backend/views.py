@@ -31,9 +31,9 @@ class RegistroPropiedadDetail(APIView):
                     return JSONResponse(status.HTTP_400_BAD_REQUEST)
             else :
                 return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
-        except Exception as e :
+        except BaseException as e :
             print(f"Error desconocido: {str(e)}")
-            return False
+            return JSONResponse({'error': 'Error desconocido'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class FiltroPropiedadDetail(APIView):
     serializer_class = FiltroPropiedadSerializer
@@ -116,21 +116,39 @@ class LoginView(APIView):
         
 class PropiedadesPendientes(APIView):
     serializer_class = BasePropiedadesSerializer
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         try :
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
                 data = serializer.data
-                print(data)
                 registros = DAOPropiedad.get_propiedades_pendientes(data['id_usuario'])
                 if isinstance(registros, dict) :
-                    serializer = ViewCaracteristicasSerializer(registros, many = False)
+                    serializer = TablasPropiedadesSerializer(registros, many = False)
                     return JSONResponse(serializer.data)
                 elif isinstance(registros, list) :
-                    serializer = ViewCaracteristicasSerializer(registros, many = True)
+                    serializer = TablasPropiedadesSerializer(registros, many = True)
                     return JSONResponse(serializer.data)
                 else :
                     return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
+            else :
+                return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except Exception as e :
+            print(f"Error desconocido : {str(e)}")
+            return False
+
+# Hazme una clase para mostrar el detalle de la propiedad pendiente
+class PropiedadPendienteDetail(APIView):
+    serializer_class = DetallePendienteUsuarioSerializer
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        try :
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid():
+                data = serializer.data
+                registro = DAOPropiedad.get_caracteristicas_propiedad_pendiente(*data.values())
+                serializer = ViewCaracteristicasSerializer(registro, many = False)
+                return JSONResponse(serializer.data)
             else :
                 return JSONResponse({ 'errores' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :
