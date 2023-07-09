@@ -193,3 +193,53 @@ class PropiedadValidadaDetail(APIView):
         except Exception as e :
             print(f"Error desconocido : {str(e)}")
             return False
+        
+class AdminPropiedadesPendientes(APIView):
+    serializer_class = BasePropiedadesSerializer
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        try :
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid():
+                data = serializer.data
+                registros = DAOPropiedad.get_propiedades_pendientes_administrador(data['id_usuario'])
+                if isinstance(registros, dict) :
+                    serializer = AdminPropiedadesSerializer(registros, many = False)
+                    return JSONResponse(serializer.data)
+                elif isinstance(registros, list) :
+                    serializer = AdminPropiedadesSerializer(registros, many = True)
+                    return JSONResponse(serializer.data)
+                elif registros == 5 :
+                    return JSONResponse({'mensaje-error' : 'No cuentas con los permisos para ingresar a esta ruta.', 'status-error' : status.HTTP_401_UNAUTHORIZED})
+                else :
+                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
+            else :
+                return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except Exception as e :
+            print(f"Error desconocido : {str(e)}")
+            return False
+
+class AdminPropiedadesBase(APIView):
+    serializer_class = BasePropiedadesSerializer
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        try :
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid():
+                data = serializer.data
+                registros = DAOPropiedad.get_propiedades_base_administrador(data['id_usuario'])
+                if isinstance(registros, dict) :
+                    serializer = AdminPropiedadesSerializer(registros, many = False)
+                    return JSONResponse(serializer.data)
+                elif isinstance(registros, list) :
+                    serializer = AdminPropiedadesSerializer(registros, many = True)
+                    return JSONResponse(serializer.data)
+                elif registros == 5 :
+                    return JSONResponse({'mensaje-error' : 'No cuentas con los permisos para ingresar a esta ruta.', 'status-error' : status.HTTP_401_UNAUTHORIZED})
+                else :
+                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
+            else :
+                return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except Exception as e :
+            print(f"Error desconocido : {str(e)}")
+            return False

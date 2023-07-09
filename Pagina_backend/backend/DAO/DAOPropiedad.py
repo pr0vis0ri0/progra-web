@@ -252,18 +252,11 @@ class DAOPropiedad :
                 SELECT
 	                COUNT(*)
                 FROM
-	                MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
-	                on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
-	                inner join MAESTRO_ASOC_CARACTERISTICAS_PROPIEDAD t3
-	                on (t1.id_propiedad = t3.id_propiedad)
-	                inner join MAESTRO_COMUNAS t4
-	                on (t1.id_comuna = t4.id_comuna)
-	                inner join MAESTRO_REGIONES t5
-	                on (t4.id_region = t5.id_region)
+	                MAESTRO_PROPIEDADES
                 WHERE
-                    t1.id_usuario = %s
-                    AND t1.esta_habilitado = 1
-                    AND t1.ultimo_estado = 1
+                    id_usuario = %s
+                    AND esta_habilitado = 1
+                    AND ultimo_estado = 1
                 """, [id_usuario])
                 count = cursor.fetchone()
                 num_filas = count[0]
@@ -369,18 +362,11 @@ class DAOPropiedad :
                 SELECT
 	                COUNT(*)
                 FROM
-	                MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
-	                on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
-	                inner join MAESTRO_ASOC_CARACTERISTICAS_PROPIEDAD t3
-	                on (t1.id_propiedad = t3.id_propiedad)
-	                inner join MAESTRO_COMUNAS t4
-	                on (t1.id_comuna = t4.id_comuna)
-	                inner join MAESTRO_REGIONES t5
-	                on (t4.id_region = t5.id_region)
+	                MAESTRO_PROPIEDADES
                 WHERE
-                    t1.id_usuario = %s
-                    AND t1.esta_habilitado = 1
-                    AND t1.ultimo_estado = 2
+                    id_usuario = %s
+                    AND esta_habilitado = 1
+                    AND ultimo_estado = 2
                 """, [id_usuario])
                 count = cursor.fetchone()
                 num_filas = count[0]
@@ -478,10 +464,164 @@ class DAOPropiedad :
             else :
                 return HTTPStatus.NOT_FOUND
     
-    def get_todas_propiedades (id_usuario):
+    def get_propiedades_pendientes_administrador (id_usuario):
         usuario = Usuario.objects.get(id_usuario = id_usuario)
-        print(usuario)
         perfil = PerfilesUsuario.objects.get(id_usuario = usuario.id_usuario)
-        print(perfil.id_perfil)
-
-    print(get_todas_propiedades(7))
+        if perfil.id_perfil.id_perfil == 2 :
+            return 5
+        else :
+            resultados = []
+            with connection.cursor() as cursor:
+                try :
+                    cursor.execute("""
+                    SELECT
+	                    COUNT(*)
+                    FROM
+	                    MAESTRO_PROPIEDADES
+                    WHERE
+                        ultimo_estado = 1
+                    """)
+                    count = cursor.fetchone()
+                    num_filas = count[0]
+                    cursor.execute("""
+                    SELECT
+	                    t1.id_propiedad id_propiedad,
+	                    t1.valor_propiedad valor_propiedad,
+	                    t1.es_arriendo es_arriendo,
+	                    t1.es_venta es_venta,
+                        t7.descripcion_estado descripcion_estado,
+	                    t2.nombre_tipo_propiedad nombre_tipo_propiedad,
+	                    t3.metros_totales metros_totales,
+	                    t3.metros_utiles metros_utiles,
+	                    t3.cant_dormitorios cant_dormitorios,
+	                    t3.cant_banos cant_banos,
+	                    t3.permite_mascotas permite_mascotas,
+	                    t3.tiene_bodega tiene_bodega,
+	                    t3.tiene_estacionamiento tiene_estacionamiento,
+	                    t4.nombre_comuna nombre_comuna,
+	                    t5.nombre_region nombre_region,
+                        upper(t6.primer_nombre|| ' ' ||t6.segundo_nombre||' ' ||t6.apellido_paterno||' '||t6.apellido_materno) nombre_usuario
+                    FROM
+	                    MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
+	                    on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
+	                    inner join MAESTRO_ASOC_CARACTERISTICAS_PROPIEDAD t3
+	                    on (t1.id_propiedad = t3.id_propiedad)
+	                    inner join MAESTRO_COMUNAS t4
+	                    on (t1.id_comuna = t4.id_comuna)
+	                    inner join MAESTRO_REGIONES t5
+	                    on (t4.id_region = t5.id_region)
+                        inner join MAESTRO_USUARIOS t6
+                        on (t1.id_usuario = t6.id_usuario)
+                        inner join MAESTRO_ESTADOS t7
+                        on (t1.ultimo_estado = t7.id_estado)
+                    WHERE
+                        t1.ultimo_estado = 1
+                    """)
+                    print
+                    if num_filas > 0 :
+                        if num_filas > 1 :
+                            resultados = cursor.fetchall()
+                        else :
+                            resultados = cursor.fetchone()
+                    else :
+                        return JSONResponse('No se han encontrado registros.')
+                except Exception as e :
+                    print(f"Error desconocido: {str(e)}")
+            data = []
+            if num_filas == 1 :
+                if resultados is not None :
+                    nombres_columnas = [desc[0] for desc in cursor.description]
+                    data = dict(zip(nombres_columnas, resultados))
+                    return (data)
+                else :
+                    return JSONResponse(HTTPStatus.NOT_FOUND)
+            elif num_filas > 1 :
+                if resultados is not None :
+                    for fila in resultados:
+                        nombres_columnas = [desc[0] for desc in cursor.description]
+                        item = dict(zip(nombres_columnas, fila))
+                        data.append(item)
+                    return (data)
+                else :
+                    return JSONResponse(HTTPStatus.NOT_FOUND)
+        
+    def get_propiedades_base_administrador (id_usuario) :
+        usuario = Usuario.objects.get(id_usuario = id_usuario)
+        perfil = PerfilesUsuario.objects.get(id_usuario = usuario.id_usuario)
+        if perfil.id_perfil.id_perfil == 2 :
+            return 5
+        else :
+            resultados = []
+            with connection.cursor() as cursor:
+                try :
+                    cursor.execute("""
+                    SELECT
+	                    COUNT(*)
+                    FROM
+	                    MAESTRO_PROPIEDADES
+                    WHERE
+                        ultimo_estado IN (2,3)
+                    """)
+                    count = cursor.fetchone()
+                    num_filas = count[0]
+                    cursor.execute("""
+                    SELECT
+	                    t1.id_propiedad id_propiedad,
+	                    t1.valor_propiedad valor_propiedad,
+	                    t1.es_arriendo es_arriendo,
+	                    t1.es_venta es_venta,
+                        t7.descripcion_estado descripcion_estado,
+	                    t2.nombre_tipo_propiedad nombre_tipo_propiedad,
+	                    t3.metros_totales metros_totales,
+	                    t3.metros_utiles metros_utiles,
+	                    t3.cant_dormitorios cant_dormitorios,
+	                    t3.cant_banos cant_banos,
+	                    t3.permite_mascotas permite_mascotas,
+	                    t3.tiene_bodega tiene_bodega,
+	                    t3.tiene_estacionamiento tiene_estacionamiento,
+	                    t4.nombre_comuna nombre_comuna,
+	                    t5.nombre_region nombre_region,
+                        upper(t6.primer_nombre|| ' ' ||t6.segundo_nombre||' ' ||t6.apellido_paterno||' '||t6.apellido_materno) nombre_usuario
+                    FROM
+	                    MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
+	                    on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
+	                    inner join MAESTRO_ASOC_CARACTERISTICAS_PROPIEDAD t3
+	                    on (t1.id_propiedad = t3.id_propiedad)
+	                    inner join MAESTRO_COMUNAS t4
+	                    on (t1.id_comuna = t4.id_comuna)
+	                    inner join MAESTRO_REGIONES t5
+	                    on (t4.id_region = t5.id_region)
+                        inner join MAESTRO_USUARIOS t6
+                        on (t1.id_usuario = t6.id_usuario)
+                        inner join MAESTRO_ESTADOS t7
+                        on (t1.ultimo_estado = t7.id_estado)
+                    WHERE
+                        t1.ultimo_estado IN (2,3)
+                    """)
+                    print
+                    if num_filas > 0 :
+                        if num_filas > 1 :
+                            resultados = cursor.fetchall()
+                        else :
+                            resultados = cursor.fetchone()
+                    else :
+                        return JSONResponse('No se han encontrado registros.')
+                except Exception as e :
+                    print(f"Error desconocido: {str(e)}")
+            data = []
+            if num_filas == 1 :
+                if resultados is not None :
+                    nombres_columnas = [desc[0] for desc in cursor.description]
+                    data = dict(zip(nombres_columnas, resultados))
+                    return (data)
+                else :
+                    return JSONResponse(HTTPStatus.NOT_FOUND)
+            elif num_filas > 1 :
+                if resultados is not None :
+                    for fila in resultados:
+                        nombres_columnas = [desc[0] for desc in cursor.description]
+                        item = dict(zip(nombres_columnas, fila))
+                        data.append(item)
+                    return (data)
+                else :
+                    return JSONResponse(HTTPStatus.NOT_FOUND)

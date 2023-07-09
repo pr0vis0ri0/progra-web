@@ -1,5 +1,12 @@
 if (!localStorage.getItem("access_token")) {
     window.location.href = "/app/login";
+} else {
+    let prior_ingreso = localStorage.getItem('access_token');
+    let decodedPrior = jwt_decode(prior_ingreso)
+    
+    if (decodedPrior['id_perfil'] == 1) {
+        window.location.href = "/app/administrador";
+    }
 }
 
 var url_api = "http://localhost:9000/"

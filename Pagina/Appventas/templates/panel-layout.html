@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="#" onclick="cerrarSesion()">
                 <i class="fas fa-right-from-bracket fa-xl"></i>
             </a>
           </li>
@@ -67,6 +67,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/jwt-decode.js' %}"></script>
+<script src="{% static 'js/logout.js' %}"></script>
 {% block extra_js %}
 {% endblock %}
 </html>

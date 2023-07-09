@@ -27,12 +27,12 @@
                       <div class="card-body">
                         <div class="d-flex justify-content-between">
                           <h5>Propiedades Pendientes de Aprobación</h5>
-                          <button class="btn btn-primary" id="btnRedirigirModal" type="button" data-bs-toggle="modal" data-bs-target="#modalRegistro">
+                          <!-- <button class="btn btn-primary" id="btnRedirigirModal" type="button" data-bs-toggle="modal" data-bs-target="#modalRegistro">
                           <i class="fa-solid fa-plus fa-sm"></i>
-                          </button>
+                          </button> -->
                         </div>
                         <hr>
-                        <table class="table mt-3" id="propiedadesPendientes">
+                        <table class="table mt-3" id="admPropPendientes" style="font-size: 14px;">
                           <thead>
                             <tr>
                               <th scope="col">ID</th>
@@ -41,23 +41,31 @@
                               <th scope="col">Modalidad</th>
                               <th scope="col">Valor Propiedad</th>
                               <th scope="col">Comuna</th>
+                              <th scope="col">Estado</th>
                               <th scope="col">Acción</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
+                            <!-- <tr>
                               <td scope="row">1</td>
                               <td>SEBASTIÁN REBOLLEDO</td>
                               <td>Departamento</td>
                               <td>Venta</td>
                               <td>7.500.000</td>
                               <td>Santiago</td>
+                              <td>Denegado</td>
                               <td>
-                                <a href="#" data-id="1" data-toggle="modal" data-target="#PropiedadModalView" class="hvr-grow">
-                                  <i class="fa fa-eye" aria-hidden="true"></i>
+                                <a href="#" data-id="1" data-bs-toggle="modal" data-bs-target="#PropiedadModalView" class="hvr-grow">
+                                  <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                                </a>
+                                <a href="#" data-id="1" data-bs-toggle="modal" data-bs-target="#PropiedadModalView" class="hvr-grow">
+                                  <i class="fa-solid fa-circle-check" style="color: #369151;"></i>
+                                </a>
+                                <a href="#" data-id="1" data-bs-toggle="modal" data-bs-target="#PropiedadModalView" class="hvr-grow">
+                                  <i class="fa-solid fa-circle-xmark" style="color: #c72929;"></i>
                                 </a>
                               </td>
-                            </tr>
+                            </tr> -->
                           </tbody>
                         </table>
                       </div>
@@ -71,30 +79,34 @@
                           </button>
                         </div>
                         <hr>
-                        <table class="table mt-3" id="basePropiedades">
+                        <table class="table mt-3" id="admPropBase" style="font-size: 14px;">
                           <thead>
                             <tr>
                               <th scope="col">ID</th>
+                              <th scope="col">Propietario</th>
                               <th scope="col">Tipo de Propiedad</th>
                               <th scope="col">Modalidad</th>
                               <th scope="col">Valor Propiedad</th>
                               <th scope="col">Comuna</th>
+                              <th scope="col">Estado</th>
                               <th scope="col">Acción</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <!-- <tr>
+                            <tr>
                               <td scope="row">1</td>
+                              <td>SEBASTIÁN REBOLLEDO</td>
                               <td>Departamento</td>
                               <td>Venta</td>
                               <td>7.500.000</td>
                               <td>Santiago</td>
+                              <td>Denegado</td>
                               <td>
                                 <a href="#" data-id="1" data-toggle="modal" data-target="#PropiedadModalView" class="hvr-grow">
                                   <i class="fa fa-eye" aria-hidden="true"></i>
                                 </a>
                               </td>
-                            </tr> -->
+                            </tr>
                           </tbody>
                         </table>
                       </div>
