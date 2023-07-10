@@ -6,30 +6,24 @@ from django.db import connection
 from http import HTTPStatus
 from backend.jsonresponse import JSONResponse
 
-class DAOUsuario :
+class DAOUsuario:
     def get_auth_user (id_user) :
         try :
             return User.objects.get(id = id_user)
         except :
-            return None
-
-    def get_usuario (id) :
+            raise None
+    
+    def get_usuario (id):
         try :
             return Usuario.objects.get(id_usuario = id)
-        except :
-            return None
-    
-    def get_perfil (id) :
-        try :
-            return Perfiles.objects.get(id_perfil = id)
-        except :
-            return None
+        except Usuario.DoesNotExist:
+            raise None
         
     def conseguir_perfil (id_usuario) :
         try :
             return PerfilesUsuario.objects.get(id_usuario = id_usuario)
         except :
-            return None
+            raise None
         
     def registrar_usuario (r_user, r_password, r_email, r_nombre, r_apellido) :
         perfil = DAOUsuario.get_perfil(2)
@@ -78,3 +72,23 @@ class DAOUsuario :
             }
         except :
             return None
+        
+    def devolver_data_usuario (id_user):
+        try :
+            usuario = Usuario.objects.get(id_usuario = id_user)
+        except Usuario.DoesNotExist:
+            usuario = None
+        
+        if usuario is not None:
+            return {
+                'id_usuario' : usuario.id_usuario,
+                'primer_nombre' : usuario.primer_nombre,
+                'segundo_nombre' : usuario.segundo_nombre,
+                'apellido_paterno' : usuario.apellido_paterno,
+                'apellido_materno' : usuario.apellido_materno,
+                'email' : usuario.email,
+                'rut' : usuario.rut,
+                'fecha_nacimiento' : usuario.fecha_nacimiento,
+            }
+        else :
+            return 0

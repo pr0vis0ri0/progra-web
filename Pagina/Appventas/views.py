@@ -34,3 +34,6 @@ def administrador(request):
 
 def redirigir(request):
     return render(request, 'intermediario.html')
+
+def perfil(request):
+    return render(request, 'perfil.html')

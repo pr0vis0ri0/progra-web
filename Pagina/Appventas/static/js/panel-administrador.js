@@ -67,7 +67,9 @@ function checkActionModal(response, action) {
         case 'view':
             $('#btnViewValidar').attr('hidden','hidden')
             $('#btnViewDenegar').attr('hidden','hidden')
-            $('#denegacion-tab').removeAttr('hidden')
+            // $('#denegacion-tab').removeAttr('hidden')
+            // $('#motivoDenegacion').attr('disabled', 'disabled')
+            $('#denegacion-tab').attr('hidden','hidden')
             $('#motivoDenegacion').attr('disabled', 'disabled')
             break;
         case 'check':
