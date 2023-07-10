@@ -48,7 +48,7 @@ class FiltroPropiedadDetail(APIView):
                 serializer = DetallePropiedadesSerializer(registros, many = True)
                 return JSONResponse(serializer.data)
             else :
-                return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
+                return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status' : status.HTTP_404_NOT_FOUND})
         else :
             return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
 
@@ -106,7 +106,7 @@ class LoginView(APIView):
                         'refresh': refresh_token,
                     })
                 else :
-                    return JSONResponse({'mensaje-error' : 'Credenciales incorrectas.', 'status-error' : status.HTTP_404_NOT_FOUND})
+                    return JSONResponse({'mensaje-error' : 'Credenciales incorrectas.', 'status' : status.HTTP_404_NOT_FOUND})
             else :
                 return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :
@@ -129,7 +129,7 @@ class PropiedadesPendientes(APIView):
                     serializer = TablasPropiedadesSerializer(registros, many = True)
                     return JSONResponse(serializer.data)
                 else :
-                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
+                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status' : status.HTTP_404_NOT_FOUND})
             else :
                 return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :
@@ -137,7 +137,7 @@ class PropiedadesPendientes(APIView):
             return False
 
 class PropiedadPendienteDetail(APIView):
-    serializer_class = DetallePendienteUsuarioSerializer
+    serializer_class = DetallePropiedadSerializer
     permission_classes = [IsAuthenticated]
     def post(self, request):
         try :
@@ -169,7 +169,7 @@ class PropiedadesValidadas(APIView):
                     serializer = TablasPropiedadesSerializer(registros, many = True)
                     return JSONResponse(serializer.data)
                 else :
-                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
+                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status' : status.HTTP_404_NOT_FOUND})
             else :
                 return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :
@@ -178,7 +178,7 @@ class PropiedadesValidadas(APIView):
 
 # hazme una clase para mostrar el detalle de la propiedad validada
 class PropiedadValidadaDetail(APIView):
-    serializer_class = DetallePendienteUsuarioSerializer
+    serializer_class = DetallePropiedadSerializer
     permission_classes = [IsAuthenticated]
     def post(self, request):
         try :
@@ -197,6 +197,7 @@ class PropiedadValidadaDetail(APIView):
 class AdminPropiedadesPendientes(APIView):
     serializer_class = BasePropiedadesSerializer
     permission_classes = [IsAuthenticated]
+
     def post(self, request):
         try :
             serializer = self.serializer_class(data=request.data)
@@ -210,9 +211,9 @@ class AdminPropiedadesPendientes(APIView):
                     serializer = AdminPropiedadesSerializer(registros, many = True)
                     return JSONResponse(serializer.data)
                 elif registros == 5 :
-                    return JSONResponse({'mensaje-error' : 'No cuentas con los permisos para ingresar a esta ruta.', 'status-error' : status.HTTP_401_UNAUTHORIZED})
+                    return JSONResponse({'mensaje-error' : 'No cuentas con los permisos para ingresar a esta ruta.', 'status' : status.HTTP_401_UNAUTHORIZED})
                 else :
-                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
+                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status' : status.HTTP_404_NOT_FOUND})
             else :
                 return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :
@@ -222,6 +223,7 @@ class AdminPropiedadesPendientes(APIView):
 class AdminPropiedadesBase(APIView):
     serializer_class = BasePropiedadesSerializer
     permission_classes = [IsAuthenticated]
+
     def post(self, request):
         try :
             serializer = self.serializer_class(data=request.data)
@@ -235,9 +237,45 @@ class AdminPropiedadesBase(APIView):
                     serializer = AdminPropiedadesSerializer(registros, many = True)
                     return JSONResponse(serializer.data)
                 elif registros == 5 :
-                    return JSONResponse({'mensaje-error' : 'No cuentas con los permisos para ingresar a esta ruta.', 'status-error' : status.HTTP_401_UNAUTHORIZED})
+                    return JSONResponse({'mensaje-error' : 'No cuentas con los permisos para ingresar a esta ruta.', 'status' : status.HTTP_401_UNAUTHORIZED})
                 else :
-                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status-error' : status.HTTP_404_NOT_FOUND})
+                    return JSONResponse({'mensaje-error' : 'No se encontraron registros.', 'status' : status.HTTP_404_NOT_FOUND})
+            else :
+                return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except Exception as e :
+            print(f"Error desconocido : {str(e)}")
+            return False
+
+class DetallePropiedadAdmin(APIView):
+    serializer_class_post = DetallePropiedadSerializer
+    serializer_class_put = PutPropiedadSerializer
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        try :
+            serializer = self.serializer_class_post(data=request.data)
+            if serializer.is_valid():
+                data = serializer.data
+                registro = DAOPropiedad.get_detalle_propiedad_administrador(*data.values())
+                if registro == 0 :
+                    return JSONResponse({'mensaje-error' : 'No cuentas con los permisos para ingresar a esta ruta.', 'status' : status.HTTP_401_UNAUTHORIZED})
+                serializer = AdminPropiedadesSerializer(registro, many = False)
+                return JSONResponse(serializer.data)
+            else :
+                return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except Exception as e :
+            print(f"Error desconocido : {str(e)}")
+            return False
+    
+    def put(self, request):
+        try :
+            serializer = self.serializer_class_put(data=request.data)
+            if serializer.is_valid():
+                data = serializer.data
+                registro = DAOPropiedad.put_propiedad_admin(*data.values())
+                if registro == 1 :
+                    return JSONResponse({'mensaje-success' : 'Se logró actualizar la fila', 'status' : status.HTTP_200_OK})
+                elif registro == 0 :
+                    return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
             else :
                 return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
         except Exception as e :

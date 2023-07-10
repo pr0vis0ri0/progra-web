@@ -65,14 +65,6 @@ function cargarModal(id_propiedad) {
     panel.devolverDetallePropiedadPendiente(url_api + ep_detalle_propiedad_pendiente, JSON.stringify(datos))
 }
 
-function cargarModal(id_propiedad) {
-    datos = {
-        id_usuario : decodedToken['id_usuario'],
-        id_propiedad : id_propiedad
-    }
-    panel.devolverDetallePropiedadPendiente(url_api + ep_detalle_propiedad_pendiente, JSON.stringify(datos))
-}
-
 function cargarModalBase(id_propiedad) {
     datos = {
         id_usuario : decodedToken['id_usuario'],

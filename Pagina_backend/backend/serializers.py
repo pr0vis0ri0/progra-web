@@ -94,7 +94,7 @@ class FiltroPropiedadSerializer(serializers.Serializer):
 class BasePropiedadesSerializer(serializers.Serializer):
     id_usuario = serializers.IntegerField()
 
-class DetallePendienteUsuarioSerializer(serializers.Serializer):
+class DetallePropiedadSerializer(serializers.Serializer):
     id_usuario = serializers.IntegerField()
     id_propiedad = serializers.IntegerField()
 
@@ -123,3 +123,9 @@ class AdminPropiedadesSerializer (serializers.Serializer):
     nombre_comuna = serializers.CharField()
     nombre_region = serializers.CharField()
     nombre_usuario = serializers.CharField()
+
+class PutPropiedadSerializer (serializers.Serializer):
+    id_usuario = serializers.IntegerField()
+    id_propiedad = serializers.IntegerField()
+    ultimo_estado = serializers.IntegerField()
+    observacion_denegacion = serializers.CharField(allow_blank = True)

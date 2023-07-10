@@ -1,6 +1,7 @@
 from backend.models import *
 from django.db import connection
 from http import HTTPStatus
+from rest_framework import status
 from backend.jsonresponse import JSONResponse
 
 class DAOPropiedad :
@@ -597,6 +598,8 @@ class DAOPropiedad :
                         on (t1.ultimo_estado = t7.id_estado)
                     WHERE
                         t1.ultimo_estado IN (2,3)
+                    ORDER BY
+                        t1.id_propiedad
                     """)
                     print
                     if num_filas > 0 :
@@ -625,3 +628,80 @@ class DAOPropiedad :
                     return (data)
                 else :
                     return JSONResponse(HTTPStatus.NOT_FOUND)
+
+    def get_detalle_propiedad_administrador (id_usuario, id_propiedad) :
+            usuario = Usuario.objects.get(id_usuario = id_usuario)
+            perfil = PerfilesUsuario.objects.get(id_usuario = usuario.id_usuario)
+            if perfil.id_perfil.id_perfil == 2 :
+                return 5
+            else :
+                with connection.cursor() as cursor:
+                    try :
+                        cursor.execute("""
+                        SELECT
+    	                    t1.id_propiedad id_propiedad,
+    	                    t1.valor_propiedad valor_propiedad,
+    	                    t1.es_arriendo es_arriendo,
+    	                    t1.es_venta es_venta,
+                            t7.descripcion_estado descripcion_estado,
+    	                    t2.nombre_tipo_propiedad nombre_tipo_propiedad,
+    	                    t3.metros_totales metros_totales,
+    	                    t3.metros_utiles metros_utiles,
+    	                    t3.cant_dormitorios cant_dormitorios,
+    	                    t3.cant_banos cant_banos,
+    	                    t3.permite_mascotas permite_mascotas,
+    	                    t3.tiene_bodega tiene_bodega,
+    	                    t3.tiene_estacionamiento tiene_estacionamiento,
+    	                    t4.nombre_comuna nombre_comuna,
+    	                    t5.nombre_region nombre_region,
+                            upper(t6.primer_nombre|| ' ' ||t6.segundo_nombre||' ' ||t6.apellido_paterno||' '||t6.apellido_materno) nombre_usuario
+                        FROM
+    	                    MAESTRO_PROPIEDADES t1 inner join MAESTRO_TIPO_PROPIEDAD t2
+    	                    on (t1.id_tipo_propiedad = t2.id_tipo_propiedad)
+    	                    inner join MAESTRO_ASOC_CARACTERISTICAS_PROPIEDAD t3
+    	                    on (t1.id_propiedad = t3.id_propiedad)
+    	                    inner join MAESTRO_COMUNAS t4
+    	                    on (t1.id_comuna = t4.id_comuna)
+    	                    inner join MAESTRO_REGIONES t5
+    	                    on (t4.id_region = t5.id_region)
+                            inner join MAESTRO_USUARIOS t6
+                            on (t1.id_usuario = t6.id_usuario)
+                            inner join MAESTRO_ESTADOS t7
+                            on (t1.ultimo_estado = t7.id_estado)
+                        AND
+                            t1.id_propiedad = %s
+                        """, [id_propiedad])
+                        result = cursor.fetchone()
+                    except :
+                        return JSONResponse(HTTPStatus.NOT_FOUND)
+                if result is not None:
+                    nombres_columnas = [desc[0] for desc in cursor.description]
+                    data = dict(zip(nombres_columnas, result))
+                    return (data)
+                else :
+                    return JSONResponse(HTTPStatus.NOT_FOUND)
+
+    def put_propiedad_admin (id_usuario, id_propiedad, ultimo_estado, observacion_denegacion) :
+            usuario = Usuario.objects.get(id_usuario = id_usuario)
+            perfil = PerfilesUsuario.objects.get(id_usuario = usuario.id_usuario)
+            if perfil.id_perfil.id_perfil == 2 :
+                return 0
+            else :
+                with connection.cursor() as cursor:
+                    try :
+                        cursor.execute("""
+                        UPDATE
+                            MAESTRO_PROPIEDADES
+                        SET
+                            ultimo_estado = %s,
+                            observacion_denegacion = %s
+                        WHERE
+                            id_propiedad = %s
+                        """, [ultimo_estado, observacion_denegacion, id_propiedad])
+                        result = cursor.rowcount
+                    except :
+                        return 0
+                if result > 0:
+                    return 1
+                else :
+                    return 0
