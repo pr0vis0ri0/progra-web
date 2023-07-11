@@ -100,7 +100,6 @@ function checkMotivo() {
         $('#motivoDenegacion').removeClass('is-invalid')
         $('#motivoDenegacion').addClass('is-valid')
     }
-
     if (error == 1) {
         $('#btnViewDenegar').addClass('disabled')
                             .prop("disabled", true)

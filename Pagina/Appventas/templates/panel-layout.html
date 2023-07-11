@@ -33,7 +33,7 @@
       <div class="collapse navbar-collapse" id="navbarPrincipal">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-2 mt-lg-2">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'perfil_usuario' %}">
                 <i class="fas fa-circle-user fa-xl"></i>
             </a>
           </li>
@@ -67,6 +67,7 @@
   </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 <script src="{% static 'js/jwt-decode.js' %}"></script>
 <script src="{% static 'js/logout.js' %}"></script>
 {% block extra_js %}

@@ -132,10 +132,10 @@ class PutPropiedadSerializer (serializers.Serializer):
 
 class PerfilUsuarioSerializer (serializers.Serializer):
     id_usuario = serializers.IntegerField()
-    primer_nombre = serializers.CharField()
+    primer_nombre = serializers.CharField(allow_blank = True)
     segundo_nombre = serializers.CharField(allow_blank = True)
-    apellido_paterno = serializers.CharField()
+    apellido_paterno = serializers.CharField(allow_blank = True)
     apellido_materno = serializers.CharField(allow_blank = True)
-    email = serializers.EmailField()
+    email = serializers.EmailField(allow_blank = True)
     rut = serializers.CharField(allow_blank = True)
     fecha_nacimiento = serializers.CharField(allow_blank = True)

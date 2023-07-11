@@ -284,6 +284,7 @@ class DetallePropiedadAdmin(APIView):
 
 class PerfilUsuarioDetail(APIView):
     serializer_class = BasePropiedadesSerializer
+    serializer_class_put = PerfilUsuarioSerializer
     permission_classes = [IsAuthenticated]
     def post(self, request):
         try :
@@ -300,7 +301,22 @@ class PerfilUsuarioDetail(APIView):
         except BaseException as e :
             print(f"Error desconocido : {str(e)}")
             return False
-
+    
+    def put(self, request):
+        try:
+            serializer = self.serializer_class_put(data=request.data)
+            if serializer.is_valid():
+                data = serializer.data
+                registro = DAOUsuario.actualizar_data_usuario(*data.values())
+                if registro == 1 :
+                    return JSONResponse({'mensaje-success' : 'Se logró actualizar la fila', 'status' : status.HTTP_200_OK})
+                elif registro == 0 :
+                    return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+            else :
+                return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
+        except BaseException as e :
+            print(f"Error desconocido : {str(e)}")
+            return False
 
 
 import requests

@@ -11,7 +11,7 @@
     var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
     function InvalidCharacterError(message) {
-        this.message = message;
+        this.Dmessage = message;
     }
 
     InvalidCharacterError.prototype = new Error();

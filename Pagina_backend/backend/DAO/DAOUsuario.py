@@ -92,3 +92,25 @@ class DAOUsuario:
             }
         else :
             return 0
+    
+    def actualizar_data_usuario (id_usuario, p_nombre, s_nombre, a_paterno, a_materno, email, rut, f_nacimiento) :
+        with connection.cursor() as cursor :
+            cursor.execute(
+            """
+                UPDATE 
+                    MAESTRO_USUARIOS 
+                SET 
+                    segundo_nombre = %s, 
+                    apellido_materno = %s, 
+                    email = %s, 
+                    rut = %s,
+                    fecha_nacimiento = %s 
+                WHERE 
+                    id_usuario = %s
+            """, [s_nombre, a_materno, email, rut, f_nacimiento, id_usuario])
+            result = cursor.rowcount
+
+            if result > 0 :
+                return 1
+            else :
+                return 0

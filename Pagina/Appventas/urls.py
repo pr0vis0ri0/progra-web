@@ -13,6 +13,5 @@ urlpatterns = [
     path('transbank', views.transbank),
     path('usuario', views.usuario),
     path('administrador', views.administrador),
-    path('perfil', views.perfil),
-    path('redirigir', views.redirigir)
+    path('perfil', views.perfil, name = 'perfil_usuario'),
 ]

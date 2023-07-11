@@ -19,45 +19,45 @@
                     <div class="col-md-10 mt-4">
                       <div class="row">
                         <div class="col-lg-6">
-                          <label for="valorPropiedad" class="form-label">Primer Nombre :</label>
+                          <label for="userPNombre" class="form-label">Primer Nombre :</label>
                           <div class="input-group mb-3">
-                          <input type="text" class="form-control" id="valorPropiedad" aria-label="Valor Propiedad" disabled>
+                          <input type="text" class="form-control" id="userPNombre" aria-label="Valor Propiedad" disabled>
                           </div>
                         </div>
                         <div class="col-lg-6">
-                          <label for="valorPropiedad" class="form-label">Segundo Nombre :</label>
+                          <label for="userSNombre" class="form-label">Segundo Nombre :</label>
                           <div class="input-group mb-3">
-                          <input type="text" class="form-control" id="valorPropiedad" aria-label="Valor Propiedad">
+                          <input type="text" class="form-control" id="userSNombre" aria-label="Valor Propiedad">
                           </div>
                         </div>
                         <div class="col-lg-6">
-                          <label for="valorPropiedad" class="form-label">Apellido Paterno :</label>
+                          <label for="userAPaterno" class="form-label">Apellido Paterno :</label>
                           <div class="input-group mb-3">
-                          <input type="text" class="form-control" id="valorPropiedad" aria-label="Valor Propiedad" disabled>
+                          <input type="text" class="form-control" id="userAPaterno" aria-label="Valor Propiedad" disabled>
                           </div>
                         </div>
                         <div class="col-lg-6">
-                          <label for="valorPropiedad" class="form-label">Apellido Materno :</label>
+                          <label for="userAMaterno" class="form-label">Apellido Materno :</label>
                           <div class="input-group mb-3">
-                          <input type="text" class="form-control" id="valorPropiedad" aria-label="Valor Propiedad">
+                          <input type="text" class="form-control" id="userAMaterno" aria-label="Valor Propiedad">
                           </div>
                         </div>
                         <div class="col-lg-4">
-                          <label for="valorPropiedad" class="form-label">Correo :</label>
+                          <label for="userCorreo" class="form-label">Correo :</label>
                           <div class="input-group mb-3">
-                          <input type="text" class="form-control" id="valorPropiedad" aria-label="Valor Propiedad" disabled>
+                          <input type="text" class="form-control" id="userCorreo" aria-label="Valor Propiedad" disabled>
                           </div>
                         </div>
                         <div class="col-lg-4">
-                          <label for="valorPropiedad" class="form-label">RUT :</label>
+                          <label for="userRUT" class="form-label">RUT :</label>
                           <div class="input-group mb-3">
-                          <input type="text" class="form-control" id="valorPropiedad" aria-label="Valor Propiedad">
+                          <input type="text" class="form-control" id="userRUT" aria-label="Valor Propiedad" data-inputmask = "'mask':'99.999.999-*'" data-mask>
                           </div>
                         </div>
                         <div class="col-lg-4">
-                          <label for="valorPropiedad" class="form-label">Fecha de Nacimiento :</label>
+                          <label for="userFNacimiento" class="form-label">Fecha de Nacimiento :</label>
                           <div class="input-group mb-3">
-                          <input type="text" class="form-control" id="valorPropiedad" aria-label="Valor Propiedad">
+                          <input type="text" class="form-control" id="userFNacimiento" aria-label="Valor Propiedad" data-inputmask = "'mask' : '9999-99-99'" data-mask>
                           </div>
                         </div>
                       </div>
@@ -67,17 +67,18 @@
              </div>
           <hr>
             <div class="row">
-              <div class="d-flex justify-content-end">
+              <div class="d-flex justify-content-between" id="botonesVista">
                 <!-- data-bs-toggle="modal" data-bs-target="#modalRegistro" -->
-                <button class="btn btn-primary" id="btnActualizarPerfil" type="button">Grabar</button>
+                <!-- <button class="btn btn-primary" id="btnVistaAdmin" type="button">Grabar</button>
+                <button class="btn btn-primary" id="btnActualizarPerfil" type="button">Grabar</button> -->
               </div>
             </div>
           </div>
        </div>
       </div>
   </section>
-
 {% endblock %}
 {% block extra_js %}
+<script src="{% static 'js/jquery.rut.js' %}"></script>
 <script src="{% static 'js/panel-perfil.js' %}"></script>
 {% endblock %}
