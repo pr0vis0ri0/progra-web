@@ -23,17 +23,14 @@ def reg_propiedad(request):
 def propiedad_caracteristicas(request, id_propiedad):
     return render(request, 'carac_propiedad.html' , {'id_propiedad' : id_propiedad})
 
-def transbank(request):
-    return render(request, 'transbank.html')
-
 def usuario(request):
     return render(request, 'usuario.html')
 
 def administrador(request):
     return render(request, 'administrador.html')
 
-def redirigir(request):
-    return render(request, 'intermediario.html')
-
 def perfil(request):
     return render(request, 'perfil.html')
+
+def preguntas_frecuentes(request):
+    return render(request, 'preguntas_frecuentes.html')

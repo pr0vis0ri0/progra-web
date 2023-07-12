@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block axel_css %}
+    <link href="{% static 'css/mi2.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block title %} Futuros Proyectos {% endblock %}
+{% block content %}
+<section id="hero">
+    <div class="hero-container" data-aos="fade-up">
+      <h1>Preguntas Frecuentes </h1>
+    </div>
+</section>
+    <section id="why-us" class="why-us">
+      <div class="container">
+        <div class="section-title" data-aos="zoom-in">
+          <h3 >Sus Preguntas</h3>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="box section-title" data-aos="fade-up">
+              <h4>Como crear un nuevo usuario </h4>
+              <a href="{% static 'manual/CCU.PDF' %}" target="_blank" class="btn btn-primary">Ver manual</a>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="box section-title" data-aos="fade-up">
+              <h4>Como registrar una propiedad</h4>
+              <a href="{% static 'manual/CRP.PDF' %}" target="_blank" class="btn btn-primary">Ver manual</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="box section-title" data-aos="fade-up">
+              <h4>Como ver el estado de una propiedad</h4>
+              <a href="{% static 'manual/CVP.PDF' %}" target="_blank" class="btn btn-primary">Ver manual</a>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="box section-title" data-aos="fade-up" data-aos-delay="100">
+              <h4>Como aprobar / Denegar una propiedad</h4>
+              <a href="{% static 'manual/CAD.PDF' %}" target="_blank" class="btn btn-primary">Ver manual</a>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </section>
+{% endblock %}
