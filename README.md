@@ -1,14 +1,10 @@
-# progra-web
+# Proyecto de Programación Web (Segundo año de Ingeniería en Informática)
 
-Este proyecto entre estudiante de segundo año de Ingeniería en Informática de DUOC UC tiene el propósito de aprender a trabajar con API como también aprender a utilizar un framework con tanto potencial como lo es **Django**, aún así, el proyecto no queda allí y también explora otras áreas como es separar el proyecto en dos secciones, una siendo el **frontend** y otra el **backend**, mientras que en el frontend se trabaja con requests a través de **AJAX** para cargar la información de forma completamente dinámica y en el backend se trabaja con una **API** a través de viewsets como también realizando métodos personalizados y se genera una documentación de la API a través de **Swagger UI**. Igualmente, para colocar a prueba el proyecto, encontrarás en una carpeta llamada **taking-care-of** archivos de Excel los cuales podrás cargar en la interfaz de admin de **Django**.
+Este repositorio tiene como propósito almacenar todo el proyecto realizado por un grupo de 4 estudiantes que están cursando su segundo año, para el proyecto se utilizó el framework
+de Django en el cual se explora el uso de APIs separando la parte del front-end con la del back-end, realizando llamados a estas APIs por medio de AJAX como también utilizando
+JQuery para el envío de información como también para la carga dinámica de la misma, así mismo, para probar el software, se necesita crear un superusuario en la base de datos
+para después replicar este usuario en las tablas MAESTRO_USUARIOS y MAESTRO_ASOC_PERFIL_USUARIO debido a que no existe una tare automática para este. Igualmente, podrás encontrar
+todos los endpoints de la API a través de la documentación generada por medio de la interfaz Swagger UI, también, encontrarás los excels para cargar la información de prueba en la
+carpeta llamada taking-care-of con un número al principio que representa el orden en el cual se deben cargar.
 
-  Hasta el momento, para que la aplicación del frontend funcione sólo hace falta lo siguiente.
-  ```
-  pip3 install fontawesomefree
-  ```
-  Por otra parte, para la aplicación del backend si se requieren varias instalaciones.
-  ```
-  pip3 install djangorestframework
-  pip3 install django-import-export
-  pip3 install drf-spectacular
-  ```
+La aplicación cuenta con un archivo para instalar todas las dependencias necesarias.

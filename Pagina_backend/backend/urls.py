@@ -16,6 +16,6 @@ urlpatterns = [
     path('detalle_propiedad_validada/', views.PropiedadValidadaDetail.as_view()),
     path('detalle_propiedad/<int:id_propiedad>', views.PropiedadDetail.as_view()),
     path('perfil_usuario/', views.PerfilUsuarioDetail.as_view()),
-    path('transbank/create/', views.TransbankCreate.as_view()),
-    path('transbank/commit/<str:tokenws>', views.TransbankCommit.as_view()),
+    # path('transbank/create/', views.TransbankCreate.as_view()),
+    # path('transbank/commit/<str:tokenws>', views.TransbankCommit.as_view()),
 ]
