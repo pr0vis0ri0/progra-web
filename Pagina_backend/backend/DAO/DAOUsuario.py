@@ -11,7 +11,7 @@ class DAOUsuario:
         try :
             return User.objects.get(id = id_user)
         except :
-            raise None
+            return None
     
     def get_usuario (id):
         try :
@@ -26,31 +26,28 @@ class DAOUsuario:
             raise None
         
     def registrar_usuario (r_user, r_password, r_email, r_nombre, r_apellido) :
-        perfil = DAOUsuario.get_perfil(2)
-        if DAOUsuario.get_auth_user(r_user) is None :
-            try :
-                registro_auth_user = User()
-                registro_auth_user.username = r_user
-                registro_auth_user.password = make_password(r_password)
-                registro_auth_user.save()
+        perfil = Perfiles.objects.get(id_perfil = 2)
+        try :
+            registro_auth_user = User()
+            registro_auth_user.username = r_user
+            registro_auth_user.password = make_password(r_password)
+            registro_auth_user.save()
 
-                registro_usuario = Usuario()
-                registro_usuario.primer_nombre = r_nombre
-                registro_usuario.apellido_paterno = r_apellido
-                registro_usuario.email = r_email
-                registro_usuario.auth_user_id = registro_auth_user
-                registro_usuario.save()
+            registro_usuario = Usuario()
+            registro_usuario.primer_nombre = r_nombre
+            registro_usuario.apellido_paterno = r_apellido
+            registro_usuario.email = r_email
+            registro_usuario.auth_user_id = registro_auth_user
+            registro_usuario.save()
 
-                perfil_usuario = PerfilesUsuario()
-                perfil_usuario.id_perfil = perfil
-                perfil_usuario.id_usuario = registro_usuario
-                perfil_usuario.save()
-            except Exception as e :
-                print(f"Error desconocido: {str(e)}")
-                return False
-            return True
-        else :
-            return False
+            perfil_usuario = PerfilesUsuario()
+            perfil_usuario.id_perfil = perfil
+            perfil_usuario.id_usuario = registro_usuario
+            perfil_usuario.save()
+        except Exception as e :
+            print(f"Error desconocido: {str(e)}")
+            return 0
+        return 1
 
     def validar_usuario (p_user, p_password):
         username = p_user
