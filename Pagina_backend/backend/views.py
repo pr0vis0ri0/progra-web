@@ -340,9 +340,9 @@ class TransbankCreate(APIView):
         return JSONResponse(response)
 
 class TransbankCommit(APIView):
-    def post(self, request, tokenws):
+    def post(self, request, token_ws):
         headers = header_request_transbank()
-        url = f"https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.2/transactions?token_ws={tokenws}"
+        url = f"https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.2/transactions/{token_ws}"
         response = requests.put(url, headers=headers)
         return JSONResponse(response)
 
