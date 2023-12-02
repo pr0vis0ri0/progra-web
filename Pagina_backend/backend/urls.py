@@ -5,6 +5,7 @@ urlpatterns = [
     path('login/', views.LoginView.as_view()),
     path('registro/', views.RegistroUsuario.as_view()),
     path('lista_propiedades/', views.PropiedadList.as_view()),
+    path('arrendar_comprar_propiedad/', views.arrendarPropiedad, name='arrendar_propiedad'),
     path('propiedades_filtradas/', views.FiltroPropiedadDetail.as_view()),
     path('propiedades_pendientes/', views.PropiedadesPendientes.as_view()),
     path('adm_prop_pendientes/', views.AdminPropiedadesPendientes.as_view()),

@@ -139,3 +139,42 @@ class PerfilUsuarioSerializer (serializers.Serializer):
     email = serializers.EmailField(allow_blank = True)
     rut = serializers.CharField(allow_blank = True)
     fecha_nacimiento = serializers.CharField(allow_blank = True)
+
+from rest_framework import serializers
+from .models import *
+
+class DynamicFieldsModelSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        fields = kwargs.pop('fields', None)
+        exclude = kwargs.pop('exclude', None)
+
+        super(DynamicFieldsModelSerializer, self).__init__(*args, **kwargs)
+
+        if fields is not None:
+            allowed = set(fields)
+            existing = set(self.fields)
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+
+        if exclude is not None:
+            for field_name in exclude:
+                self.fields.pop(field_name, None)
+
+class PropiedadDinamico (DynamicFieldsModelSerializer):
+    class Meta:
+        model = Propiedad
+        fields = '__all__'
+
+class ActualizarPropiedad (serializers.Serializer):
+    id_propiedad = serializers.IntegerField()
+    ultimo_estado = serializers.PrimaryKeyRelatedField(queryset=Estados.objects.all())
+
+    # def update(self, instance, validated_data):
+    #     instance.save()
+    #     return instance
+    def update(self, instance, validated_data):
+        propiedad = Propiedad.objects.get(id_propiedad = validated_data['id_propiedad'])
+        estado = validated_data['ultimo_estado']
+        propiedad.ultimo_estado = estado
+        propiedad.save()
+        return propiedad

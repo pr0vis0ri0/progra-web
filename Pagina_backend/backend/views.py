@@ -20,19 +20,22 @@ class RegistroPropiedadDetail(APIView):
     serializer_class = RegistroPropiedadSerializer
     permission_classes = [IsAuthenticated]
     def post(self, request):
-        try :
+        # try :
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid() :
                 data = serializer.data
+                print(data)
                 if DAOPropiedad.post_registrar_propiedad(*data.values()):
+                    print('aquí no')
                     return JSONResponse('Registro creado.')
                 else :
+                    print('aquí?')
                     return JSONResponse(status.HTTP_400_BAD_REQUEST)
             else :
                 return JSONResponse({ 'mensaje-error' : serializer.errors, 'status' : status.HTTP_400_BAD_REQUEST})
-        except BaseException as e :
-            print(f"Error desconocido: {str(e)}")
-            return JSONResponse({'mensaje-error': 'Error desconocido'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        # except BaseException as e :
+        #     print(f"Error desconocido: {str(e)}")
+        #     return JSONResponse({'mensaje-error': 'Error desconocido'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class FiltroPropiedadDetail(APIView):
     serializer_class = FiltroPropiedadSerializer
@@ -318,6 +321,43 @@ class PerfilUsuarioDetail(APIView):
             print(f"Error desconocido : {str(e)}")
             return False
 
+from rest_framework.decorators import api_view, permission_classes
+import jwt
+from django.conf import settings
+
+# def verificar_perfil(token):
+#     payload = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+#     usuario = payload.get('id_usuario', '')
+#     try:
+#         usuario = Usuario.objects.get(id_usuario=usuario)
+#         perfil = PerfilesUsuario.objects.filter(id_usuario=usuario.id_usuario)
+#     except Usuario.DoesNotExist:
+#         return JSONResponse({'error': 'No existe el usuario con el que intentas realizar esta acción.'}, status=status.HTTP_404_NOT_FOUND)
+#     return perfil.id_perfil
+
+
+@permission_classes([IsAuthenticated])
+@api_view(['PUT'])
+def arrendarPropiedad(request):
+    data = request.data
+    pk = data.get('id_propiedad')  # Asume que 'pk' es el nombre del campo en los datos del request
+
+    try:
+        propiedad = Propiedad.objects.get(pk=pk)
+    except Propiedad.DoesNotExist:
+        return JSONResponse({'error': 'No existe la propiedad que intentas actualizar.'}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = ActualizarPropiedad(propiedad, data=data)
+
+    if serializer.is_valid():
+        # data = serializer.validated_data
+        # print(data)
+        # estado = Estados.objects.get(pk=data.get('ultimo_estado'))
+        # propiedad.ultimo_estado = estado
+        serializer.save()
+        return JSONResponse(serializer.data, status=status.HTTP_200_OK)
+    else: 
+        return JSONResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 import requests
 def header_request_transbank() :
@@ -346,10 +386,10 @@ class TransbankCommit(APIView):
         response = requests.put(url, headers=headers)
         return JSONResponse(response)
 
-# class TransbankReverseOrCancel(APIView):
-#     def post(self, request, tokenws):
-#         headers = header_request_transbank()
-#         data = request.data
-#         url = f"https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.2/transactions/{tokenws}/refunds"
-#         response = requests.post(url, json=data, headers=headers)
-#         return JSONResponse(response)
+class TransbankReverseOrCancel(APIView):
+    def post(self, request):
+        headers = header_request_transbank()
+        token_ws = request.data
+        url = f"https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.2/transactions/{token_ws}/refunds"
+        response = requests.post(url, headers=headers)
+        return JSONResponse(response)
